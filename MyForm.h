@@ -352,7 +352,7 @@ private: System::Void ok_game_size_Click(System::Object^ sender, System::EventAr
 	int height = System::Convert::ToInt16(textBox1->Text);
 	int weight = System::Convert::ToInt16(textBox2->Text);
 	if (height < 4 || weight < 4 ) {
-		MessageBox::Show("Invalid dime  nsions", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show("Invalid dimensions", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 	else { game_size_panel->Hide(); }
 }
