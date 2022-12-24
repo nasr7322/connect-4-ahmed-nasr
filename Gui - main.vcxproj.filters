@@ -24,6 +24,9 @@
     <ClCompile Include="NATools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="storeRank.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyForm.h">
@@ -38,5 +41,13 @@
     <ClInclude Include="NATools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="storeRank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="sample.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

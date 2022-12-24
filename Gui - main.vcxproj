@@ -74,7 +74,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Users\acer\Downloads\iconv-1.14-win32-x86_64\include;$(IncludePath)</IncludePath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Users\acer\Downloads\iconv-1.14-win32-x86_64\include;$(IncludePath)</IncludePath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -124,6 +131,7 @@
     <ClCompile Include="actions.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="NATools.cpp" />
+    <ClCompile Include="storeRank.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="actions.h" />
@@ -131,6 +139,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="NATools.h" />
+    <ClInclude Include="storeRank.h" />
     <ClInclude Include="structures.h" />
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +147,9 @@
       <DependentUpon>MyForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="sample.xml" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

@@ -1,5 +1,6 @@
 ﻿#pragma once
-
+#using <System.Xml.dll>
+using namespace System::Xml;
 namespace Guimain {
 
 	using namespace System;
@@ -337,6 +338,27 @@ private: System::Void quit_Click(System::Object^ sender, System::EventArgs^ e) {
 private: System::Void start_new_Click(System::Object^ sender, System::EventArgs^ e) {
 	game_size_panel->Show();
 	game_size_panel->Location = System::Drawing::Point(65, 205);
+	/**
+	XmlTextReader^ reader = gcnew XmlTextReader("sample.xml");
+	while (reader->Read())
+	{
+		// Do some work here on the data.
+		switch (reader->NodeType)
+		{
+		case XmlNodeType::Element: // The node is an element.
+			MessageBox::Show(reader->Name, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			break;
+		case XmlNodeType::Text: //Display the text in each element.
+			MessageBox::Show(reader->Value, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			break;
+		case XmlNodeType::EndElement: //Display the end of the element.
+
+			MessageBox::Show(reader->Name, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			break;
+		}
+		
+	}
+	*/
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
