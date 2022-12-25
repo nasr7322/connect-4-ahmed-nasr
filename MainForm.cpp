@@ -1,4 +1,5 @@
-#include "MyForm.h"
+#include "MainForm.h"
+#include "GameForm.h"
 
 using namespace System;
 using namespace System::Windows::Forms;

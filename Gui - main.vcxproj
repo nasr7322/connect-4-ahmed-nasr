@@ -122,13 +122,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="actions.cpp" />
-    <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="NATools.cpp" />
     <ClCompile Include="storeRank.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="actions.h" />
-    <ClInclude Include="MyForm.h">
+    <ClInclude Include="GameForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="BoardPrint.h" />
+    <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="NATools.h" />
@@ -136,11 +140,13 @@
     <ClInclude Include="structures.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyForm.resx">
-      <DependentUpon>MyForm.h</DependentUpon>
+    <EmbeddedResource Include="GameForm.resx">
+      <DependentUpon>GameForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <Xml Include="sample.xml" />
   </ItemGroup>
