@@ -121,19 +121,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="actions.cpp" />
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="NATools.cpp" />
+    <ClCompile Include="storeRank.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="actions.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="NATools.h" />
+    <ClInclude Include="storeRank.h" />
+    <ClInclude Include="structures.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+
+  <ItemGroup>
+    <Xml Include="sample.xml" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>
