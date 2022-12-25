@@ -1,8 +1,6 @@
 #pragma once
 #include "structures.h"
 
-
-
 namespace Guimain {
 
 	using namespace System;
@@ -12,11 +10,6 @@ namespace Guimain {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-
-
-	/// <summary>
-	/// Summary for GameForm
-	/// </summary>
 	public ref class GameForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -37,11 +30,6 @@ namespace Guimain {
 			}
 		}
 
-		GameForm(void)
-		{
-			InitializeComponent();
-		}
-
 		GameForm(int h, int w)
 		{
 			InitializeComponent();
@@ -50,11 +38,8 @@ namespace Guimain {
 			board.width = w;
 			PrintBoard(board.height, board.width, board);
 		}
-
+		
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~GameForm()
 		{
 			if (components)
@@ -62,27 +47,35 @@ namespace Guimain {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::Button^ main_menu;
+	protected:
 
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->main_menu = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
+			// 
+			// main_menu
+			// 
+			this->main_menu->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->main_menu->Location = System::Drawing::Point(200, 465);
+			this->main_menu->Name = L"main_menu";
+			this->main_menu->Size = System::Drawing::Size(100, 25);
+			this->main_menu->TabIndex = 0;
+			this->main_menu->Text = L"Main Menu";
+			this->main_menu->UseVisualStyleBackColor = true;
+			this->main_menu->Click += gcnew System::EventHandler(this, &GameForm::main_menu_Click);
 			// 
 			// GameForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(500, 500);
+			this->Controls->Add(this->main_menu);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"GameForm";
 			this->Text = L"GameForm";
@@ -90,5 +83,8 @@ namespace Guimain {
 
 		}
 #pragma endregion
+	private: System::Void main_menu_Click(System::Object^ sender, System::EventArgs^ e) {
+		GameForm::Visible = false;
+	}
 	};
 }

@@ -3,6 +3,7 @@
 #include "GameForm.h"
 
 using namespace System::Xml;
+
 namespace Guimain {
 
 	using namespace System;
@@ -12,9 +13,6 @@ namespace Guimain {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for MyForm
-	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -25,9 +23,6 @@ namespace Guimain {
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~MyForm()
 		{
 			if (components)
@@ -55,11 +50,7 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ selecttext;
 	private: System::Windows::Forms::Button^ cancel_game_size;
 
-	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		System::ComponentModel::Container^ components;
+	private:System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -168,7 +159,7 @@ namespace Guimain {
 			this->cancel_game_size->TabIndex = 15;
 			this->cancel_game_size->Text = L"Cancel";
 			this->cancel_game_size->UseVisualStyleBackColor = true;
-			this->cancel_game_size->Click += gcnew System::EventHandler(this, &MyForm::button1_Click_1);
+			this->cancel_game_size->Click += gcnew System::EventHandler(this, &MyForm::cancel_game_size_Click);
 			// 
 			// ok_game_size
 			// 
@@ -240,7 +231,6 @@ namespace Guimain {
 			this->selecttext->TabIndex = 9;
 			this->selecttext->Text = L"Game Size";
 			this->selecttext->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->selecttext->Click += gcnew System::EventHandler(this, &MyForm::selecttext_Click_1);
 			// 
 			// quit
 			// 
@@ -324,26 +314,20 @@ namespace Guimain {
 		}
 #pragma endregion
 
+//quit game
 	private: System::Void quit_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (MessageBox::Show("Are you sure you want to quit?", "Quit", MessageBoxButtons::YesNo, MessageBoxIcon::Warning) == System::Windows::Forms::DialogResult::Yes) {
 			Application::Exit();
 		}
 	}
+
+//generate size panel
 	private: System::Void start_new_Click(System::Object^ sender, System::EventArgs^ e) {
 		game_size_panel->Show();
 		game_size_panel->Location = System::Drawing::Point(65, 205);
 	}
 
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void selecttext_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
+//start game form
 	private: System::Void ok_game_size_Click(System::Object^ sender, System::EventArgs^ e) {
 		int height, width;
 		try {
@@ -358,17 +342,19 @@ namespace Guimain {
 			MessageBox::Show("Invalid dimensions", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else {
-			//MyForm::Visible = false;
+			MyForm::Visible = false;
 			GameForm^ gameform = gcnew GameForm(height,width);
 			gameform->ShowDialog();
+			if (! (gameform->Visible) ){ MyForm::Visible = true; }
 		}
-
 	}
 
-	private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+//cancel size panel
+	private: System::Void cancel_game_size_Click(System::Object^ sender, System::EventArgs^ e) {
 		game_size_panel->Hide();
 	}
 
+//textbox only accepts digits
 	private: System::Void h_box_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		// Accept only digits
 		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) {
@@ -381,8 +367,6 @@ namespace Guimain {
 			e->Handled = true;
 		}
 	}
-private: System::Void selecttext_Click_1(System::Object^ sender, System::EventArgs^ e) {
-}
 };
 
 }
