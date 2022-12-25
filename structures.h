@@ -1,7 +1,7 @@
 #pragma once
 struct Board {
     int height, width;
-    int board[1000][1000];
+    int board[100][100];
 
 };
 

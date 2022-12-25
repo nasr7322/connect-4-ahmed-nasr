@@ -101,7 +101,7 @@ int addScore(char* prename, int score, char* filename) {
     fclose(newfp);
     fclose(fp);
     remove(filename);
-    rename("newscore.txt", filename);
+    //rename("newscore.txt", filename);
 
 
 

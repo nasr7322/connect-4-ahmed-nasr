@@ -1,7 +1,9 @@
 ﻿#pragma once
-
 #using <System.Xml.dll>
+#include "GameForm.h"
+
 using namespace System::Xml;
+
 namespace Guimain {
 
 	using namespace System;
@@ -11,9 +13,6 @@ namespace Guimain {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for MyForm
-	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -21,16 +20,9 @@ namespace Guimain {
 		{
 			InitializeComponent();
 			game_size_panel->Hide();
-
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~MyForm()
 		{
 			if (components)
@@ -58,11 +50,7 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ selecttext;
 	private: System::Windows::Forms::Button^ cancel_game_size;
 
-	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		System::ComponentModel::Container^ components;
+	private:System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -76,14 +64,12 @@ namespace Guimain {
 			this->maintext = (gcnew System::Windows::Forms::Label());
 			this->main_panel = (gcnew System::Windows::Forms::Panel());
 			this->game_size_panel = (gcnew System::Windows::Forms::Panel());
-
 			this->cancel_game_size = (gcnew System::Windows::Forms::Button());
 			this->ok_game_size = (gcnew System::Windows::Forms::Button());
 			this->size_instructions = (gcnew System::Windows::Forms::Label());
 			this->label_select_custom = (gcnew System::Windows::Forms::Label());
 			this->w_box = (gcnew System::Windows::Forms::TextBox());
 			this->h_box = (gcnew System::Windows::Forms::TextBox());
-
 			this->selecttext = (gcnew System::Windows::Forms::Label());
 			this->quit = (gcnew System::Windows::Forms::Button());
 			this->top_players = (gcnew System::Windows::Forms::Button());
@@ -97,11 +83,10 @@ namespace Guimain {
 			// 
 			this->owrname->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->owrname->Font = (gcnew System::Drawing::Font(L"Open Sans", 7));
-
-			this->owrname->Location = System::Drawing::Point(150, 475);
+			this->owrname->Location = System::Drawing::Point(200, 585);
+			this->owrname->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->owrname->Name = L"owrname";
-			this->owrname->Size = System::Drawing::Size(200, 25);
-
+			this->owrname->Size = System::Drawing::Size(267, 31);
 			this->owrname->TabIndex = 3;
 			this->owrname->Text = L"Mohamed Nasr and Ahmed Hassan";
 			this->owrname->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -109,12 +94,11 @@ namespace Guimain {
 			// gamename
 			// 
 			this->gamename->Anchor = System::Windows::Forms::AnchorStyles::None;
-
-			this->gamename->Font = (gcnew System::Drawing::Font(L"Lato", 10));
-			this->gamename->Location = System::Drawing::Point(138, 175);
+			this->gamename->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10));
+			this->gamename->Location = System::Drawing::Point(184, 215);
+			this->gamename->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->gamename->Name = L"gamename";
-			this->gamename->Size = System::Drawing::Size(224, 25);
-
+			this->gamename->Size = System::Drawing::Size(299, 31);
 			this->gamename->TabIndex = 9;
 			this->gamename->Text = L"~~~~~~ Connect Four ~~~~~~";
 			this->gamename->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -122,13 +106,12 @@ namespace Guimain {
 			// maintext
 			// 
 			this->maintext->Anchor = System::Windows::Forms::AnchorStyles::None;
-
-			this->maintext->Font = (gcnew System::Drawing::Font(L"Lato Black", 38));
-			this->maintext->Location = System::Drawing::Point(100, 113);
+			this->maintext->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 38));
+			this->maintext->Location = System::Drawing::Point(133, 139);
+			this->maintext->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->maintext->MinimumSize = System::Drawing::Size(1, 1);
 			this->maintext->Name = L"maintext";
-			this->maintext->Size = System::Drawing::Size(300, 62);
-
+			this->maintext->Size = System::Drawing::Size(400, 76);
 			this->maintext->TabIndex = 8;
 			this->maintext->Text = L"Main Menu";
 			this->maintext->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -144,17 +127,15 @@ namespace Guimain {
 			this->main_panel->Controls->Add(this->start_new);
 			this->main_panel->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->main_panel->Location = System::Drawing::Point(0, 0);
-
+			this->main_panel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->main_panel->Name = L"main_panel";
-			this->main_panel->Size = System::Drawing::Size(500, 500);
-
+			this->main_panel->Size = System::Drawing::Size(667, 615);
 			this->main_panel->TabIndex = 7;
 			// 
 			// game_size_panel
 			// 
 			this->game_size_panel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->game_size_panel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-
 			this->game_size_panel->Controls->Add(this->cancel_game_size);
 			this->game_size_panel->Controls->Add(this->ok_game_size);
 			this->game_size_panel->Controls->Add(this->size_instructions);
@@ -162,31 +143,31 @@ namespace Guimain {
 			this->game_size_panel->Controls->Add(this->w_box);
 			this->game_size_panel->Controls->Add(this->h_box);
 			this->game_size_panel->Controls->Add(this->selecttext);
-			this->game_size_panel->Location = System::Drawing::Point(370, 234);
+			this->game_size_panel->Location = System::Drawing::Point(76, 194);
+			this->game_size_panel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->game_size_panel->Name = L"game_size_panel";
-			this->game_size_panel->Size = System::Drawing::Size(374, 200);
+			this->game_size_panel->Size = System::Drawing::Size(498, 246);
 			this->game_size_panel->TabIndex = 14;
 			// 
 			// cancel_game_size
 			// 
 			this->cancel_game_size->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->cancel_game_size->Location = System::Drawing::Point(211, 166);
+			this->cancel_game_size->Location = System::Drawing::Point(281, 204);
+			this->cancel_game_size->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->cancel_game_size->Name = L"cancel_game_size";
-			this->cancel_game_size->Size = System::Drawing::Size(50, 20);
+			this->cancel_game_size->Size = System::Drawing::Size(67, 25);
 			this->cancel_game_size->TabIndex = 15;
 			this->cancel_game_size->Text = L"Cancel";
 			this->cancel_game_size->UseVisualStyleBackColor = true;
-			this->cancel_game_size->Click += gcnew System::EventHandler(this, &MyForm::button1_Click_1);
-
+			this->cancel_game_size->Click += gcnew System::EventHandler(this, &MyForm::cancel_game_size_Click);
 			// 
 			// ok_game_size
 			// 
 			this->ok_game_size->Anchor = System::Windows::Forms::AnchorStyles::None;
-
-			this->ok_game_size->Location = System::Drawing::Point(111, 166);
+			this->ok_game_size->Location = System::Drawing::Point(148, 204);
+			this->ok_game_size->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->ok_game_size->Name = L"ok_game_size";
-			this->ok_game_size->Size = System::Drawing::Size(50, 20);
-
+			this->ok_game_size->Size = System::Drawing::Size(67, 25);
 			this->ok_game_size->TabIndex = 14;
 			this->ok_game_size->Text = L"OK";
 			this->ok_game_size->UseVisualStyleBackColor = true;
@@ -195,32 +176,32 @@ namespace Guimain {
 			// size_instructions
 			// 
 			this->size_instructions->Anchor = System::Windows::Forms::AnchorStyles::None;
-
-			this->size_instructions->Location = System::Drawing::Point(109, 139);
+			this->size_instructions->Location = System::Drawing::Point(145, 171);
+			this->size_instructions->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->size_instructions->Name = L"size_instructions";
-			this->size_instructions->Size = System::Drawing::Size(152, 15);
-
+			this->size_instructions->Size = System::Drawing::Size(203, 18);
 			this->size_instructions->TabIndex = 13;
-			this->size_instructions->Text = L"Leave empty for default values";
+			this->size_instructions->Text = L"*For default size leave empty*";
 			this->size_instructions->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// label_select_custom
 			// 
 			this->label_select_custom->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label_select_custom->AutoSize = true;
-
-			this->label_select_custom->Location = System::Drawing::Point(108, 90);
+			this->label_select_custom->Location = System::Drawing::Point(144, 111);
+			this->label_select_custom->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label_select_custom->Name = L"label_select_custom";
-			this->label_select_custom->Size = System::Drawing::Size(107, 13);
+			this->label_select_custom->Size = System::Drawing::Size(141, 17);
 			this->label_select_custom->TabIndex = 12;
 			this->label_select_custom->Text = L"Select a custom size:";
 			// 
 			// w_box
 			// 
 			this->w_box->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->w_box->Location = System::Drawing::Point(191, 109);
+			this->w_box->Location = System::Drawing::Point(255, 134);
+			this->w_box->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->w_box->Name = L"w_box";
-			this->w_box->Size = System::Drawing::Size(70, 20);
+			this->w_box->Size = System::Drawing::Size(92, 22);
 			this->w_box->TabIndex = 11;
 			this->w_box->Text = L"  ";
 			this->w_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -229,25 +210,24 @@ namespace Guimain {
 			// h_box
 			// 
 			this->h_box->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->h_box->Location = System::Drawing::Point(111, 109);
+			this->h_box->Location = System::Drawing::Point(148, 134);
+			this->h_box->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->h_box->Name = L"h_box";
-			this->h_box->Size = System::Drawing::Size(70, 20);
+			this->h_box->Size = System::Drawing::Size(92, 22);
 			this->h_box->TabIndex = 10;
 			this->h_box->Text = L"  ";
 			this->h_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->h_box->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::h_box_KeyPress);
-
 			// 
 			// selecttext
 			// 
 			this->selecttext->Anchor = System::Windows::Forms::AnchorStyles::None;
-
-			this->selecttext->Font = (gcnew System::Drawing::Font(L"Lato Black", 30));
-			this->selecttext->Location = System::Drawing::Point(74, 19);
+			this->selecttext->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30));
+			this->selecttext->Location = System::Drawing::Point(99, 23);
+			this->selecttext->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->selecttext->MinimumSize = System::Drawing::Size(1, 1);
 			this->selecttext->Name = L"selecttext";
-			this->selecttext->Size = System::Drawing::Size(224, 40);
-
+			this->selecttext->Size = System::Drawing::Size(299, 49);
 			this->selecttext->TabIndex = 9;
 			this->selecttext->Text = L"Game Size";
 			this->selecttext->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -256,13 +236,12 @@ namespace Guimain {
 			// 
 			this->quit->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->quit->Cursor = System::Windows::Forms::Cursors::Hand;
-
-			this->quit->Location = System::Drawing::Point(175, 364);
-			this->quit->MaximumSize = System::Drawing::Size(225, 36);
-			this->quit->MinimumSize = System::Drawing::Size(150, 24);
+			this->quit->Location = System::Drawing::Point(233, 448);
+			this->quit->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->quit->MaximumSize = System::Drawing::Size(300, 44);
+			this->quit->MinimumSize = System::Drawing::Size(200, 30);
 			this->quit->Name = L"quit";
-			this->quit->Size = System::Drawing::Size(150, 24);
-
+			this->quit->Size = System::Drawing::Size(200, 30);
 			this->quit->TabIndex = 12;
 			this->quit->Text = L"Quit";
 			this->quit->UseVisualStyleBackColor = true;
@@ -272,13 +251,12 @@ namespace Guimain {
 			// 
 			this->top_players->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->top_players->Cursor = System::Windows::Forms::Cursors::Hand;
-
-			this->top_players->Location = System::Drawing::Point(175, 334);
-			this->top_players->MaximumSize = System::Drawing::Size(225, 36);
-			this->top_players->MinimumSize = System::Drawing::Size(150, 24);
+			this->top_players->Location = System::Drawing::Point(233, 411);
+			this->top_players->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->top_players->MaximumSize = System::Drawing::Size(300, 44);
+			this->top_players->MinimumSize = System::Drawing::Size(200, 30);
 			this->top_players->Name = L"top_players";
-			this->top_players->Size = System::Drawing::Size(150, 24);
-
+			this->top_players->Size = System::Drawing::Size(200, 30);
 			this->top_players->TabIndex = 11;
 			this->top_players->Text = L"Top Players";
 			this->top_players->UseVisualStyleBackColor = true;
@@ -287,13 +265,12 @@ namespace Guimain {
 			// 
 			this->load_game->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->load_game->Cursor = System::Windows::Forms::Cursors::Hand;
-
-			this->load_game->Location = System::Drawing::Point(175, 304);
-			this->load_game->MaximumSize = System::Drawing::Size(225, 36);
-			this->load_game->MinimumSize = System::Drawing::Size(150, 24);
+			this->load_game->Location = System::Drawing::Point(233, 374);
+			this->load_game->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->load_game->MaximumSize = System::Drawing::Size(300, 44);
+			this->load_game->MinimumSize = System::Drawing::Size(200, 30);
 			this->load_game->Name = L"load_game";
-			this->load_game->Size = System::Drawing::Size(150, 24);
-
+			this->load_game->Size = System::Drawing::Size(200, 30);
 			this->load_game->TabIndex = 10;
 			this->load_game->Text = L"Load Game";
 			this->load_game->UseVisualStyleBackColor = true;
@@ -302,13 +279,12 @@ namespace Guimain {
 			// 
 			this->start_new->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->start_new->Cursor = System::Windows::Forms::Cursors::Hand;
-
-			this->start_new->Location = System::Drawing::Point(175, 274);
-			this->start_new->MaximumSize = System::Drawing::Size(225, 36);
-			this->start_new->MinimumSize = System::Drawing::Size(150, 24);
+			this->start_new->Location = System::Drawing::Point(233, 337);
+			this->start_new->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->start_new->MaximumSize = System::Drawing::Size(300, 44);
+			this->start_new->MinimumSize = System::Drawing::Size(200, 30);
 			this->start_new->Name = L"start_new";
-			this->start_new->Size = System::Drawing::Size(150, 24);
-
+			this->start_new->Size = System::Drawing::Size(200, 30);
 			this->start_new->TabIndex = 7;
 			this->start_new->Text = L"Start New";
 			this->start_new->UseVisualStyleBackColor = true;
@@ -316,24 +292,20 @@ namespace Guimain {
 			// 
 			// MyForm
 			// 
-
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
-			this->ClientSize = System::Drawing::Size(500, 500);
-
+			this->ClientSize = System::Drawing::Size(667, 615);
 			this->Controls->Add(this->owrname);
 			this->Controls->Add(this->main_panel);
 			this->Cursor = System::Windows::Forms::Cursors::Arrow;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-
-			this->MinimumSize = System::Drawing::Size(500, 500);
-
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->MinimumSize = System::Drawing::Size(667, 615);
 			this->Name = L"MyForm";
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Show;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"MyForm";
-
+			this->Text = L"MAIN FORM";
 			this->main_panel->ResumeLayout(false);
 			this->game_size_panel->ResumeLayout(false);
 			this->game_size_panel->PerformLayout();
@@ -342,26 +314,20 @@ namespace Guimain {
 		}
 #pragma endregion
 
+//quit game
 	private: System::Void quit_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (MessageBox::Show("Are you sure you want to quit?", "Quit", MessageBoxButtons::YesNo, MessageBoxIcon::Warning) == System::Windows::Forms::DialogResult::Yes) {
 			Application::Exit();
 		}
 	}
+
+//generate size panel
 	private: System::Void start_new_Click(System::Object^ sender, System::EventArgs^ e) {
 		game_size_panel->Show();
-		game_size_panel->Location = System::Drawing::Point(65, 0/*205*/);
+		game_size_panel->Location = System::Drawing::Point(65, 205);
 	}
 
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void selecttext_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
+//start game form
 	private: System::Void ok_game_size_Click(System::Object^ sender, System::EventArgs^ e) {
 		int height, width;
 		try {
@@ -369,19 +335,26 @@ namespace Guimain {
 			width = System::Convert::ToInt16(w_box->Text);
 		}
 		catch (...) {
-			MessageBox::Show("Invalid input", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-			return;
+			height = 8;
+			width = 8;
 		}
 		if (height < 4 || width < 4) {
 			MessageBox::Show("Invalid dimensions", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
-		else { game_size_panel->Hide(); }
+		else {
+			MyForm::Visible = false;
+			GameForm^ gameform = gcnew GameForm(height,width);
+			gameform->ShowDialog();
+			if (! (gameform->Visible) ){ MyForm::Visible = true; }
+		}
 	}
 
-	private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+//cancel size panel
+	private: System::Void cancel_game_size_Click(System::Object^ sender, System::EventArgs^ e) {
 		game_size_panel->Hide();
 	}
 
+//textbox only accepts digits
 	private: System::Void h_box_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		// Accept only digits
 		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) {
@@ -394,6 +367,6 @@ namespace Guimain {
 			e->Handled = true;
 		}
 	}
-	};
+};
 
 }
