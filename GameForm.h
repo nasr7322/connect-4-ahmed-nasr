@@ -111,10 +111,10 @@ namespace Guimain {
 			this->main_menu->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->main_menu->BackColor = System::Drawing::SystemColors::Control;
 			this->main_menu->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->main_menu->Location = System::Drawing::Point(350, 629);
+			this->main_menu->Location = System::Drawing::Point(255, 487);
 			this->main_menu->Margin = System::Windows::Forms::Padding(4);
 			this->main_menu->Name = L"main_menu";
-			this->main_menu->Size = System::Drawing::Size(133, 31);
+			this->main_menu->Size = System::Drawing::Size(100, 25);
 			this->main_menu->TabIndex = 0;
 			this->main_menu->Text = L"Main Menu";
 			this->main_menu->UseVisualStyleBackColor = false;
@@ -124,7 +124,7 @@ namespace Guimain {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(667, 615);
+			this->ClientSize = System::Drawing::Size(610, 574);
 			this->Controls->Add(this->main_menu);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(4);
