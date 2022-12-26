@@ -5,4 +5,4 @@ void UpdateScore(struct Board* B, struct Player* P);///Time Complexity O(N^2),Ad
 
 
 
-int Move(struct Board* B, struct Player* P, int col_number);
+int PlayerMove(struct Board* B, struct Player* P, int col_number);

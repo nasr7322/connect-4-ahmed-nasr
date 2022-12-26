@@ -66,7 +66,7 @@ void UpdateScore(struct Board* B, struct Player* P) {///Time Complexity O(N^2),A
     P->score = new_score;
 }
 
-int Move(struct Board* B, struct Player* P, int col_number) {
+int PlayerMove(struct Board* B, struct Player* P, int col_number) {
     if (col_number >= B->width || col_number < 0 || B->board[0][col_number] != 0)return -1;
     int cr = 0;
     while (cr + 1 < B->height && B->board[cr + 1][col_number] == 0)cr++;
