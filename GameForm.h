@@ -2,12 +2,13 @@
 #include "structures.h"
 #include "actions.h"
 
-Board board;
-Player p1;
-Player p2;
-int turns=0;
-
 namespace Guimain {
+
+	Board board;
+	Player p1;
+	Player p2;
+	int turns = 0;
+
 	
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -18,6 +19,7 @@ namespace Guimain {
 
 	public ref class GameForm : public System::Windows::Forms::Form
 	{
+		
 	public:
 
 		Void button_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -29,6 +31,11 @@ namespace Guimain {
 			InitializeComponent();
 			PrintBoard(board.height, board.width, board);
 			PrintButtons(board.width);
+			p1_label_score->Text = L"Score:"+ System::Convert::ToString((p1.score));
+			p1_label_moves->Text = L"Moves:"+ System::Convert::ToString(p1.turns_played);
+			p2_label_moves->Text = L"Moves:"+ System::Convert::ToString(p2.turns_played);
+			p2_label_score->Text = L"Score:" + System::Convert::ToString(p2.score);
+			turns_label->Text = L"Player " + System::Convert::ToString((turns % 2) + 1) + "'s Turn";
 		}
 
 		void PrintBoard(int h, int w, Board fboard) {
@@ -42,15 +49,15 @@ namespace Guimain {
 					button->Top = 135 + (i * (button->Height));
 					button->Enabled = false;
 					button->BackColor = System::Drawing::Color::RoyalBlue;
+					//button->BackColor = System::Drawing::Color::Transparent;
 					button->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 					button->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-
 					if (fboard.board[i][j] == 1) {
-						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\acer\\source\\repos\\connect-4-ahmed-nasr\\ORANGE.PNG");
+						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\PM\\source\\repos\\connect-4-ahmed-nasr\\ORANGE.PNG");
 					}
 
 					if (fboard.board[i][j] == 2) {
-						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\acer\\source\\repos\\connect-4-ahmed-nasr\\RED.PNG");
+						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\PM\\source\\repos\\connect-4-ahmed-nasr\\RED.PNG");
 					}
 					
 					Controls->Add(button);
@@ -76,7 +83,6 @@ namespace Guimain {
 		GameForm(int h, int w)
 		{
 			InitializeComponent();
-			
 			board.height = h;
 			board.width = w;
 			p1.score = p1.turns_played = 0;
@@ -107,14 +113,17 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ p2_label;
 	private: System::Windows::Forms::Label^ owrname;
 
-	protected:
+
+
+	private: System::ComponentModel::IContainer^ components;
 
 	private:
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(GameForm::typeid));
 			this->main_menu = (gcnew System::Windows::Forms::Button());
 			this->p1_label = (gcnew System::Windows::Forms::Label());
 			this->p1_label_score = (gcnew System::Windows::Forms::Label());
@@ -132,9 +141,7 @@ namespace Guimain {
 			this->main_menu->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->main_menu->BackColor = System::Drawing::SystemColors::Control;
 			this->main_menu->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-
-			this->main_menu->Location = System::Drawing::Point(350, 550);
-
+			this->main_menu->Location = System::Drawing::Point(350, 560);
 			this->main_menu->Name = L"main_menu";
 			this->main_menu->Size = System::Drawing::Size(100, 25);
 			this->main_menu->TabIndex = 0;
@@ -145,7 +152,8 @@ namespace Guimain {
 			// p1_label
 			// 
 			this->p1_label->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->p1_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,static_cast<System::Byte>(0)));
+			this->p1_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->p1_label->Location = System::Drawing::Point(12, 9);
 			this->p1_label->Name = L"p1_label";
 			this->p1_label->Size = System::Drawing::Size(122, 37);
@@ -155,12 +163,13 @@ namespace Guimain {
 			// p1_label_score
 			// 
 			this->p1_label_score->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->p1_label_score->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,static_cast<System::Byte>(0)));
+			this->p1_label_score->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->p1_label_score->Location = System::Drawing::Point(16, 46);
 			this->p1_label_score->Name = L"p1_label_score";
 			this->p1_label_score->Size = System::Drawing::Size(60, 16);
 			this->p1_label_score->TabIndex = 2;
-			this->p1_label_score->Text = L"Score:"+ System::Convert::ToString(p1.score);
+			this->p1_label_score->Text = L"Score:0";
 			// 
 			// p1_label_moves
 			// 
@@ -170,23 +179,25 @@ namespace Guimain {
 			this->p1_label_moves->Name = L"p1_label_moves";
 			this->p1_label_moves->Size = System::Drawing::Size(75, 26);
 			this->p1_label_moves->TabIndex = 3;
-			this->p1_label_moves->Text = L"Moves:"+ System::Convert::ToString(p1.turns_played);
+			this->p1_label_moves->Text = L"Moves:0";
 			// 
 			// turns_label
 			// 
 			this->turns_label->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->turns_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,static_cast<System::Byte>(0)));
+			this->turns_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->turns_label->Location = System::Drawing::Point(338, 17);
 			this->turns_label->Name = L"turns_label";
 			this->turns_label->Size = System::Drawing::Size(124, 24);
 			this->turns_label->TabIndex = 4;
-			this->turns_label->Text = L"Player " + System::Convert::ToString((turns % 2)+1) + "'s Turn";
+			this->turns_label->Text = L"Player 1\'s Turn";
 			this->turns_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// time_label
 			// 
 			this->time_label->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->time_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,static_cast<System::Byte>(0)));
+			this->time_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->time_label->Location = System::Drawing::Point(350, 41);
 			this->time_label->Name = L"time_label";
 			this->time_label->Size = System::Drawing::Size(100, 35);
@@ -202,24 +213,26 @@ namespace Guimain {
 			this->p2_label_moves->Name = L"p2_label_moves";
 			this->p2_label_moves->Size = System::Drawing::Size(75, 26);
 			this->p2_label_moves->TabIndex = 8;
-			this->p2_label_moves->Text = L"Moves:"+ System::Convert::ToString(p2.turns_played);
+			this->p2_label_moves->Text = L"Moves:0";
 			this->p2_label_moves->TextAlign = System::Drawing::ContentAlignment::TopRight;
 			// 
 			// p2_label_score
 			// 
 			this->p2_label_score->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->p2_label_score->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,static_cast<System::Byte>(0)));
-			this->p2_label_score->Location = System::Drawing::Point(698, 47);
+			this->p2_label_score->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->p2_label_score->Location = System::Drawing::Point(702, 46);
 			this->p2_label_score->Name = L"p2_label_score";
 			this->p2_label_score->Size = System::Drawing::Size(60, 16);
 			this->p2_label_score->TabIndex = 7;
-			this->p2_label_score->Text = L"Score:" + System::Convert::ToString(p2.score);
+			this->p2_label_score->Text = L"Score:0";
 			this->p2_label_score->TextAlign = System::Drawing::ContentAlignment::TopRight;
 			// 
 			// p2_label
 			// 
 			this->p2_label->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->p2_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,static_cast<System::Byte>(0)));
+			this->p2_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->p2_label->Location = System::Drawing::Point(648, 9);
 			this->p2_label->Name = L"p2_label";
 			this->p2_label->Size = System::Drawing::Size(124, 37);
@@ -241,7 +254,6 @@ namespace Guimain {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-
 			this->ClientSize = System::Drawing::Size(784, 611);
 			this->ControlBox = false;
 			this->Controls->Add(this->owrname);
@@ -255,18 +267,20 @@ namespace Guimain {
 			this->Controls->Add(this->p1_label);
 			this->Controls->Add(this->main_menu);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MaximizeBox = false;
 			this->Name = L"GameForm";
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
 			this->Text = L"GameForm";
 			this->ResumeLayout(false);
+
 		}
 #pragma endregion
 
 	private: System::Void main_menu_Click(System::Object^ sender, System::EventArgs^ e) {
 		GameForm::Visible = false;	
 		turns = 0;
-		//reset
+		Reset(&board,&p1,&p2);
 
 	}
 };

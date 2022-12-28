@@ -268,7 +268,6 @@ namespace Guimain {
 			// 
 			this->start_new->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->start_new->Cursor = System::Windows::Forms::Cursors::Hand;
-
 			this->start_new->Location = System::Drawing::Point(225, 324);
 			this->start_new->MaximumSize = System::Drawing::Size(225, 36);
 			this->start_new->MinimumSize = System::Drawing::Size(150, 24);
@@ -277,7 +276,6 @@ namespace Guimain {
 			this->start_new->TabIndex = 15;
 			this->start_new->Text = L"Start New";
 			this->start_new->UseVisualStyleBackColor = true;
-
 			this->start_new->Click += gcnew System::EventHandler(this, &MainForm::start_new_Click);
 			// 
 			// MainForm
