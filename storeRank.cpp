@@ -133,3 +133,25 @@ int getScore(char* prename, char* filename) {
 
     return score;
 }
+
+int getScoreByIndex(int idx, char* filename) {
+    FILE* fp;
+    fp = fopen(filename, "r");
+
+    char buffer[255];
+    int found = 0;
+    int cr = 0;
+    int score = -1;
+    while (!feof(fp)) {
+        fgets(buffer, 255, fp);
+        if (feof(fp))break;
+        if (cr == idx) {
+            found = 1;
+            score = parseScore(buffer);
+            break;
+        }
+        cr++;
+    }
+
+    return score;
+}
