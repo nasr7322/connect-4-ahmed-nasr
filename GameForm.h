@@ -41,7 +41,9 @@ namespace Guimain {
 					button->Left = 150 + (j * (button->Width));
 					button->Top = 135 + (i * (button->Height));
 					button->Enabled = false;
-					button->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+					button->BackColor = System::Drawing::Color::RoyalBlue;
+					button->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+					button->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 
 					if (fboard.board[i][j] == 1) {
 						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\PM\\source\\repos\\connect-4-ahmed-nasr\\ORANGE.PNG");
@@ -166,7 +168,7 @@ namespace Guimain {
 			this->p1_label_moves->Name = L"p1_label_moves";
 			this->p1_label_moves->Size = System::Drawing::Size(60, 26);
 			this->p1_label_moves->TabIndex = 3;
-			this->p1_label_moves->Text = L"Moves:"+ 0;
+			this->p1_label_moves->Text = L"Moves:"+ p1.turns_played;
 			// 
 			// turns_label
 			// 
@@ -198,7 +200,7 @@ namespace Guimain {
 			this->p2_label_moves->Name = L"p2_label_moves";
 			this->p2_label_moves->Size = System::Drawing::Size(60, 26);
 			this->p2_label_moves->TabIndex = 8;
-			this->p2_label_moves->Text = L"Moves:"+ 0;
+			this->p2_label_moves->Text = L"Moves:"+ p2.turns_played;
 			this->p2_label_moves->TextAlign = System::Drawing::ContentAlignment::TopRight;
 			// 
 			// p2_label_score
