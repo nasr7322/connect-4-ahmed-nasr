@@ -166,7 +166,7 @@ namespace Guimain {
 			this->p1_label_moves->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F));
 			this->p1_label_moves->Location = System::Drawing::Point(16, 62);
 			this->p1_label_moves->Name = L"p1_label_moves";
-			this->p1_label_moves->Size = System::Drawing::Size(60, 26);
+			this->p1_label_moves->Size = System::Drawing::Size(75, 26);
 			this->p1_label_moves->TabIndex = 3;
 			this->p1_label_moves->Text = L"Moves:"+ System::Convert::ToString(p1.turns_played);
 			// 
@@ -198,7 +198,7 @@ namespace Guimain {
 			this->p2_label_moves->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F));
 			this->p2_label_moves->Location = System::Drawing::Point(698, 63);
 			this->p2_label_moves->Name = L"p2_label_moves";
-			this->p2_label_moves->Size = System::Drawing::Size(60, 26);
+			this->p2_label_moves->Size = System::Drawing::Size(75, 26);
 			this->p2_label_moves->TabIndex = 8;
 			this->p2_label_moves->Text = L"Moves:"+ System::Convert::ToString(p2.turns_played);
 			this->p2_label_moves->TextAlign = System::Drawing::ContentAlignment::TopRight;
