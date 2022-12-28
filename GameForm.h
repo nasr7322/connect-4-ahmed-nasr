@@ -44,11 +44,11 @@ namespace Guimain {
 					button->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 
 					if (fboard.board[i][j] == 1) {
-						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\PM\\source\\repos\\connect-4-ahmed-nasr\\ORANGE.PNG");
+						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\acer\\source\\repos\\connect-4-ahmed-nasr\\ORANGE.PNG");
 					}
 
 					if (fboard.board[i][j] == 2) {
-						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\PM\\source\\repos\\connect-4-ahmed-nasr\\RED.PNG");
+						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\acer\\source\\repos\\connect-4-ahmed-nasr\\RED.PNG");
 					}
 					
 					Controls->Add(button);
