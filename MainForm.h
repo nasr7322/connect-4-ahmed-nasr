@@ -54,6 +54,8 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ maintext;
 	private: System::Windows::Forms::Button^ start_new;
 
+
+
 	private:System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
@@ -63,6 +65,7 @@ namespace Guimain {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->owrname = (gcnew System::Windows::Forms::Label());
 			this->game_size_panel = (gcnew System::Windows::Forms::Panel());
 			this->cancel_game_size = (gcnew System::Windows::Forms::Button());
@@ -289,6 +292,7 @@ namespace Guimain {
 			this->Controls->Add(this->maintext);
 			this->Controls->Add(this->start_new);
 			this->Controls->Add(this->owrname);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MinimumSize = System::Drawing::Size(500, 500);
 			this->Name = L"MainForm";
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;

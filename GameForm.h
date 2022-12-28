@@ -41,7 +41,9 @@ namespace Guimain {
 					button->Left = 150 + (j * (button->Width));
 					button->Top = 135 + (i * (button->Height));
 					button->Enabled = false;
-					button->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+					button->BackColor = System::Drawing::Color::RoyalBlue;
+					button->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+					button->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 
 					if (fboard.board[i][j] == 1) {
 						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\acer\\source\\repos\\connect-4-ahmed-nasr\\ORANGE.PNG");
@@ -65,7 +67,7 @@ namespace Guimain {
 					select->Left = 150 + (i * (select->Width));
 					select->Top = 100;
 					select->Tag = i;
-					select->Click += gcnew EventHandler( this, &GameForm::button_Click);
+					select->Click += gcnew EventHandler(this,&GameForm::button_Click);
 					select->Text = i + "C";
 					Controls->Add(select);
 			}
@@ -158,7 +160,7 @@ namespace Guimain {
 			this->p1_label_score->Name = L"p1_label_score";
 			this->p1_label_score->Size = System::Drawing::Size(60, 16);
 			this->p1_label_score->TabIndex = 2;
-			this->p1_label_score->Text = L"Score:"+ p1.score;
+			this->p1_label_score->Text = L"Score:"+ System::Convert::ToString(p1.score);
 			// 
 			// p1_label_moves
 			// 
@@ -166,9 +168,9 @@ namespace Guimain {
 			this->p1_label_moves->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F));
 			this->p1_label_moves->Location = System::Drawing::Point(16, 62);
 			this->p1_label_moves->Name = L"p1_label_moves";
-			this->p1_label_moves->Size = System::Drawing::Size(60, 26);
+			this->p1_label_moves->Size = System::Drawing::Size(75, 26);
 			this->p1_label_moves->TabIndex = 3;
-			this->p1_label_moves->Text = L"Moves:"+ 0;
+			this->p1_label_moves->Text = L"Moves:"+ System::Convert::ToString(p1.turns_played);
 			// 
 			// turns_label
 			// 
@@ -178,7 +180,7 @@ namespace Guimain {
 			this->turns_label->Name = L"turns_label";
 			this->turns_label->Size = System::Drawing::Size(124, 24);
 			this->turns_label->TabIndex = 4;
-			this->turns_label->Text = L"Player " + ((turns % 2)+1) + "'s Turn";
+			this->turns_label->Text = L"Player " + System::Convert::ToString((turns % 2)+1) + "'s Turn";
 			this->turns_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// time_label
@@ -196,11 +198,11 @@ namespace Guimain {
 			// 
 			this->p2_label_moves->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->p2_label_moves->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F));
-			this->p2_label_moves->Location = System::Drawing::Point(698, 63);
+			this->p2_label_moves->Location = System::Drawing::Point(687, 63);
 			this->p2_label_moves->Name = L"p2_label_moves";
-			this->p2_label_moves->Size = System::Drawing::Size(60, 26);
+			this->p2_label_moves->Size = System::Drawing::Size(75, 26);
 			this->p2_label_moves->TabIndex = 8;
-			this->p2_label_moves->Text = L"Moves:"+ 0;
+			this->p2_label_moves->Text = L"Moves:"+ System::Convert::ToString(p2.turns_played);
 			this->p2_label_moves->TextAlign = System::Drawing::ContentAlignment::TopRight;
 			// 
 			// p2_label_score
@@ -211,7 +213,7 @@ namespace Guimain {
 			this->p2_label_score->Name = L"p2_label_score";
 			this->p2_label_score->Size = System::Drawing::Size(60, 16);
 			this->p2_label_score->TabIndex = 7;
-			this->p2_label_score->Text = L"Score:" + p2.score;
+			this->p2_label_score->Text = L"Score:" + System::Convert::ToString(p2.score);
 			this->p2_label_score->TextAlign = System::Drawing::ContentAlignment::TopRight;
 			// 
 			// p2_label
@@ -263,6 +265,9 @@ namespace Guimain {
 
 	private: System::Void main_menu_Click(System::Object^ sender, System::EventArgs^ e) {
 		GameForm::Visible = false;	
+		turns = 0;
+		//reset
+
 	}
 };
 }
