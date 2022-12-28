@@ -17,3 +17,6 @@ int addScore(char* prename, int score, char* filename);
 
 
 int getScore(char* prename, char* filename);
+
+
+int getScoreByIndex(int idx, char* filename);
