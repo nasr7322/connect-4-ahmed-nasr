@@ -67,7 +67,7 @@ namespace Guimain {
 					select->Left = 150 + (i * (select->Width));
 					select->Top = 100;
 					select->Tag = i;
-					select->Click += gcnew EventHandler( this, &GameForm::button_Click);
+					select->Click += gcnew EventHandler(this,&GameForm::button_Click);
 					select->Text = i + "C";
 					Controls->Add(select);
 			}
@@ -196,7 +196,7 @@ namespace Guimain {
 			// 
 			this->p2_label_moves->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->p2_label_moves->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F));
-			this->p2_label_moves->Location = System::Drawing::Point(698, 63);
+			this->p2_label_moves->Location = System::Drawing::Point(687, 63);
 			this->p2_label_moves->Name = L"p2_label_moves";
 			this->p2_label_moves->Size = System::Drawing::Size(75, 26);
 			this->p2_label_moves->TabIndex = 8;
@@ -262,6 +262,9 @@ namespace Guimain {
 
 	private: System::Void main_menu_Click(System::Object^ sender, System::EventArgs^ e) {
 		GameForm::Visible = false;	
+		turns = 0;
+		//reset
+
 	}
 };
 }
