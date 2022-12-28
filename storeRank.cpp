@@ -107,3 +107,29 @@ int addScore(char* prename, int score, char* filename) {
 
     return 0;
 }
+
+
+
+int getScore(char* prename, char* filename) {
+    char* name = lower(prename);///Avoid Case sensitive
+
+
+    FILE* fp;
+    fp = fopen(filename, "r");
+
+    char buffer[255];
+    int found = 0;
+    int score = -1;
+    while (!feof(fp)) {
+        fgets(buffer, 255, fp);
+        if (feof(fp))break;
+        char* crname = parseName(buffer);
+        if (strcmp(crname, name) == 0) {
+            found = 1;
+            score = parseScore(buffer);
+            break;
+        }
+    }
+
+    return score;
+}

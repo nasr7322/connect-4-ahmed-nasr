@@ -85,6 +85,7 @@ namespace Guimain {
 			// 
 			this->owrname->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->owrname->Font = (gcnew System::Drawing::Font(L"Open Sans", 7));
+
 			this->owrname->Location = System::Drawing::Point(200, 575);
 			this->owrname->Name = L"owrname";
 			this->owrname->Size = System::Drawing::Size(200, 25);
@@ -92,6 +93,7 @@ namespace Guimain {
 			this->owrname->Text = L"Mohamed Nasr and Ahmed Hassan";
 			this->owrname->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
+
 			// game_size_panel
 			// 
 			this->game_size_panel->Anchor = System::Windows::Forms::AnchorStyles::None;
@@ -103,6 +105,7 @@ namespace Guimain {
 			this->game_size_panel->Controls->Add(this->w_box);
 			this->game_size_panel->Controls->Add(this->h_box);
 			this->game_size_panel->Controls->Add(this->selecttext);
+
 			this->game_size_panel->Location = System::Drawing::Point(150, 250);
 			this->game_size_panel->Name = L"game_size_panel";
 			this->game_size_panel->Size = System::Drawing::Size(300, 190);
@@ -111,6 +114,7 @@ namespace Guimain {
 			// cancel_game_size
 			// 
 			this->cancel_game_size->Anchor = System::Windows::Forms::AnchorStyles::None;
+
 			this->cancel_game_size->Location = System::Drawing::Point(174, 144);
 			this->cancel_game_size->Name = L"cancel_game_size";
 			this->cancel_game_size->Size = System::Drawing::Size(50, 20);
@@ -122,6 +126,7 @@ namespace Guimain {
 			// ok_game_size
 			// 
 			this->ok_game_size->Anchor = System::Windows::Forms::AnchorStyles::None;
+
 			this->ok_game_size->Location = System::Drawing::Point(74, 144);
 			this->ok_game_size->Name = L"ok_game_size";
 			this->ok_game_size->Size = System::Drawing::Size(50, 20);
@@ -133,6 +138,7 @@ namespace Guimain {
 			// size_instructions
 			// 
 			this->size_instructions->Anchor = System::Windows::Forms::AnchorStyles::None;
+
 			this->size_instructions->Location = System::Drawing::Point(73, 122);
 			this->size_instructions->Name = L"size_instructions";
 			this->size_instructions->Size = System::Drawing::Size(152, 15);
@@ -144,6 +150,7 @@ namespace Guimain {
 			// 
 			this->label_select_custom->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label_select_custom->AutoSize = true;
+
 			this->label_select_custom->Location = System::Drawing::Point(71, 76);
 			this->label_select_custom->Name = L"label_select_custom";
 			this->label_select_custom->Size = System::Drawing::Size(107, 13);
@@ -153,6 +160,7 @@ namespace Guimain {
 			// w_box
 			// 
 			this->w_box->Anchor = System::Windows::Forms::AnchorStyles::None;
+
 			this->w_box->Location = System::Drawing::Point(154, 95);
 			this->w_box->Name = L"w_box";
 			this->w_box->Size = System::Drawing::Size(70, 20);
@@ -164,6 +172,7 @@ namespace Guimain {
 			// h_box
 			// 
 			this->h_box->Anchor = System::Windows::Forms::AnchorStyles::None;
+
 			this->h_box->Location = System::Drawing::Point(74, 95);
 			this->h_box->Name = L"h_box";
 			this->h_box->Size = System::Drawing::Size(70, 20);
@@ -176,6 +185,7 @@ namespace Guimain {
 			// 
 			this->selecttext->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->selecttext->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30));
+
 			this->selecttext->Location = System::Drawing::Point(37, 14);
 			this->selecttext->MinimumSize = System::Drawing::Size(1, 1);
 			this->selecttext->Name = L"selecttext";
@@ -188,6 +198,7 @@ namespace Guimain {
 			// 
 			this->quit->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->quit->Cursor = System::Windows::Forms::Cursors::Hand;
+
 			this->quit->Location = System::Drawing::Point(225, 414);
 			this->quit->MaximumSize = System::Drawing::Size(225, 36);
 			this->quit->MinimumSize = System::Drawing::Size(150, 24);
@@ -202,6 +213,7 @@ namespace Guimain {
 			// 
 			this->top_players->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->top_players->Cursor = System::Windows::Forms::Cursors::Hand;
+
 			this->top_players->Location = System::Drawing::Point(225, 384);
 			this->top_players->MaximumSize = System::Drawing::Size(225, 36);
 			this->top_players->MinimumSize = System::Drawing::Size(150, 24);
@@ -215,6 +227,7 @@ namespace Guimain {
 			// 
 			this->load_game->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->load_game->Cursor = System::Windows::Forms::Cursors::Hand;
+
 			this->load_game->Location = System::Drawing::Point(225, 354);
 			this->load_game->MaximumSize = System::Drawing::Size(225, 36);
 			this->load_game->MinimumSize = System::Drawing::Size(150, 24);
@@ -252,6 +265,7 @@ namespace Guimain {
 			// 
 			this->start_new->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->start_new->Cursor = System::Windows::Forms::Cursors::Hand;
+
 			this->start_new->Location = System::Drawing::Point(225, 324);
 			this->start_new->MaximumSize = System::Drawing::Size(225, 36);
 			this->start_new->MinimumSize = System::Drawing::Size(150, 24);
@@ -260,6 +274,7 @@ namespace Guimain {
 			this->start_new->TabIndex = 15;
 			this->start_new->Text = L"Start New";
 			this->start_new->UseVisualStyleBackColor = true;
+
 			this->start_new->Click += gcnew System::EventHandler(this, &MainForm::start_new_Click);
 			// 
 			// MainForm

@@ -13,3 +13,7 @@ char* parseName(char* data);
 
 
 int addScore(char* prename, int score, char* filename);
+
+
+
+int getScore(char* prename, char* filename);
