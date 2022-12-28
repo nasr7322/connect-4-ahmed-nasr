@@ -79,3 +79,15 @@ int PlayerMove(struct Board* B, struct Player* P, int col_number) {
     P->turns_played++;
     return 0;
 }
+
+void Reset(Board* B, Player* P1, Player* P2)
+{
+    for (int i = 0;i < B->height;i++) {
+        for (int j = 0;j < B->width;j++) {
+            B->board[i][j] = 0;
+        }
+    }
+
+    P1->score = P1->turns_played = 0;
+    P2->score = P2->turns_played = 0;
+}
