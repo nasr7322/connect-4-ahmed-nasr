@@ -2,6 +2,10 @@
 #using <System.Xml.dll>
 #include "GameForm.h"
 
+int errors = 0;
+int xmlv;
+int height=0,width=0,Highscores=0;
+
 using namespace System::Xml;
 
 namespace Guimain {
@@ -33,11 +37,6 @@ namespace Guimain {
 
 	protected:
 
-
-
-
-
-
 	private: System::Windows::Forms::Label^ owrname;
 	private: System::Windows::Forms::Panel^ game_size_panel;
 	private: System::Windows::Forms::Button^ cancel_game_size;
@@ -60,12 +59,10 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Label^ label3;
-
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::ListBox^ listBox;
-
-
-
+	private: System::Windows::Forms::Label^ xml_instructions;
+	private: System::Windows::Forms::CheckBox^ xml_check;
 	private:System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
@@ -100,6 +97,8 @@ namespace Guimain {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->listBox = (gcnew System::Windows::Forms::ListBox());
+			this->xml_instructions = (gcnew System::Windows::Forms::Label());
+			this->xml_check = (gcnew System::Windows::Forms::CheckBox());
 			this->game_size_panel->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
@@ -379,17 +378,37 @@ namespace Guimain {
 			// listBox
 			// 
 			this->listBox->FormattingEnabled = true;
-			this->listBox->Location = System::Drawing::Point(394, 325);
+			this->listBox->Location = System::Drawing::Point(395, 359);
 			this->listBox->Name = L"listBox";
-			this->listBox->Size = System::Drawing::Size(176, 134);
+			this->listBox->Size = System::Drawing::Size(176, 82);
 			this->listBox->TabIndex = 22;
+			this->listBox->Visible = false;
+			// 
+			// xml_instructions
+			// 
+			this->xml_instructions->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->xml_instructions->Location = System::Drawing::Point(392, 324);
+			this->xml_instructions->Name = L"xml_instructions";
+			this->xml_instructions->Size = System::Drawing::Size(179, 32);
+			this->xml_instructions->TabIndex = 23;
+			this->xml_instructions->Text = L"If a corrupted file is loaded 3 times the default setting will be used.";
+			this->xml_instructions->Visible = false;
+			// 
+			// xml_check
+			// 
+			this->xml_check->AutoSize = true;
+			this->xml_check->Location = System::Drawing::Point(395, 448);
+			this->xml_check->Name = L"xml_check";
+			this->xml_check->Size = System::Drawing::Size(104, 17);
+			this->xml_check->TabIndex = 24;
+			this->xml_check->Text = L"Use XML values";
+			this->xml_check->UseVisualStyleBackColor = true;
+			this->xml_check->Visible = false;
 			// 
 			// MainForm
 			// 
 			this->ClientSize = System::Drawing::Size(600, 600);
 			this->ControlBox = false;
-			this->Controls->Add(this->listBox);
-			this->Controls->Add(this->button3);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->game_size_panel);
 			this->Controls->Add(this->quit);
@@ -399,6 +418,10 @@ namespace Guimain {
 			this->Controls->Add(this->maintext);
 			this->Controls->Add(this->start_new);
 			this->Controls->Add(this->owrname);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->xml_check);
+			this->Controls->Add(this->xml_instructions);
+			this->Controls->Add(this->listBox);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MinimumSize = System::Drawing::Size(500, 500);
 			this->Name = L"MainForm";
@@ -410,6 +433,7 @@ namespace Guimain {
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -421,15 +445,33 @@ namespace Guimain {
 		}
 	}
 
-//generate size panel
+//start game button
 	private: System::Void start_new_Click(System::Object^ sender, System::EventArgs^ e) {
-		game_size_panel->Show();
-		game_size_panel->Location = System::Drawing::Point(150, 250);
+		if (xml_check->Checked){ start_game(sender, e);}
+		else {
+			game_size_panel->Show();
+			game_size_panel->Location = System::Drawing::Point(150, 250);
+		}
 	}
 
-//start game form
+//check validity of dimentions and starts the game
+	public: System::Void start_game(System::Object^ sender, System::EventArgs^ e) {
+
+		if (height < 4 || width < 4 || height >20 || width >20) {
+			MessageBox::Show("Invalid dimensions", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		else {
+			MainForm::Visible = false;
+			GameForm^ gameform = gcnew GameForm(height, width);
+			gameform->ShowDialog();
+			if (!(gameform->Visible)) { MainForm::Visible = true; }
+			game_size_panel->Hide();
+		}
+	}
+
+//start game from size panel
 	private: System::Void ok_game_size_Click(System::Object^ sender, System::EventArgs^ e) {
-		int height, width;
+		
 		try {
 			height = System::Convert::ToInt16(h_box->Text);
 			width = System::Convert::ToInt16(w_box->Text);
@@ -438,16 +480,7 @@ namespace Guimain {
 			height = 9;
 			width = 7;
 		}
-		if (height < 4 || width < 4 || height >20 || width >20) {
-			MessageBox::Show("Invalid dimensions", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-		else {
-			MainForm::Visible = false;
-			GameForm^ gameform = gcnew GameForm(height,width);
-			gameform->ShowDialog();
-			if (! (gameform->Visible) ){ MainForm::Visible = true; }
-			game_size_panel->Hide();
-		}
+		start_game(sender,e);
 	}
 
 //cancel size panel
@@ -456,30 +489,51 @@ namespace Guimain {
 		
 	}
 
-//textbox only accepts digits
+//textboxs only accepts digits
 	private: System::Void h_box_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		// Accept only digits
 		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) {
 			e->Handled = true;
 		}
 	}
-
 	private: System::Void w_box_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) {
 			e->Handled = true;
 		}
 	}
-private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-	OpenFileDialog^ openfiledialog = gcnew OpenFileDialog;
-	if(openfiledialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-		XmlTextReader^ reader = gcnew XmlTextReader(openfiledialog->FileName);
-		while (reader->Read())
-		{
-			if ((reader->NodeType == XmlNodeType::Text)) {
-				listBox->Items->Add(reader->Value);
-			}
+//reading xml files
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+		listBox->Items->Clear();
+		listBox->Visible = true;
+		xml_instructions->Visible = true;
+		this->xml_check->Visible = true;
+		OpenFileDialog^ openfiledialog = gcnew OpenFileDialog;
+		if(openfiledialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+			try {
+				//if (errors==3){ XmlTextReader^ reader = System::Resources::File::"default.xml"; } else{}
+				XmlTextReader^ reader = gcnew XmlTextReader(openfiledialog->FileName);
+				while (reader->Read())
+				{
 
-		}
+					if ((reader->NodeType == XmlNodeType::Element)) {
+						listBox->Items->Add(reader->Name);
+						if (reader->Name == "Height") { xmlv = 1; }
+						if (reader->Name == "Width") { xmlv = 2; }
+						if (reader->Name == "Highscores") { xmlv = 3; }
+					}
+
+					if ((reader->NodeType == XmlNodeType::Text)) {
+						listBox->Items->Add(reader->Value);
+						if (xmlv == 1) { height = System::Convert::ToInt16(reader->Value); }
+						if (xmlv == 2) { width = System::Convert::ToInt16(reader->Value);}
+						if (xmlv == 3) { Highscores = System::Convert::ToInt16(reader->Value);}
+					}
+				}
+			}
+			catch (...) {
+				MessageBox::Show("corrupted file", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				listBox->Items->Clear();
+				errors++;
+			}
 	}
 }
 };
