@@ -30,6 +30,9 @@
     <ClCompile Include="saveGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="undoRedo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="structures.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="saveGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="undoRedo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

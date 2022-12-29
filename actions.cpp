@@ -91,3 +91,26 @@ void Reset(Board* B, Player* P1, Player* P2)
     P1->score = P1->turns_played = 0;
     P2->score = P2->turns_played = 0;
 }
+
+int PopMove(struct Board* B, struct Player* P1, struct Player* P2, int col_number) {
+    if (col_number >= B->width || col_number < 0)return -1;
+    int cr = 0;
+    while (cr + 1 < B->height && B->board[cr + 1][col_number] == 0)cr++;
+    cr++;
+
+    if (B->board[cr][col_number] == P1->id) {
+        P1->turns_played--;
+        B->board[cr][col_number] = 0;
+        UpdateScore(B, P1);
+
+    }
+    else if (B->board[cr][col_number] == P2->id) {
+        P2->turns_played--;
+        B->board[cr][col_number] = 0;
+        UpdateScore(B, P2);
+
+    }
+
+
+    return 0;
+}
