@@ -19,7 +19,14 @@ namespace Guimain {
 
 	public ref class GameForm : public System::Windows::Forms::Form
 	{
-		
+
+		static int secounds = 0, minutes = 0;
+		String ^sec, ^min;
+	private: System::Windows::Forms::Timer^ timer;
+
+
+
+
 	public:
 
 		Void button_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -27,8 +34,9 @@ namespace Guimain {
 			int ret=PlayerMove(&board, (turns & 1) ? (&p2) : (&p1), System::Convert::ToInt32(clicked->Tag));
 			if(!ret)
 				turns++;
-			Controls->Clear();
-			InitializeComponent();
+			panel1->Controls->Clear();
+			Panel^ panel1;
+			panel1 = gcnew System::Windows::Forms::Panel;
 			PrintBoard(board.height, board.width, board);
 			PrintButtons(board.width);
 			p1_label_score->Text = L"Score:"+ System::Convert::ToString((p1.score));
@@ -49,18 +57,17 @@ namespace Guimain {
 					button->Top = 135 + (i * (button->Height));
 					button->Enabled = false;
 					button->BackColor = System::Drawing::Color::RoyalBlue;
-					//button->BackColor = System::Drawing::Color::Transparent;
 					button->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 					button->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 					if (fboard.board[i][j] == 1) {
-						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\acer\\source\\repos\\connect-4-ahmed-nasr\\ORANGE.PNG");
+						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\PM\\source\\repos\\connect-4-ahmed-nasr\\ORANGE.PNG");
 					}
 
 					if (fboard.board[i][j] == 2) {
-						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\acer\\source\\repos\\connect-4-ahmed-nasr\\RED.PNG");
+						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\PM\\source\\repos\\connect-4-ahmed-nasr\\RED.PNG");
 					}
 					
-					Controls->Add(button);
+					panel1->Controls->Add(button);
 				}
 			}
 		}
@@ -75,13 +82,21 @@ namespace Guimain {
 					select->Top = 100;
 					select->Tag = i;
 					select->Click += gcnew EventHandler(this,&GameForm::button_Click);
-					select->Text = i + "C";
-					Controls->Add(select);
+					panel1->Controls->Add(select);
 			}
+		}
+
+		void addtimer() {
+			Timer ^timer;
+			timer = gcnew System::Windows::Forms::Timer;
+			timer->Enabled = true;
+			timer->Interval = 1000;
+			timer->Tick += gcnew System::EventHandler(this, &GameForm::timer_Tick);
 		}
 
 		GameForm(int h, int w)
 		{
+			
 			InitializeComponent();
 			board.height = h;
 			board.width = w;
@@ -89,8 +104,10 @@ namespace Guimain {
 			p1.id = 1;
 			p2.score = p2.turns_played = 0;
 			p2.id = 2;
+			//addtimer();
 			PrintBoard(board.height, board.width, board);
 			PrintButtons(w);
+
 		}
 		
 	protected:
@@ -112,9 +129,7 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ p2_label_score;
 	private: System::Windows::Forms::Label^ p2_label;
 	private: System::Windows::Forms::Label^ owrname;
-
-
-
+	private: System::Windows::Forms::Panel^ panel1;
 	private: System::ComponentModel::IContainer^ components;
 
 	private:
@@ -123,6 +138,7 @@ namespace Guimain {
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(GameForm::typeid));
 			this->main_menu = (gcnew System::Windows::Forms::Button());
 			this->p1_label = (gcnew System::Windows::Forms::Label());
@@ -134,6 +150,8 @@ namespace Guimain {
 			this->p2_label_score = (gcnew System::Windows::Forms::Label());
 			this->p2_label = (gcnew System::Windows::Forms::Label());
 			this->owrname = (gcnew System::Windows::Forms::Label());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SuspendLayout();
 			// 
 			// main_menu
@@ -202,7 +220,7 @@ namespace Guimain {
 			this->time_label->Name = L"time_label";
 			this->time_label->Size = System::Drawing::Size(100, 35);
 			this->time_label->TabIndex = 5;
-			this->time_label->Text = L"00:00";
+			this->time_label->Text = L"0:0";
 			this->time_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// p2_label_moves
@@ -250,6 +268,20 @@ namespace Guimain {
 			this->owrname->Text = L"Mohamed Nasr and Ahmed Hassan";
 			this->owrname->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
+			// panel1
+			// 
+			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->panel1->Location = System::Drawing::Point(0, 0);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(784, 611);
+			this->panel1->TabIndex = 10;
+			// 
+			// timer
+			// 
+			this->timer->Enabled = true;
+			this->timer->Interval = 1000;
+			this->timer->Tick += gcnew System::EventHandler(this, &GameForm::timer_Tick);
+			// 
 			// GameForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -266,6 +298,7 @@ namespace Guimain {
 			this->Controls->Add(this->p1_label_score);
 			this->Controls->Add(this->p1_label);
 			this->Controls->Add(this->main_menu);
+			this->Controls->Add(this->panel1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MaximizeBox = false;
@@ -278,10 +311,24 @@ namespace Guimain {
 #pragma endregion
 
 	private: System::Void main_menu_Click(System::Object^ sender, System::EventArgs^ e) {
-		GameForm::Visible = false;	
+		timer->Enabled = false;
+		this->Close();
 		turns = 0;
 		Reset(&board,&p1,&p2);
-
+		secounds = 0;
+		minutes = 0;
+		
 	}
+
+private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
+	secounds++;
+	if (secounds == 60) { 
+		secounds = 0;
+		minutes++;
+	}
+	sec = Convert::ToString(secounds);
+	min = Convert::ToString(minutes);
+	time_label->Text = min + ":" + sec;
+}
 };
 }
