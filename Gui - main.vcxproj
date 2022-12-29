@@ -152,11 +152,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="sample.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="..\..\..\Downloads\RED.PNG" />
     <Image Include="..\..\..\Downloads\ORANGE.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="default.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
