@@ -99,6 +99,10 @@ namespace Guimain {
 
 		void gameend(){
 			timer->Enabled = false;
+			panel1->Enabled = false;
+			if (p1.score < p2.score){}
+			if (p1.score > p2.score) {}
+			else {}
 		}
 
 		GameForm(int h, int w)

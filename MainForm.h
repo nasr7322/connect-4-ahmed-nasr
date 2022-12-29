@@ -398,6 +398,7 @@ namespace Guimain {
 			// xml_check
 			// 
 			this->xml_check->AutoSize = true;
+			this->xml_check->Checked = true;
 			this->xml_check->Location = System::Drawing::Point(7, 133);
 			this->xml_check->Name = L"xml_check";
 			this->xml_check->Size = System::Drawing::Size(104, 17);
@@ -457,7 +458,6 @@ namespace Guimain {
 
 //start game button
 	private: System::Void start_new_Click(System::Object^ sender, System::EventArgs^ e) {
-		xml_panel->Visible = true;
 		if (xml_check->Checked && !(listBox->Items->Count ==0)) { start_game(sender, e); }
 		else {
 			listBox->Items->Clear();
