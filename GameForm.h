@@ -31,16 +31,19 @@ namespace Guimain {
 	private: System::Windows::Forms::ToolStripMenuItem^ redoToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ saveToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ exitToolStripMenuItem;
+	internal: System::Windows::Forms::Panel^ winnerpanel;
+	private: System::Windows::Forms::Label^ winnerlabel;
+	private: System::Windows::Forms::Button^ to_leaderboards_button;
+	private: System::Windows::Forms::Label^ enter_name_winner;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::Label^ final_scores_label;
+	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::Panel^ save_panel;
 	private: System::Windows::Forms::Label^ save_label;
 	private: System::Windows::Forms::Button^ cancel_button;
-
 	private: System::Windows::Forms::Button^ save_button;
-
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::TextBox^ save_box;
-
-
 	private: System::Windows::Forms::Timer^ timer;
 
 
@@ -136,9 +139,19 @@ namespace Guimain {
 		void gameend(){
 			timer->Enabled = false;
 			panel1->Enabled = false;
-			if (p1.score < p2.score){}
-			if (p1.score > p2.score) {}
-			else {}
+			if (p1.score < p2.score) { 
+				winnerpanel->Visible = true; 
+				winnerlabel->Text = "Player 2 Wins!!";
+			}
+			if (p1.score > p2.score) {
+				winnerpanel->Visible = true;
+				winnerlabel->Text = "Player 1 Wins!!";
+			}
+			else { 
+				winnerpanel->Visible = true; 
+				winnerlabel->Text = "It's a Draw!!";
+			}
+			final_scores_label->Text = "player 1's score: "+ p1_label_score->Text +"player 2's score: " + p2_label_score->Text;
 		}
 
 		GameForm(int h, int w,Board B,Player P1, Player P2)
@@ -186,7 +199,7 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ p2_label_score;
 	private: System::Windows::Forms::Label^ p2_label;
 	private: System::Windows::Forms::Label^ owrname;
-	private: System::Windows::Forms::Panel^ panel1;
+
 	private: System::ComponentModel::IContainer^ components;
 
 	private:
@@ -207,7 +220,6 @@ namespace Guimain {
 			this->p2_label_score = (gcnew System::Windows::Forms::Label());
 			this->p2_label = (gcnew System::Windows::Forms::Label());
 			this->owrname = (gcnew System::Windows::Forms::Label());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->save_panel = (gcnew System::Windows::Forms::Panel());
 			this->cancel_button = (gcnew System::Windows::Forms::Button());
 			this->save_button = (gcnew System::Windows::Forms::Button());
@@ -221,9 +233,17 @@ namespace Guimain {
 			this->saveToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->timer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->winnerpanel = (gcnew System::Windows::Forms::Panel());
+			this->to_leaderboards_button = (gcnew System::Windows::Forms::Button());
+			this->enter_name_winner = (gcnew System::Windows::Forms::Label());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->final_scores_label = (gcnew System::Windows::Forms::Label());
+			this->winnerlabel = (gcnew System::Windows::Forms::Label());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->panel1->SuspendLayout();
 			this->save_panel->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
+			this->winnerpanel->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// main_menu
@@ -231,10 +251,9 @@ namespace Guimain {
 			this->main_menu->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->main_menu->BackColor = System::Drawing::SystemColors::Control;
 			this->main_menu->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->main_menu->Location = System::Drawing::Point(467, 689);
-			this->main_menu->Margin = System::Windows::Forms::Padding(4);
+			this->main_menu->Location = System::Drawing::Point(350, 560);
 			this->main_menu->Name = L"main_menu";
-			this->main_menu->Size = System::Drawing::Size(133, 31);
+			this->main_menu->Size = System::Drawing::Size(100, 25);
 			this->main_menu->TabIndex = 0;
 			this->main_menu->Text = L"Main Menu";
 			this->main_menu->UseVisualStyleBackColor = false;
@@ -245,11 +264,12 @@ namespace Guimain {
 			this->p1_label->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->p1_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->p1_label->Location = System::Drawing::Point(12, 21);
 			this->p1_label->ForeColor = System::Drawing::Color::Coral;
 			this->p1_label->Location = System::Drawing::Point(16, 26);
 			this->p1_label->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->p1_label->Name = L"p1_label";
-			this->p1_label->Size = System::Drawing::Size(163, 46);
+			this->p1_label->Size = System::Drawing::Size(122, 37);
 			this->p1_label->TabIndex = 1;
 			this->p1_label->Text = L"Player1";
 			this->p1_label->Click += gcnew System::EventHandler(this, &GameForm::p1_label_Click);
@@ -259,11 +279,12 @@ namespace Guimain {
 			this->p1_label_score->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->p1_label_score->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->p1_label_score->Location = System::Drawing::Point(16, 58);
 			this->p1_label_score->ForeColor = System::Drawing::Color::Coral;
 			this->p1_label_score->Location = System::Drawing::Point(21, 72);
 			this->p1_label_score->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->p1_label_score->Name = L"p1_label_score";
-			this->p1_label_score->Size = System::Drawing::Size(80, 20);
+			this->p1_label_score->Size = System::Drawing::Size(60, 16);
 			this->p1_label_score->TabIndex = 2;
 			this->p1_label_score->Text = L"Score:0";
 			// 
@@ -271,11 +292,12 @@ namespace Guimain {
 			// 
 			this->p1_label_moves->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->p1_label_moves->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F));
+			this->p1_label_moves->Location = System::Drawing::Point(16, 74);
 			this->p1_label_moves->ForeColor = System::Drawing::Color::Coral;
 			this->p1_label_moves->Location = System::Drawing::Point(21, 91);
 			this->p1_label_moves->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->p1_label_moves->Name = L"p1_label_moves";
-			this->p1_label_moves->Size = System::Drawing::Size(100, 32);
+			this->p1_label_moves->Size = System::Drawing::Size(75, 26);
 			this->p1_label_moves->TabIndex = 3;
 			this->p1_label_moves->Text = L"Moves:0";
 			// 
@@ -284,10 +306,9 @@ namespace Guimain {
 			this->turns_label->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->turns_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->turns_label->Location = System::Drawing::Point(451, 40);
-			this->turns_label->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->turns_label->Location = System::Drawing::Point(338, 32);
 			this->turns_label->Name = L"turns_label";
-			this->turns_label->Size = System::Drawing::Size(165, 30);
+			this->turns_label->Size = System::Drawing::Size(124, 24);
 			this->turns_label->TabIndex = 4;
 			this->turns_label->Text = L"Player 1\'s Turn";
 			this->turns_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -297,10 +318,9 @@ namespace Guimain {
 			this->time_label->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->time_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->time_label->Location = System::Drawing::Point(467, 69);
-			this->time_label->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->time_label->Location = System::Drawing::Point(350, 56);
 			this->time_label->Name = L"time_label";
-			this->time_label->Size = System::Drawing::Size(133, 43);
+			this->time_label->Size = System::Drawing::Size(100, 35);
 			this->time_label->TabIndex = 5;
 			this->time_label->Text = L"0:0";
 			this->time_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -309,11 +329,12 @@ namespace Guimain {
 			// 
 			this->p2_label_moves->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->p2_label_moves->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F));
+			this->p2_label_moves->Location = System::Drawing::Point(687, 76);
 			this->p2_label_moves->ForeColor = System::Drawing::Color::Red;
 			this->p2_label_moves->Location = System::Drawing::Point(916, 93);
 			this->p2_label_moves->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->p2_label_moves->Name = L"p2_label_moves";
-			this->p2_label_moves->Size = System::Drawing::Size(100, 32);
+			this->p2_label_moves->Size = System::Drawing::Size(75, 26);
 			this->p2_label_moves->TabIndex = 8;
 			this->p2_label_moves->Text = L"Moves:0";
 			this->p2_label_moves->TextAlign = System::Drawing::ContentAlignment::TopRight;
@@ -323,11 +344,12 @@ namespace Guimain {
 			this->p2_label_score->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->p2_label_score->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->p2_label_score->Location = System::Drawing::Point(702, 58);
 			this->p2_label_score->ForeColor = System::Drawing::Color::Red;
 			this->p2_label_score->Location = System::Drawing::Point(936, 72);
 			this->p2_label_score->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->p2_label_score->Name = L"p2_label_score";
-			this->p2_label_score->Size = System::Drawing::Size(80, 20);
+			this->p2_label_score->Size = System::Drawing::Size(60, 16);
 			this->p2_label_score->TabIndex = 7;
 			this->p2_label_score->Text = L"Score:0";
 			this->p2_label_score->TextAlign = System::Drawing::ContentAlignment::TopRight;
@@ -337,11 +359,12 @@ namespace Guimain {
 			this->p2_label->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->p2_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->p2_label->Location = System::Drawing::Point(648, 21);
 			this->p2_label->ForeColor = System::Drawing::Color::Red;
 			this->p2_label->Location = System::Drawing::Point(864, 26);
 			this->p2_label->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->p2_label->Name = L"p2_label";
-			this->p2_label->Size = System::Drawing::Size(165, 46);
+			this->p2_label->Size = System::Drawing::Size(124, 37);
 			this->p2_label->TabIndex = 6;
 			this->p2_label->Text = L"Player2";
 			// 
@@ -349,10 +372,9 @@ namespace Guimain {
 			// 
 			this->owrname->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->owrname->Font = (gcnew System::Drawing::Font(L"Open Sans", 7));
-			this->owrname->Location = System::Drawing::Point(400, 726);
-			this->owrname->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->owrname->Location = System::Drawing::Point(300, 590);
 			this->owrname->Name = L"owrname";
-			this->owrname->Size = System::Drawing::Size(267, 31);
+			this->owrname->Size = System::Drawing::Size(200, 25);
 			this->owrname->TabIndex = 9;
 			this->owrname->Text = L"Mohamed Nasr and Ahmed Hassan";
 			this->owrname->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -430,11 +452,16 @@ namespace Guimain {
 			// 
 			// menuStrip1
 			// 
+			this->menuStrip1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->menuStrip1->AutoSize = false;
+			this->menuStrip1->BackColor = System::Drawing::SystemColors::ActiveCaption;
+			this->menuStrip1->Dock = System::Windows::Forms::DockStyle::None;
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->actionsToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1045, 28);
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(4, 2, 0, 2);
+			this->menuStrip1->Size = System::Drawing::Size(784, 21);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -445,13 +472,14 @@ namespace Guimain {
 					this->redoToolStripMenuItem, this->saveToolStripMenuItem, this->exitToolStripMenuItem
 			});
 			this->actionsToolStripMenuItem->Name = L"actionsToolStripMenuItem";
-			this->actionsToolStripMenuItem->Size = System::Drawing::Size(72, 24);
+			this->actionsToolStripMenuItem->Size = System::Drawing::Size(59, 17);
 			this->actionsToolStripMenuItem->Text = L"Actions";
 			// 
 			// undoToolStripMenuItem
 			// 
 			this->undoToolStripMenuItem->Enabled = false;
 			this->undoToolStripMenuItem->Name = L"undoToolStripMenuItem";
+			this->undoToolStripMenuItem->Size = System::Drawing::Size(103, 22);
 			this->undoToolStripMenuItem->Size = System::Drawing::Size(128, 26);
 			this->undoToolStripMenuItem->Text = L"Undo";
 			this->undoToolStripMenuItem->Click += gcnew System::EventHandler(this, &GameForm::undoToolStripMenuItem_Click);
@@ -483,12 +511,75 @@ namespace Guimain {
 			this->timer->Interval = 1000;
 			this->timer->Tick += gcnew System::EventHandler(this, &GameForm::timer_Tick);
 			// 
+			// winnerpanel
+			// 
+			this->winnerpanel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->winnerpanel->Controls->Add(this->to_leaderboards_button);
+			this->winnerpanel->Controls->Add(this->enter_name_winner);
+			this->winnerpanel->Controls->Add(this->textBox1);
+			this->winnerpanel->Controls->Add(this->final_scores_label);
+			this->winnerpanel->Controls->Add(this->winnerlabel);
+			this->winnerpanel->Location = System::Drawing::Point(175, 200);
+			this->winnerpanel->Name = L"winnerpanel";
+			this->winnerpanel->Size = System::Drawing::Size(450, 200);
+			this->winnerpanel->TabIndex = 10;
+			this->winnerpanel->Visible = false;
+			// 
+			// to_leaderboards_button
+			// 
+			this->to_leaderboards_button->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->to_leaderboards_button->Location = System::Drawing::Point(175, 163);
+			this->to_leaderboards_button->Name = L"to_leaderboards_button";
+			this->to_leaderboards_button->Size = System::Drawing::Size(100, 23);
+			this->to_leaderboards_button->TabIndex = 6;
+			this->to_leaderboards_button->Text = L"Leaderboard";
+			this->to_leaderboards_button->UseVisualStyleBackColor = true;
+			// 
+			// enter_name_winner
+			// 
+			this->enter_name_winner->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->enter_name_winner->Location = System::Drawing::Point(178, 114);
+			this->enter_name_winner->Name = L"enter_name_winner";
+			this->enter_name_winner->Size = System::Drawing::Size(88, 16);
+			this->enter_name_winner->TabIndex = 5;
+			this->enter_name_winner->Text = L"Enter Your Name";
+			// 
+			// textBox1
+			// 
+			this->textBox1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->textBox1->Location = System::Drawing::Point(151, 132);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(150, 20);
+			this->textBox1->TabIndex = 4;
+			// 
+			// final_scores_label
+			// 
+			this->final_scores_label->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->final_scores_label->Location = System::Drawing::Point(170, 70);
+			this->final_scores_label->Name = L"final_scores_label";
+			this->final_scores_label->Size = System::Drawing::Size(110, 33);
+			this->final_scores_label->TabIndex = 3;
+			this->final_scores_label->Text = L"player 1 \'s score: 100 player 2 \'s score: 100";
+			// 
+			// winnerlabel
+			// 
+			this->winnerlabel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->winnerlabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->winnerlabel->Location = System::Drawing::Point(105, 20);
+			this->winnerlabel->Name = L"winnerlabel";
+			this->winnerlabel->Size = System::Drawing::Size(240, 40);
+			this->winnerlabel->TabIndex = 2;
+			this->winnerlabel->Text = L"Player 1 wins";
+			this->winnerlabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
 			// GameForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1045, 752);
+			this->ClientSize = System::Drawing::Size(784, 611);
 			this->ControlBox = false;
+			this->Controls->Add(this->winnerpanel);
 			this->Controls->Add(this->menuStrip1);
 			this->Controls->Add(this->owrname);
 			this->Controls->Add(this->p2_label_moves);
@@ -504,7 +595,6 @@ namespace Guimain {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(4);
 			this->MaximizeBox = false;
 			this->Name = L"GameForm";
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
@@ -514,8 +604,9 @@ namespace Guimain {
 			this->save_panel->PerformLayout();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			this->winnerpanel->ResumeLayout(false);
+			this->winnerpanel->PerformLayout();
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 

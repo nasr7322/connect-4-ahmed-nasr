@@ -87,6 +87,25 @@ namespace Guimain {
 			}
 		}
 
+	void readxml(XmlTextReader^ reader) {
+		while (reader->Read())
+		{
+			if ((reader->NodeType == XmlNodeType::Element)) {
+				xmllistBox->Items->Add(reader->Name);
+				if (reader->Name == "Height") { xmlv = 1; }
+				if (reader->Name == "Width") { xmlv = 2; }
+				if (reader->Name == "Highscores") { xmlv = 3; }
+			}
+
+			if ((reader->NodeType == XmlNodeType::Text)) {
+				xmllistBox->Items->Add(reader->Value);
+				if (xmlv == 1) { height = System::Convert::ToInt16(reader->Value); }
+				if (xmlv == 2) { width = System::Convert::ToInt16(reader->Value); }
+				if (xmlv == 3) { Highscores = System::Convert::ToInt16(reader->Value); }
+			}
+		}
+	}
+
 	protected:
 
 	private: System::Windows::Forms::Label^ owrname;
@@ -105,23 +124,13 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ maintext;
 	private: System::Windows::Forms::Button^ start_new;
 	private: System::Windows::Forms::Panel^ scores_panel;
-
 	private: System::Windows::Forms::Button^ scores_cancel;
-
 	private: System::Windows::Forms::Button^ scores_ok;
-
 	private: System::Windows::Forms::Label^ scores_label2;
-
 	private: System::Windows::Forms::Label^ scores_label1;
 	private: System::Windows::Forms::TextBox^ scores_count_box;
-
-
-
 	private: System::Windows::Forms::Label^ scores;
-
 	private: System::Windows::Forms::Button^ getxmldata_button;
-
-
 	private: System::Windows::Forms::ListBox^ listBox;
 	private: System::Windows::Forms::Label^ xml_instructions;
 	private: System::Windows::Forms::CheckBox^ xml_check;
@@ -325,6 +334,7 @@ namespace Guimain {
 			this->top_players->TabIndex = 19;
 			this->top_players->Text = L"Top Players";
 			this->top_players->UseVisualStyleBackColor = true;
+			this->top_players->Click += gcnew System::EventHandler(this, &MainForm::top_players_Click);
 			// 
 			// load_game
 			// 
@@ -483,6 +493,7 @@ namespace Guimain {
 			this->scores_panel->Name = L"scores_panel";
 			this->scores_panel->Size = System::Drawing::Size(300, 190);
 			this->scores_panel->TabIndex = 16;
+			this->scores_panel->Visible = false;
 			// 
 			// scores_cancel
 			// 
@@ -493,6 +504,7 @@ namespace Guimain {
 			this->scores_cancel->TabIndex = 15;
 			this->scores_cancel->Text = L"Cancel";
 			this->scores_cancel->UseVisualStyleBackColor = true;
+			this->scores_cancel->Click += gcnew System::EventHandler(this, &MainForm::scores_cancel_Click);
 			// 
 			// scores_ok
 			// 
@@ -503,6 +515,7 @@ namespace Guimain {
 			this->scores_ok->TabIndex = 14;
 			this->scores_ok->Text = L"OK";
 			this->scores_ok->UseVisualStyleBackColor = true;
+			this->scores_ok->Click += gcnew System::EventHandler(this, &MainForm::scores_ok_Click);
 			// 
 			// scores_label2
 			// 
@@ -533,6 +546,7 @@ namespace Guimain {
 			this->scores_count_box->TabIndex = 10;
 			this->scores_count_box->Text = L"  ";
 			this->scores_count_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->scores_count_box->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::scores_count_box_KeyPress);
 			// 
 			// scores
 			// 
@@ -691,6 +705,7 @@ namespace Guimain {
 			MessageBox::Show("Invalid dimensions", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else {
+			game_size_panel->Hide();
 			Board B;
 			Player P1, P2;
 			B.width = 0;
@@ -698,7 +713,6 @@ namespace Guimain {
 			GameForm^ gameform = gcnew GameForm(height, width,B,P1,P2);
 			gameform->ShowDialog();
 			if (!(gameform->Visible)) { MainForm::Visible = true; }
-			game_size_panel->Hide();
 		}
 	}
 
@@ -733,39 +747,72 @@ namespace Guimain {
 			e->Handled = true;
 		}
 	}
+	private: System::Void scores_count_box_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) {
+			e->Handled = true;
+		}
+	}
 //reading xml files
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 		xmllistBox->Items->Clear();
 		xml_panel->Visible = true;
 		OpenFileDialog^ openfiledialog = gcnew OpenFileDialog;
+		XmlTextReader^ reader;
 		if(openfiledialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			try {
-				//if (errors==3){ XmlTextReader^ reader = System::Xml ("default.xml"); }else{}
-				XmlTextReader^ reader = gcnew XmlTextReader(openfiledialog->FileName);
-				while (reader->Read())
-				{
-					if ((reader->NodeType == XmlNodeType::Element)) {
-						xmllistBox->Items->Add(reader->Name);
-						if (reader->Name == "Height") { xmlv = 1; }
-						if (reader->Name == "Width") { xmlv = 2; }
-						if (reader->Name == "Highscores") { xmlv = 3; }
-					}
-
-					if ((reader->NodeType == XmlNodeType::Text)) {
-						xmllistBox->Items->Add(reader->Value);
-						if (xmlv == 1) { height = System::Convert::ToInt16(reader->Value); }
-						if (xmlv == 2) { width = System::Convert::ToInt16(reader->Value);}
-						if (xmlv == 3) { Highscores = System::Convert::ToInt16(reader->Value);}
-					}
-				}
+				reader = gcnew XmlTextReader(openfiledialog->FileName);
+				readxml(reader);
 			}
 			catch (...) {
-				MessageBox::Show("corrupted file", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				xmllistBox->Items->Clear();
-				errors++;
+				if (errors == 2) {
+					xmllistBox->Items->Clear();
+					reader = gcnew XmlTextReader("default.xml");
+					readxml(reader);
+					MessageBox::Show("3 corrupted files in a row. the default configurations are now loaded.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					errors = 0;
+				}
+				else {
+					MessageBox::Show("corrupted file", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					xmllistBox->Items->Clear();
+					errors++;
+				}
 			}
 	}
 }
+
+private: System::Void top_players_Click(System::Object^ sender, System::EventArgs^ e) {
+	scores_panel->Show();
+	scores_panel->Location = System::Drawing::Point(150, 250);
+}
+private: System::Void scores_cancel_Click(System::Object^ sender, System::EventArgs^ e) {
+	scores_panel->Hide();
+}
+private: System::Void scores_ok_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (xml_check->Checked && !(xmllistBox->Items->Count == 0)) { loadhighscores(sender, e); }
+	else {
+		try {
+			Highscores = System::Convert::ToInt16(scores_count_box->Text);
+		}
+		catch (...) {
+			Highscores = 10;
+		}
+		loadhighscores(sender, e);
+	}
+}
+	public: System::Void loadhighscores(System::Object^ sender, System::EventArgs^ e) {
+
+		if (Highscores < 4 ) {
+			MessageBox::Show("Invalid input", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		else {
+			scores_panel->Hide();
+			MainForm::Visible = false;
+			GameForm^ gameform = gcnew GameForm(height, width);
+			gameform->ShowDialog();
+			if (!(gameform->Visible)) { MainForm::Visible = true; }
+		}
+	}
+
 private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void load_game_Click(System::Object^ sender, System::EventArgs^ e) {
