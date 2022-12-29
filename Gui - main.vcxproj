@@ -45,7 +45,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -124,6 +124,7 @@
     <ClCompile Include="actions.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="NATools.cpp" />
+    <ClCompile Include="saveGame.cpp" />
     <ClCompile Include="storeRank.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +137,7 @@
     </ClInclude>
     <ClInclude Include="NATools.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="saveGame.h" />
     <ClInclude Include="storeRank.h" />
     <ClInclude Include="structures.h" />
   </ItemGroup>
