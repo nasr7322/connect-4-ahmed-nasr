@@ -51,6 +51,9 @@ namespace Guimain {
 			p2_label_moves->Text = L"Moves:" + System::Convert::ToString(p2.turns_played);
 			p2_label_score->Text = L"Score:" + System::Convert::ToString(p2.score);
 			turns_label->Text = L"Player " + System::Convert::ToString((turns % 2) + 1) + "'s Turn";
+			if (turns == (board.height) * (board.width)) {
+				gameend();
+			}
 		}
 
 		Void button_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -115,6 +118,14 @@ namespace Guimain {
 			timer->Tick += gcnew System::EventHandler(this, &GameForm::timer_Tick);
 		}
 
+		void gameend(){
+			timer->Enabled = false;
+			panel1->Enabled = false;
+			if (p1.score < p2.score){}
+			if (p1.score > p2.score) {}
+			else {}
+		}
+
 		GameForm(int h, int w)
 		{
 			
@@ -125,7 +136,6 @@ namespace Guimain {
 			p1.id = 1;
 			p2.score = p2.turns_played = 0;
 			p2.id = 2;
-			//addtimer();
 			PrintBoard(board.height, board.width, board);
 			PrintButtons(w);
 
