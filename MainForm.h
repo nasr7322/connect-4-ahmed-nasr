@@ -134,6 +134,14 @@ namespace Guimain {
 	private: System::Windows::Forms::ListBox^ xmllistBox;
 
 	private:System::ComponentModel::Container^ components;
+	private: System::Windows::Forms::Panel^ panel1;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::TextBox^ textBox2;
+	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Button^ button3;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -173,6 +181,15 @@ namespace Guimain {
 			this->load_panel = (gcnew System::Windows::Forms::Panel());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->load_label = (gcnew System::Windows::Forms::Label());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->load_panel->SuspendLayout();
 			this->game_size_panel->SuspendLayout();
 			this->scores_panel->SuspendLayout();
 			this->xml_panel->SuspendLayout();
@@ -452,14 +469,6 @@ namespace Guimain {
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &MainForm::button3_Click);
 			// 
-			// listBox
-			// 
-			this->listBox->FormattingEnabled = true;
-			this->listBox->ItemHeight = 16;
-			this->listBox->Location = System::Drawing::Point(394, 325);
-			this->listBox->Name = L"listBox";
-			this->listBox->Size = System::Drawing::Size(176, 132);
-			this->listBox->TabIndex = 22;
 			// scores_panel
 			// 
 			this->scores_panel->Anchor = System::Windows::Forms::AnchorStyles::None;

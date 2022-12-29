@@ -70,9 +70,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="sample.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
+    <Xml Include="default.xml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\Downloads\RED.PNG">

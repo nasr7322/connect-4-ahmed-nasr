@@ -563,7 +563,7 @@ private: System::Void saveToolStripMenuItem_Click(System::Object^ sender, System
 		this->Controls->Add(save_panel);
 	save_panel->Show();
 	save_panel->BringToFront();
-	save_panel->Hide();
+	
 }
 private: System::Void p1_label_Click(System::Object^ sender, System::EventArgs^ e) {
 }
@@ -586,7 +586,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		}
 		name[j] = '\0';
 		SaveBoard(&board, "games_struct.txt", name);
-
+		save_panel->Hide();
 	}
 }
 private: System::Void cancel_button_Click(System::Object^ sender, System::EventArgs^ e) {
