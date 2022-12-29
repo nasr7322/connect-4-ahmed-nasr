@@ -63,6 +63,7 @@ namespace Guimain {
 	private: System::Windows::Forms::ListBox^ listBox;
 	private: System::Windows::Forms::Label^ xml_instructions;
 	private: System::Windows::Forms::CheckBox^ xml_check;
+	private: System::Windows::Forms::Panel^ xml_panel;
 	private:System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
@@ -99,8 +100,10 @@ namespace Guimain {
 			this->listBox = (gcnew System::Windows::Forms::ListBox());
 			this->xml_instructions = (gcnew System::Windows::Forms::Label());
 			this->xml_check = (gcnew System::Windows::Forms::CheckBox());
+			this->xml_panel = (gcnew System::Windows::Forms::Panel());
 			this->game_size_panel->SuspendLayout();
 			this->panel1->SuspendLayout();
+			this->xml_panel->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// owrname
@@ -378,32 +381,40 @@ namespace Guimain {
 			// listBox
 			// 
 			this->listBox->FormattingEnabled = true;
-			this->listBox->Location = System::Drawing::Point(395, 359);
+			this->listBox->Location = System::Drawing::Point(7, 44);
 			this->listBox->Name = L"listBox";
 			this->listBox->Size = System::Drawing::Size(176, 82);
 			this->listBox->TabIndex = 22;
-			this->listBox->Visible = false;
 			// 
 			// xml_instructions
 			// 
 			this->xml_instructions->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->xml_instructions->Location = System::Drawing::Point(392, 324);
+			this->xml_instructions->Location = System::Drawing::Point(4, 9);
 			this->xml_instructions->Name = L"xml_instructions";
 			this->xml_instructions->Size = System::Drawing::Size(179, 32);
 			this->xml_instructions->TabIndex = 23;
-			this->xml_instructions->Text = L"If a corrupted file is loaded 3 times the default setting will be used.";
-			this->xml_instructions->Visible = false;
+			this->xml_instructions->Text = L"If a corrupted file is loaded 3 times the default XML will be used.";
 			// 
 			// xml_check
 			// 
 			this->xml_check->AutoSize = true;
-			this->xml_check->Location = System::Drawing::Point(395, 448);
+			this->xml_check->Location = System::Drawing::Point(7, 133);
 			this->xml_check->Name = L"xml_check";
 			this->xml_check->Size = System::Drawing::Size(104, 17);
 			this->xml_check->TabIndex = 24;
 			this->xml_check->Text = L"Use XML values";
 			this->xml_check->UseVisualStyleBackColor = true;
-			this->xml_check->Visible = false;
+			// 
+			// xml_panel
+			// 
+			this->xml_panel->Controls->Add(this->xml_check);
+			this->xml_panel->Controls->Add(this->xml_instructions);
+			this->xml_panel->Controls->Add(this->listBox);
+			this->xml_panel->Location = System::Drawing::Point(388, 315);
+			this->xml_panel->Name = L"xml_panel";
+			this->xml_panel->Size = System::Drawing::Size(191, 151);
+			this->xml_panel->TabIndex = 25;
+			this->xml_panel->Visible = false;
 			// 
 			// MainForm
 			// 
@@ -419,9 +430,7 @@ namespace Guimain {
 			this->Controls->Add(this->start_new);
 			this->Controls->Add(this->owrname);
 			this->Controls->Add(this->button3);
-			this->Controls->Add(this->xml_check);
-			this->Controls->Add(this->xml_instructions);
-			this->Controls->Add(this->listBox);
+			this->Controls->Add(this->xml_panel);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MinimumSize = System::Drawing::Size(500, 500);
 			this->Name = L"MainForm";
@@ -432,8 +441,9 @@ namespace Guimain {
 			this->game_size_panel->PerformLayout();
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
+			this->xml_panel->ResumeLayout(false);
+			this->xml_panel->PerformLayout();
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -447,11 +457,14 @@ namespace Guimain {
 
 //start game button
 	private: System::Void start_new_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (xml_check->Checked){ start_game(sender, e);}
+		xml_panel->Visible = true;
+		if (xml_check->Checked && !(listBox->Items->Count ==0)) { start_game(sender, e); }
 		else {
+			listBox->Items->Clear();
 			game_size_panel->Show();
 			game_size_panel->Location = System::Drawing::Point(150, 250);
 		}
+		
 	}
 
 //check validity of dimentions and starts the game
@@ -503,9 +516,7 @@ namespace Guimain {
 //reading xml files
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 		listBox->Items->Clear();
-		listBox->Visible = true;
-		xml_instructions->Visible = true;
-		this->xml_check->Visible = true;
+		xml_panel->Visible = true;
 		OpenFileDialog^ openfiledialog = gcnew OpenFileDialog;
 		if(openfiledialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			try {
