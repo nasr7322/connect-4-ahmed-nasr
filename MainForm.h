@@ -1,6 +1,7 @@
 ﻿ #pragma once
 #using <System.Xml.dll>
 #include "GameForm.h"
+#include <windows.h>
 
 int errors = 0;
 int xmlv;
@@ -20,11 +21,61 @@ namespace Guimain {
 
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
+		Void button_Click(System::Object^ sender, System::EventArgs^ e) {
+			Button^ clicked = (Button^)sender;
+			///int ret = PlayerMove(&board, (turns & 1) ? (&p2) : (&p1), System::Convert::ToInt32(clicked->Tag));
+			Board B;
+			Player P1, P2;
+			String^ s = System::Convert::ToString(clicked->Tag);
+			auto a=s->ToCharArray();
+
+			char name[255];
+			int j = 0;
+			for (;j < a->Length;j++) {
+				name[j] = a[j];
+			}
+			name[j] = '\0';
+			OutputDebugStringA("Gme name\n");
+			OutputDebugStringA(name);
+			LoadGame(&B, &P1, &P2, &turns, "games_struct.txt",name );
+
+			MainForm::Visible = false;
+			GameForm^ gameform = gcnew GameForm(height, width, B, P1, P2);
+			gameform->ShowDialog();
+			if (!(gameform->Visible)) { MainForm::Visible = true; }
+			game_size_panel->Hide();
+		}
+
+		void renderGames() {
+			FILE* fgames;///names file
+			fgames = fopen("games.txt", "r");
+			if (!fgames)return;
+
+			char buffer[255];
+			int nosaved = GetNoSaved();
+			for (int i = 0;i < nosaved;i++) {
+				fgets(buffer, 255, fgames);
+				Button^ button = gcnew System::Windows::Forms::Button;
+				String^ s=gcnew String(buffer);
+
+				button->Height = 20 ;
+				button->Width = 80 ;
+				button->Left = 112 ;
+				button->Top = 130+(i*(button->Height)) ;
+				button->Text = s;
+				button->Tag =s;
+				button->Click += gcnew EventHandler(this, &MainForm::button_Click);
+				load_panel->Controls->Add(button);
+			}
+			fclose(fgames);
+		}
 	public:
 		MainForm(void)
 		{
 			InitializeComponent();
 			game_size_panel->Hide();
+			load_panel->Hide();
+			renderGames();
 		}
 
 	protected:
@@ -84,9 +135,22 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ xml_instructions;
 	private: System::Windows::Forms::CheckBox^ xml_check;
 	private: System::Windows::Forms::Panel^ xml_panel;
+	private: System::Windows::Forms::Panel^ load_panel;
+	private: System::Windows::Forms::Label^ load_label;
+	private: System::Windows::Forms::Label^ label4;
+
+
 	private: System::Windows::Forms::ListBox^ xmllistBox;
 
 	private:System::ComponentModel::Container^ components;
+	private: System::Windows::Forms::Panel^ panel1;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::TextBox^ textBox2;
+	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Button^ button3;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -123,9 +187,22 @@ namespace Guimain {
 			this->xml_check = (gcnew System::Windows::Forms::CheckBox());
 			this->xml_panel = (gcnew System::Windows::Forms::Panel());
 			this->xmllistBox = (gcnew System::Windows::Forms::ListBox());
+			this->load_panel = (gcnew System::Windows::Forms::Panel());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->load_label = (gcnew System::Windows::Forms::Label());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->load_panel->SuspendLayout();
 			this->game_size_panel->SuspendLayout();
 			this->scores_panel->SuspendLayout();
 			this->xml_panel->SuspendLayout();
+			this->load_panel->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// owrname
@@ -271,6 +348,7 @@ namespace Guimain {
 			this->load_game->TabIndex = 18;
 			this->load_game->Text = L"Load Game";
 			this->load_game->UseVisualStyleBackColor = true;
+			this->load_game->Click += gcnew System::EventHandler(this, &MainForm::load_game_Click);
 			// 
 			// gamename
 			// 
@@ -309,6 +387,97 @@ namespace Guimain {
 			this->start_new->Text = L"Start New";
 			this->start_new->UseVisualStyleBackColor = true;
 			this->start_new->Click += gcnew System::EventHandler(this, &MainForm::start_new_Click);
+			// 
+			// panel1
+			// 
+			this->panel1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->panel1->Controls->Add(this->button1);
+			this->panel1->Controls->Add(this->button2);
+			this->panel1->Controls->Add(this->label1);
+			this->panel1->Controls->Add(this->label2);
+			this->panel1->Controls->Add(this->textBox2);
+			this->panel1->Controls->Add(this->label3);
+			this->panel1->Location = System::Drawing::Point(12, 12);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(300, 190);
+			this->panel1->TabIndex = 16;
+			// 
+			// button1
+			// 
+			this->button1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->button1->Location = System::Drawing::Point(174, 144);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(50, 20);
+			this->button1->TabIndex = 15;
+			this->button1->Text = L"Cancel";
+			this->button1->UseVisualStyleBackColor = true;
+			// 
+			// button2
+			// 
+			this->button2->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->button2->Location = System::Drawing::Point(74, 144);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(50, 20);
+			this->button2->TabIndex = 14;
+			this->button2->Text = L"OK";
+			this->button2->UseVisualStyleBackColor = true;
+			// 
+			// label1
+			// 
+			this->label1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->label1->Location = System::Drawing::Point(73, 122);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(152, 15);
+			this->label1->TabIndex = 13;
+			this->label1->Text = L"*For default size leave empty*";
+			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// label2
+			// 
+			this->label2->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(71, 76);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(171, 17);
+			this->label2->TabIndex = 12;
+			this->label2->Text = L"select a number of scores";
+			// 
+			// textBox2
+			// 
+			this->textBox2->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->textBox2->Location = System::Drawing::Point(74, 95);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(150, 22);
+			this->textBox2->TabIndex = 10;
+			this->textBox2->Text = L"  ";
+			this->textBox2->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			// 
+			// label3
+			// 
+			this->label3->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30));
+			this->label3->Location = System::Drawing::Point(37, 14);
+			this->label3->MinimumSize = System::Drawing::Size(1, 1);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(224, 40);
+			this->label3->TabIndex = 9;
+			this->label3->Text = L"Scores";
+			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// button3
+			// 
+			this->button3->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->button3->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button3->Location = System::Drawing::Point(225, 353);
+			this->button3->MaximumSize = System::Drawing::Size(225, 36);
+			this->button3->MinimumSize = System::Drawing::Size(150, 24);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(150, 24);
+			this->button3->TabIndex = 21;
+			this->button3->Text = L"Get XML Data";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MainForm::button3_Click);
 			// 
 			// scores_panel
 			// 
@@ -421,7 +590,7 @@ namespace Guimain {
 			this->xml_check->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->xml_check->Location = System::Drawing::Point(7, 133);
 			this->xml_check->Name = L"xml_check";
-			this->xml_check->Size = System::Drawing::Size(104, 17);
+			this->xml_check->Size = System::Drawing::Size(132, 21);
 			this->xml_check->TabIndex = 24;
 			this->xml_check->Text = L"Use XML values";
 			this->xml_check->UseVisualStyleBackColor = true;
@@ -437,6 +606,35 @@ namespace Guimain {
 			this->xml_panel->TabIndex = 25;
 			this->xml_panel->Visible = false;
 			// 
+			// load_panel
+			// 
+			this->load_panel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->load_panel->Controls->Add(this->label4);
+			this->load_panel->Controls->Add(this->load_label);
+			this->load_panel->Location = System::Drawing::Point(112, 230);
+			this->load_panel->Name = L"load_panel";
+			this->load_panel->Size = System::Drawing::Size(338, 252);
+			this->load_panel->TabIndex = 26;
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(110, 74);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(111, 17);
+			this->label4->TabIndex = 2;
+			this->label4->Text = L"Available games";
+			// 
+			// load_label
+			// 
+			this->load_label->AutoSize = true;
+			this->load_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->load_label->Location = System::Drawing::Point(25, 13);
+			this->load_label->Name = L"load_label";
+			this->load_label->Size = System::Drawing::Size(287, 58);
+			this->load_label->TabIndex = 0;
+			this->load_label->Text = L"Load Game";
 			// xmllistBox
 			// 
 			this->xmllistBox->FormattingEnabled = true;
@@ -449,6 +647,9 @@ namespace Guimain {
 			// 
 			this->ClientSize = System::Drawing::Size(600, 600);
 			this->ControlBox = false;
+			this->Controls->Add(this->load_panel);
+			this->Controls->Add(this->panel1);
+
 			this->Controls->Add(this->scores_panel);
 			this->Controls->Add(this->game_size_panel);
 			this->Controls->Add(this->quit);
@@ -472,6 +673,8 @@ namespace Guimain {
 			this->scores_panel->PerformLayout();
 			this->xml_panel->ResumeLayout(false);
 			this->xml_panel->PerformLayout();
+			this->load_panel->ResumeLayout(false);
+			this->load_panel->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -503,8 +706,11 @@ namespace Guimain {
 		}
 		else {
 			game_size_panel->Hide();
+			Board B;
+			Player P1, P2;
+			B.width = 0;
 			MainForm::Visible = false;
-			GameForm^ gameform = gcnew GameForm(height, width);
+			GameForm^ gameform = gcnew GameForm(height, width,B,P1,P2);
 			gameform->ShowDialog();
 			if (!(gameform->Visible)) { MainForm::Visible = true; }
 		}
@@ -607,7 +813,22 @@ private: System::Void scores_ok_Click(System::Object^ sender, System::EventArgs^
 		}
 	}
 
+private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void load_game_Click(System::Object^ sender, System::EventArgs^ e) {
+	/**
+	Board B;
+	Player P1, P2;
+	LoadGame(&B, &P1, &P2, &turns,"games_struct.txt","G1\n");
+	
+	MainForm::Visible = false;
+	GameForm^ gameform = gcnew GameForm(height, width, B, P1, P2);
+	gameform->ShowDialog();
+	if (!(gameform->Visible)) { MainForm::Visible = true; }
+	game_size_panel->Hide();*/
+	load_panel->Show();
 
+}
 };
 
 }
