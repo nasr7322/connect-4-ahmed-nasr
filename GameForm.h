@@ -63,13 +63,11 @@ namespace Guimain {
 				gameend();
 			}
 		}
-
+		
 		Void button_Click(System::Object^ sender, System::EventArgs^ e) {
 			Button^ clicked = (Button^) sender;
 			int ret=PlayerMove(&board, (turns & 1) ? (&p2) : (&p1), System::Convert::ToInt32(clicked->Tag));
 			if (!ret) {
-
-				
 				play_stack[turns++] = System::Convert::ToInt32(clicked->Tag);
 				play_stack[turns] = -1;
 				this->redoToolStripMenuItem->Enabled = false;
@@ -105,6 +103,7 @@ namespace Guimain {
 					catch (...) {
 						MessageBox::Show("Can't Load Image", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 						
+
 					}
 					
 					panel1->Controls->Add(button);
@@ -519,6 +518,7 @@ namespace Guimain {
 			this->PerformLayout();
 
 		}
+
 #pragma endregion
 
 	private: System::Void main_menu_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -528,7 +528,6 @@ namespace Guimain {
 		Reset(&board,&p1,&p2);
 		secounds = 0;
 		minutes = 0;
-		
 	}
 
 private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
@@ -541,11 +540,7 @@ private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
 	min = Convert::ToString(minutes);
 	time_label->Text = min + ":" + sec;
 }
-
-
-
-
-
+	   
 private: System::Void undoToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->redoToolStripMenuItem->Enabled = true;
 	UndoMove(&board,&p1,&p2,play_stack,&turns);
@@ -553,14 +548,15 @@ private: System::Void undoToolStripMenuItem_Click(System::Object^ sender, System
 	if(!canUndo(play_stack,turns))
 		this->undoToolStripMenuItem->Enabled = false;
 }
+
 private: System::Void redoToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->undoToolStripMenuItem->Enabled = true;
 	RedoMove(&board, &p1, &p2, play_stack, &turns);
 	updatePanel1();
 	if (!canRedo(play_stack, turns))
 		this->redoToolStripMenuItem->Enabled = false;
-
 }
+
 private: System::Void saveToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 	///SaveBoard(&board, "games_struct.txt", "G1");
 	if (!(this->Contains(save_panel)) )

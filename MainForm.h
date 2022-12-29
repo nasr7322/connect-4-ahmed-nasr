@@ -17,6 +17,7 @@ namespace Guimain {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Xml;
 
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
@@ -103,14 +104,24 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ gamename;
 	private: System::Windows::Forms::Label^ maintext;
 	private: System::Windows::Forms::Button^ start_new;
-	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Panel^ scores_panel;
+
+	private: System::Windows::Forms::Button^ scores_cancel;
+
+	private: System::Windows::Forms::Button^ scores_ok;
+
+	private: System::Windows::Forms::Label^ scores_label2;
+
+	private: System::Windows::Forms::Label^ scores_label1;
+	private: System::Windows::Forms::TextBox^ scores_count_box;
+
+
+
+	private: System::Windows::Forms::Label^ scores;
+
+	private: System::Windows::Forms::Button^ getxmldata_button;
+
+
 	private: System::Windows::Forms::ListBox^ listBox;
 	private: System::Windows::Forms::Label^ xml_instructions;
 	private: System::Windows::Forms::CheckBox^ xml_check;
@@ -120,6 +131,7 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ label4;
 
 
+	private: System::Windows::Forms::ListBox^ xmllistBox;
 
 	private:System::ComponentModel::Container^ components;
 
@@ -146,23 +158,23 @@ namespace Guimain {
 			this->gamename = (gcnew System::Windows::Forms::Label());
 			this->maintext = (gcnew System::Windows::Forms::Label());
 			this->start_new = (gcnew System::Windows::Forms::Button());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->listBox = (gcnew System::Windows::Forms::ListBox());
+			this->scores_panel = (gcnew System::Windows::Forms::Panel());
+			this->scores_cancel = (gcnew System::Windows::Forms::Button());
+			this->scores_ok = (gcnew System::Windows::Forms::Button());
+			this->scores_label2 = (gcnew System::Windows::Forms::Label());
+			this->scores_label1 = (gcnew System::Windows::Forms::Label());
+			this->scores_count_box = (gcnew System::Windows::Forms::TextBox());
+			this->scores = (gcnew System::Windows::Forms::Label());
+			this->getxmldata_button = (gcnew System::Windows::Forms::Button());
 			this->xml_instructions = (gcnew System::Windows::Forms::Label());
 			this->xml_check = (gcnew System::Windows::Forms::CheckBox());
 			this->xml_panel = (gcnew System::Windows::Forms::Panel());
+			this->xmllistBox = (gcnew System::Windows::Forms::ListBox());
 			this->load_panel = (gcnew System::Windows::Forms::Panel());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->load_label = (gcnew System::Windows::Forms::Label());
 			this->game_size_panel->SuspendLayout();
-			this->panel1->SuspendLayout();
+			this->scores_panel->SuspendLayout();
 			this->xml_panel->SuspendLayout();
 			this->load_panel->SuspendLayout();
 			this->SuspendLayout();
@@ -232,7 +244,7 @@ namespace Guimain {
 			this->label_select_custom->AutoSize = true;
 			this->label_select_custom->Location = System::Drawing::Point(71, 76);
 			this->label_select_custom->Name = L"label_select_custom";
-			this->label_select_custom->Size = System::Drawing::Size(141, 17);
+			this->label_select_custom->Size = System::Drawing::Size(107, 13);
 			this->label_select_custom->TabIndex = 12;
 			this->label_select_custom->Text = L"Select a custom size:";
 			// 
@@ -241,7 +253,7 @@ namespace Guimain {
 			this->w_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->w_box->Location = System::Drawing::Point(154, 95);
 			this->w_box->Name = L"w_box";
-			this->w_box->Size = System::Drawing::Size(70, 22);
+			this->w_box->Size = System::Drawing::Size(70, 20);
 			this->w_box->TabIndex = 11;
 			this->w_box->Text = L"  ";
 			this->w_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -252,7 +264,7 @@ namespace Guimain {
 			this->h_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->h_box->Location = System::Drawing::Point(74, 95);
 			this->h_box->Name = L"h_box";
-			this->h_box->Size = System::Drawing::Size(70, 22);
+			this->h_box->Size = System::Drawing::Size(70, 20);
 			this->h_box->TabIndex = 10;
 			this->h_box->Text = L"  ";
 			this->h_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -448,11 +460,101 @@ namespace Guimain {
 			this->listBox->Name = L"listBox";
 			this->listBox->Size = System::Drawing::Size(176, 132);
 			this->listBox->TabIndex = 22;
+			// scores_panel
+			// 
+			this->scores_panel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->scores_panel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->scores_panel->Controls->Add(this->scores_cancel);
+			this->scores_panel->Controls->Add(this->scores_ok);
+			this->scores_panel->Controls->Add(this->scores_label2);
+			this->scores_panel->Controls->Add(this->scores_label1);
+			this->scores_panel->Controls->Add(this->scores_count_box);
+			this->scores_panel->Controls->Add(this->scores);
+			this->scores_panel->Location = System::Drawing::Point(12, 12);
+			this->scores_panel->Name = L"scores_panel";
+			this->scores_panel->Size = System::Drawing::Size(300, 190);
+			this->scores_panel->TabIndex = 16;
+			// 
+			// scores_cancel
+			// 
+			this->scores_cancel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->scores_cancel->Location = System::Drawing::Point(174, 144);
+			this->scores_cancel->Name = L"scores_cancel";
+			this->scores_cancel->Size = System::Drawing::Size(50, 20);
+			this->scores_cancel->TabIndex = 15;
+			this->scores_cancel->Text = L"Cancel";
+			this->scores_cancel->UseVisualStyleBackColor = true;
+			// 
+			// scores_ok
+			// 
+			this->scores_ok->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->scores_ok->Location = System::Drawing::Point(74, 144);
+			this->scores_ok->Name = L"scores_ok";
+			this->scores_ok->Size = System::Drawing::Size(50, 20);
+			this->scores_ok->TabIndex = 14;
+			this->scores_ok->Text = L"OK";
+			this->scores_ok->UseVisualStyleBackColor = true;
+			// 
+			// scores_label2
+			// 
+			this->scores_label2->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->scores_label2->Location = System::Drawing::Point(73, 122);
+			this->scores_label2->Name = L"scores_label2";
+			this->scores_label2->Size = System::Drawing::Size(152, 15);
+			this->scores_label2->TabIndex = 13;
+			this->scores_label2->Text = L"*For default size leave empty*";
+			this->scores_label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// scores_label1
+			// 
+			this->scores_label1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->scores_label1->AutoSize = true;
+			this->scores_label1->Location = System::Drawing::Point(71, 76);
+			this->scores_label1->Name = L"scores_label1";
+			this->scores_label1->Size = System::Drawing::Size(128, 13);
+			this->scores_label1->TabIndex = 12;
+			this->scores_label1->Text = L"select a number of scores";
+			// 
+			// scores_count_box
+			// 
+			this->scores_count_box->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->scores_count_box->Location = System::Drawing::Point(74, 95);
+			this->scores_count_box->Name = L"scores_count_box";
+			this->scores_count_box->Size = System::Drawing::Size(150, 20);
+			this->scores_count_box->TabIndex = 10;
+			this->scores_count_box->Text = L"  ";
+			this->scores_count_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			// 
+			// scores
+			// 
+			this->scores->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->scores->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30));
+			this->scores->Location = System::Drawing::Point(37, 14);
+			this->scores->MinimumSize = System::Drawing::Size(1, 1);
+			this->scores->Name = L"scores";
+			this->scores->Size = System::Drawing::Size(224, 40);
+			this->scores->TabIndex = 9;
+			this->scores->Text = L"Scores";
+			this->scores->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// getxmldata_button
+			// 
+			this->getxmldata_button->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->getxmldata_button->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->getxmldata_button->Location = System::Drawing::Point(225, 353);
+			this->getxmldata_button->MaximumSize = System::Drawing::Size(225, 36);
+			this->getxmldata_button->MinimumSize = System::Drawing::Size(150, 24);
+			this->getxmldata_button->Name = L"getxmldata_button";
+			this->getxmldata_button->Size = System::Drawing::Size(150, 24);
+			this->getxmldata_button->TabIndex = 21;
+			this->getxmldata_button->Text = L"Get XML Data";
+			this->getxmldata_button->UseVisualStyleBackColor = true;
+			this->getxmldata_button->Click += gcnew System::EventHandler(this, &MainForm::button3_Click);
 			// 
 			// xml_instructions
 			// 
 			this->xml_instructions->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->xml_instructions->Location = System::Drawing::Point(4, 9);
+			this->xml_instructions->Location = System::Drawing::Point(5, 9);
 			this->xml_instructions->Name = L"xml_instructions";
 			this->xml_instructions->Size = System::Drawing::Size(179, 32);
 			this->xml_instructions->TabIndex = 23;
@@ -472,12 +574,12 @@ namespace Guimain {
 			// 
 			// xml_panel
 			// 
+			this->xml_panel->Controls->Add(this->xmllistBox);
 			this->xml_panel->Controls->Add(this->xml_check);
 			this->xml_panel->Controls->Add(this->xml_instructions);
-			this->xml_panel->Controls->Add(this->listBox);
-			this->xml_panel->Location = System::Drawing::Point(388, 315);
+			this->xml_panel->Location = System::Drawing::Point(388, 316);
 			this->xml_panel->Name = L"xml_panel";
-			this->xml_panel->Size = System::Drawing::Size(191, 151);
+			this->xml_panel->Size = System::Drawing::Size(192, 151);
 			this->xml_panel->TabIndex = 25;
 			this->xml_panel->Visible = false;
 			// 
@@ -510,6 +612,13 @@ namespace Guimain {
 			this->load_label->Size = System::Drawing::Size(287, 58);
 			this->load_label->TabIndex = 0;
 			this->load_label->Text = L"Load Game";
+			// xmllistBox
+			// 
+			this->xmllistBox->FormattingEnabled = true;
+			this->xmllistBox->Location = System::Drawing::Point(10, 45);
+			this->xmllistBox->Name = L"xmllistBox";
+			this->xmllistBox->Size = System::Drawing::Size(173, 82);
+			this->xmllistBox->TabIndex = 25;
 			// 
 			// MainForm
 			// 
@@ -517,6 +626,8 @@ namespace Guimain {
 			this->ControlBox = false;
 			this->Controls->Add(this->load_panel);
 			this->Controls->Add(this->panel1);
+
+			this->Controls->Add(this->scores_panel);
 			this->Controls->Add(this->game_size_panel);
 			this->Controls->Add(this->quit);
 			this->Controls->Add(this->top_players);
@@ -525,7 +636,7 @@ namespace Guimain {
 			this->Controls->Add(this->maintext);
 			this->Controls->Add(this->start_new);
 			this->Controls->Add(this->owrname);
-			this->Controls->Add(this->button3);
+			this->Controls->Add(this->getxmldata_button);
 			this->Controls->Add(this->xml_panel);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MinimumSize = System::Drawing::Size(500, 500);
@@ -533,11 +644,10 @@ namespace Guimain {
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Main Menu";
-			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->game_size_panel->ResumeLayout(false);
 			this->game_size_panel->PerformLayout();
-			this->panel1->ResumeLayout(false);
-			this->panel1->PerformLayout();
+			this->scores_panel->ResumeLayout(false);
+			this->scores_panel->PerformLayout();
 			this->xml_panel->ResumeLayout(false);
 			this->xml_panel->PerformLayout();
 			this->load_panel->ResumeLayout(false);
@@ -556,13 +666,13 @@ namespace Guimain {
 
 //start game button
 	private: System::Void start_new_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (xml_check->Checked && !(listBox->Items->Count ==0)) { start_game(sender, e); }
+		if (xml_check->Checked && !(xmllistBox->Items->Count == 0)) { start_game(sender, e); }
 		else {
-			listBox->Items->Clear();
+			xmllistBox->Items->Clear();
 			game_size_panel->Show();
 			game_size_panel->Location = System::Drawing::Point(150, 250);
 		}
-		
+	
 	}
 
 //check validity of dimentions and starts the game
@@ -616,25 +726,24 @@ namespace Guimain {
 	}
 //reading xml files
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-		listBox->Items->Clear();
+		xmllistBox->Items->Clear();
 		xml_panel->Visible = true;
 		OpenFileDialog^ openfiledialog = gcnew OpenFileDialog;
 		if(openfiledialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			try {
-				//if (errors==3){ XmlTextReader^ reader = System::Resources::File::"default.xml"; } else{}
+				//if (errors==3){ XmlTextReader^ reader = System::Xml ("default.xml"); }else{}
 				XmlTextReader^ reader = gcnew XmlTextReader(openfiledialog->FileName);
 				while (reader->Read())
 				{
-
 					if ((reader->NodeType == XmlNodeType::Element)) {
-						listBox->Items->Add(reader->Name);
+						xmllistBox->Items->Add(reader->Name);
 						if (reader->Name == "Height") { xmlv = 1; }
 						if (reader->Name == "Width") { xmlv = 2; }
 						if (reader->Name == "Highscores") { xmlv = 3; }
 					}
 
 					if ((reader->NodeType == XmlNodeType::Text)) {
-						listBox->Items->Add(reader->Value);
+						xmllistBox->Items->Add(reader->Value);
 						if (xmlv == 1) { height = System::Convert::ToInt16(reader->Value); }
 						if (xmlv == 2) { width = System::Convert::ToInt16(reader->Value);}
 						if (xmlv == 3) { Highscores = System::Convert::ToInt16(reader->Value);}
@@ -643,7 +752,7 @@ namespace Guimain {
 			}
 			catch (...) {
 				MessageBox::Show("corrupted file", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				listBox->Items->Clear();
+				xmllistBox->Items->Clear();
 				errors++;
 			}
 	}
