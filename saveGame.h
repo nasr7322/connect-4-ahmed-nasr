@@ -11,9 +11,9 @@
 
 char* parseGameName(char* data);
 
-int SaveBoard(struct Board* B, char* filename, char* gameprename);
+int SaveBoard(struct Board* B, char* filename, char* gameprename);///Example:SaveBoard(&B,"file_to_save_structs.txt","game1")
 
 
 int LoadBoard(struct Board* B, char* filename, char* gameprename);
 
-int LoadGame(struct Board* B, struct Player* P1, struct Player* P2, int* turns, char* filename, char* gameprename);
+int LoadGame(struct Board* B, struct Player* P1, struct Player* P2, int* turns, char* filename, char* gameprename);///Example:LoadGame(&B,&P1,&P2,&turns,"file_to_save_structs.txt","game1")
