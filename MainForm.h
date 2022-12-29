@@ -533,7 +533,7 @@ namespace Guimain {
 		OpenFileDialog^ openfiledialog = gcnew OpenFileDialog;
 		if(openfiledialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			try {
-				//if (errors==3){ XmlTextReader^ reader = System::Resources::File::"default.xml"; } else{}
+				if (errors==3){ XmlTextReader^ reader = System::Resources::File::"default.xml"; } else{}
 				XmlTextReader^ reader = gcnew XmlTextReader(openfiledialog->FileName);
 				while (reader->Read())
 				{

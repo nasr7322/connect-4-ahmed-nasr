@@ -82,11 +82,11 @@ namespace Guimain {
 					button->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 					button->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 					if (fboard.board[i][j] == 1) {
-						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\PM\\source\\repos\\connect-4-ahmed-nasr\\ORANGE.PNG");
+						button->BackgroundImage = System::Drawing::Image::FromFile("ORANGE.PNG");
 					}
 
 					if (fboard.board[i][j] == 2) {
-						button->BackgroundImage = System::Drawing::Image::FromFile("C:\\Users\\PM\\source\\repos\\connect-4-ahmed-nasr\\RED.PNG");
+						button->BackgroundImage = System::Drawing::Image::FromFile("RED.PNG");
 					}
 					
 					panel1->Controls->Add(button);
