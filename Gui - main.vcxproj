@@ -126,6 +126,7 @@
     <ClCompile Include="NATools.cpp" />
     <ClCompile Include="saveGame.cpp" />
     <ClCompile Include="storeRank.cpp" />
+    <ClCompile Include="undoRedo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="actions.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="saveGame.h" />
     <ClInclude Include="storeRank.h" />
     <ClInclude Include="structures.h" />
+    <ClInclude Include="undoRedo.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GameForm.resx">
