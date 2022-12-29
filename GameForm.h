@@ -22,6 +22,8 @@ namespace Guimain {
 
 		static int secounds = 0, minutes = 0;
 		String ^sec, ^min;
+	private: System::Windows::Forms::Timer^ timer;
+
 
 
 
@@ -102,7 +104,7 @@ namespace Guimain {
 			p1.id = 1;
 			p2.score = p2.turns_played = 0;
 			p2.id = 2;
-			addtimer();
+			//addtimer();
 			PrintBoard(board.height, board.width, board);
 			PrintButtons(w);
 
@@ -136,6 +138,7 @@ namespace Guimain {
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(GameForm::typeid));
 			this->main_menu = (gcnew System::Windows::Forms::Button());
 			this->p1_label = (gcnew System::Windows::Forms::Label());
@@ -148,6 +151,7 @@ namespace Guimain {
 			this->p2_label = (gcnew System::Windows::Forms::Label());
 			this->owrname = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SuspendLayout();
 			// 
 			// main_menu
@@ -272,6 +276,12 @@ namespace Guimain {
 			this->panel1->Size = System::Drawing::Size(784, 611);
 			this->panel1->TabIndex = 10;
 			// 
+			// timer
+			// 
+			this->timer->Enabled = true;
+			this->timer->Interval = 1000;
+			this->timer->Tick += gcnew System::EventHandler(this, &GameForm::timer_Tick);
+			// 
 			// GameForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -301,12 +311,13 @@ namespace Guimain {
 #pragma endregion
 
 	private: System::Void main_menu_Click(System::Object^ sender, System::EventArgs^ e) {
-		GameForm::Visible = false;	
+		timer->Enabled = false;
+		this->Close();
 		turns = 0;
-		Controls->Clear();
 		Reset(&board,&p1,&p2);
 		secounds = 0;
 		minutes = 0;
+		
 	}
 
 private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
