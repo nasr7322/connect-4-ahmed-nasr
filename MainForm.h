@@ -807,7 +807,10 @@ private: System::Void scores_ok_Click(System::Object^ sender, System::EventArgs^
 		else {
 			scores_panel->Hide();
 			MainForm::Visible = false;
-			GameForm^ gameform = gcnew GameForm(height, width);
+			Board B;
+			Player P1, P2;
+			B.width = 0;
+			GameForm^ gameform = gcnew GameForm(height, width, B, P1, P2);
 			gameform->ShowDialog();
 			if (!(gameform->Visible)) { MainForm::Visible = true; }
 		}
