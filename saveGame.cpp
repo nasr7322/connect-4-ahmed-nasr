@@ -1,5 +1,7 @@
 #include "saveGame.h"
-
+#include <windows.h>
+#include <stdio.h>
+#include <stdlib.h>
 char* parseGameName(char* data) {
     int ret = 0;
     int cr = 0;
@@ -23,9 +25,10 @@ int SaveBoard(struct Board* B, char* filename, char* gameprename) {
         fclose(fgames);
         fgames = fopen("games.txt", "r");
     }
-
-    char* gamename = lower(gameprename);
-
+    char* gamename = gameprename;
+    
+    
+    
     newfgames = fopen("newgames.txt", "w");
     if (fgames == NULL || newfgames == NULL) {
         return -1;
@@ -89,7 +92,7 @@ int SaveBoard(struct Board* B, char* filename, char* gameprename) {
     fclose(fsgames);
     remove(filename);
     rename("newgames_structures.txt", filename);
-
+    
 }
 
 

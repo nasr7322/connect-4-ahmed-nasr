@@ -169,7 +169,7 @@ namespace Guimain {
 			this->label_select_custom->AutoSize = true;
 			this->label_select_custom->Location = System::Drawing::Point(71, 76);
 			this->label_select_custom->Name = L"label_select_custom";
-			this->label_select_custom->Size = System::Drawing::Size(107, 13);
+			this->label_select_custom->Size = System::Drawing::Size(141, 17);
 			this->label_select_custom->TabIndex = 12;
 			this->label_select_custom->Text = L"Select a custom size:";
 			// 
@@ -178,7 +178,7 @@ namespace Guimain {
 			this->w_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->w_box->Location = System::Drawing::Point(154, 95);
 			this->w_box->Name = L"w_box";
-			this->w_box->Size = System::Drawing::Size(70, 20);
+			this->w_box->Size = System::Drawing::Size(70, 22);
 			this->w_box->TabIndex = 11;
 			this->w_box->Text = L"  ";
 			this->w_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -189,7 +189,7 @@ namespace Guimain {
 			this->h_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->h_box->Location = System::Drawing::Point(74, 95);
 			this->h_box->Name = L"h_box";
-			this->h_box->Size = System::Drawing::Size(70, 20);
+			this->h_box->Size = System::Drawing::Size(70, 22);
 			this->h_box->TabIndex = 10;
 			this->h_box->Text = L"  ";
 			this->h_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -336,7 +336,7 @@ namespace Guimain {
 			this->label2->AutoSize = true;
 			this->label2->Location = System::Drawing::Point(71, 76);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(128, 13);
+			this->label2->Size = System::Drawing::Size(171, 17);
 			this->label2->TabIndex = 12;
 			this->label2->Text = L"select a number of scores";
 			// 
@@ -345,7 +345,7 @@ namespace Guimain {
 			this->textBox2->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->textBox2->Location = System::Drawing::Point(74, 95);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(150, 20);
+			this->textBox2->Size = System::Drawing::Size(150, 22);
 			this->textBox2->TabIndex = 10;
 			this->textBox2->Text = L"  ";
 			this->textBox2->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -379,9 +379,10 @@ namespace Guimain {
 			// listBox
 			// 
 			this->listBox->FormattingEnabled = true;
+			this->listBox->ItemHeight = 16;
 			this->listBox->Location = System::Drawing::Point(394, 325);
 			this->listBox->Name = L"listBox";
-			this->listBox->Size = System::Drawing::Size(176, 134);
+			this->listBox->Size = System::Drawing::Size(176, 132);
 			this->listBox->TabIndex = 22;
 			// 
 			// MainForm
@@ -405,6 +406,7 @@ namespace Guimain {
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Main Menu";
+			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->game_size_panel->ResumeLayout(false);
 			this->game_size_panel->PerformLayout();
 			this->panel1->ResumeLayout(false);
@@ -481,6 +483,8 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 
 		}
 	}
+}
+private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 
