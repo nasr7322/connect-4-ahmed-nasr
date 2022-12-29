@@ -174,6 +174,7 @@ int GetNoSaved() {
     FILE* fgames;///names file
     fgames = fopen("games.txt", "r");
 
+    if (!fgames)return -1;
 
     char buffer[255];
     int cnt = 0;

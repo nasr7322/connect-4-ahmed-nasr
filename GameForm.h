@@ -3,7 +3,7 @@
 #include "actions.h"
 #include "undoRedo.h"
 #include "saveGame.h"
-
+#include <Windows.h>
 
 namespace Guimain {
 
@@ -31,6 +31,14 @@ namespace Guimain {
 	private: System::Windows::Forms::ToolStripMenuItem^ redoToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ saveToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ exitToolStripMenuItem;
+	private: System::Windows::Forms::Panel^ save_panel;
+	private: System::Windows::Forms::Label^ save_label;
+	private: System::Windows::Forms::Button^ cancel_button;
+
+	private: System::Windows::Forms::Button^ save_button;
+
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::TextBox^ save_box;
 
 
 	private: System::Windows::Forms::Timer^ timer;
@@ -156,6 +164,7 @@ namespace Guimain {
 			
 			PrintBoard(board.height, board.width, board);
 			PrintButtons(w);
+			save_panel->Hide();
 
 		}
 		
@@ -200,6 +209,12 @@ namespace Guimain {
 			this->p2_label = (gcnew System::Windows::Forms::Label());
 			this->owrname = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->save_panel = (gcnew System::Windows::Forms::Panel());
+			this->cancel_button = (gcnew System::Windows::Forms::Button());
+			this->save_button = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->save_box = (gcnew System::Windows::Forms::TextBox());
+			this->save_label = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->actionsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->undoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -207,6 +222,8 @@ namespace Guimain {
 			this->saveToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->timer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->panel1->SuspendLayout();
+			this->save_panel->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -343,12 +360,74 @@ namespace Guimain {
 			// 
 			// panel1
 			// 
+			this->panel1->Controls->Add(this->save_panel);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->panel1->Location = System::Drawing::Point(0, 0);
 			this->panel1->Margin = System::Windows::Forms::Padding(4);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(1045, 752);
 			this->panel1->TabIndex = 10;
+			// 
+			// save_panel
+			// 
+			this->save_panel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->save_panel->Controls->Add(this->cancel_button);
+			this->save_panel->Controls->Add(this->save_button);
+			this->save_panel->Controls->Add(this->label1);
+			this->save_panel->Controls->Add(this->save_box);
+			this->save_panel->Controls->Add(this->save_label);
+			this->save_panel->Location = System::Drawing::Point(358, 137);
+			this->save_panel->Name = L"save_panel";
+			this->save_panel->Size = System::Drawing::Size(354, 212);
+			this->save_panel->TabIndex = 0;
+			// 
+			// cancel_button
+			// 
+			this->cancel_button->Location = System::Drawing::Point(203, 165);
+			this->cancel_button->Name = L"cancel_button";
+			this->cancel_button->Size = System::Drawing::Size(105, 28);
+			this->cancel_button->TabIndex = 4;
+			this->cancel_button->Text = L"cancel";
+			this->cancel_button->UseVisualStyleBackColor = true;
+			this->cancel_button->Click += gcnew System::EventHandler(this, &GameForm::cancel_button_Click);
+			// 
+			// save_button
+			// 
+			this->save_button->Location = System::Drawing::Point(58, 169);
+			this->save_button->Name = L"save_button";
+			this->save_button->Size = System::Drawing::Size(97, 24);
+			this->save_button->TabIndex = 3;
+			this->save_button->Text = L"save";
+			this->save_button->UseVisualStyleBackColor = true;
+			this->save_button->Click += gcnew System::EventHandler(this, &GameForm::button1_Click);
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(112, 87);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(100, 17);
+			this->label1->TabIndex = 2;
+			this->label1->Text = L"Name of game";
+			// 
+			// save_box
+			// 
+			this->save_box->Location = System::Drawing::Point(58, 107);
+			this->save_box->Name = L"save_box";
+			this->save_box->Size = System::Drawing::Size(248, 22);
+			this->save_box->TabIndex = 1;
+			// 
+			// save_label
+			// 
+			this->save_label->AutoSize = true;
+			this->save_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->save_label->Location = System::Drawing::Point(34, 17);
+			this->save_label->Name = L"save_label";
+			this->save_label->Size = System::Drawing::Size(278, 58);
+			this->save_label->TabIndex = 0;
+			this->save_label->Text = L"Save game";
+			this->save_label->Click += gcnew System::EventHandler(this, &GameForm::save_label_Click);
 			// 
 			// menuStrip1
 			// 
@@ -431,6 +510,9 @@ namespace Guimain {
 			this->Name = L"GameForm";
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
 			this->Text = L"GameForm";
+			this->panel1->ResumeLayout(false);
+			this->save_panel->ResumeLayout(false);
+			this->save_panel->PerformLayout();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
@@ -480,9 +562,40 @@ private: System::Void redoToolStripMenuItem_Click(System::Object^ sender, System
 
 }
 private: System::Void saveToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	SaveBoard(&board, "games_struct.txt", "G1");
+	///SaveBoard(&board, "games_struct.txt", "G1");
+	if (!(this->Contains(save_panel)) )
+		this->Controls->Add(save_panel);
+	save_panel->Show();
+	save_panel->BringToFront();
+	save_panel->Hide();
 }
 private: System::Void p1_label_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void save_label_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (save_box->Text == ""|| save_box->Text->Length>12) {
+		MessageBox::Show("Invalid Name(1<=length<=12)", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}else if(GetNoSaved() == 3){
+		MessageBox::Show("Maximum number of saved games reached", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+	}
+	else {
+		///Casting
+		auto a = save_box->Text->ToLower()->ToCharArray();
+		char name[255];
+		int j = 0;
+		for (;j < a->Length;j++) {
+			name[j] = a[j];
+		}
+		name[j] = '\0';
+		SaveBoard(&board, "games_struct.txt", name);
+
+	}
+}
+private: System::Void cancel_button_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	save_panel->Hide();
 }
 };
 }
