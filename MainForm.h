@@ -62,6 +62,7 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ label3;
 
 	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::ListBox^ listBox;
 
 
 
@@ -98,6 +99,7 @@ namespace Guimain {
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->listBox = (gcnew System::Windows::Forms::ListBox());
 			this->game_size_panel->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
@@ -124,7 +126,7 @@ namespace Guimain {
 			this->game_size_panel->Controls->Add(this->w_box);
 			this->game_size_panel->Controls->Add(this->h_box);
 			this->game_size_panel->Controls->Add(this->selecttext);
-			this->game_size_panel->Location = System::Drawing::Point(488, 60);
+			this->game_size_panel->Location = System::Drawing::Point(318, 12);
 			this->game_size_panel->Name = L"game_size_panel";
 			this->game_size_panel->Size = System::Drawing::Size(300, 190);
 			this->game_size_panel->TabIndex = 14;
@@ -293,7 +295,7 @@ namespace Guimain {
 			this->panel1->Controls->Add(this->label2);
 			this->panel1->Controls->Add(this->textBox2);
 			this->panel1->Controls->Add(this->label3);
-			this->panel1->Location = System::Drawing::Point(24, 32);
+			this->panel1->Location = System::Drawing::Point(12, 12);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(300, 190);
 			this->panel1->TabIndex = 16;
@@ -374,10 +376,19 @@ namespace Guimain {
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &MainForm::button3_Click);
 			// 
+			// listBox
+			// 
+			this->listBox->FormattingEnabled = true;
+			this->listBox->Location = System::Drawing::Point(394, 325);
+			this->listBox->Name = L"listBox";
+			this->listBox->Size = System::Drawing::Size(176, 134);
+			this->listBox->TabIndex = 22;
+			// 
 			// MainForm
 			// 
 			this->ClientSize = System::Drawing::Size(600, 600);
 			this->ControlBox = false;
+			this->Controls->Add(this->listBox);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->game_size_panel);
@@ -462,6 +473,13 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	OpenFileDialog^ openfiledialog = gcnew OpenFileDialog;
 	if(openfiledialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 		XmlTextReader^ reader = gcnew XmlTextReader(openfiledialog->FileName);
+		while (reader->Read())
+		{
+			if ((reader->NodeType == XmlNodeType::Text)) {
+				listBox->Items->Add(reader->Value);
+			}
+
+		}
 	}
 }
 };
