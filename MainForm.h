@@ -327,7 +327,7 @@ namespace Guimain {
 			height = 9;
 			width = 7;
 		}
-		if (height < 4 || width < 4) {
+		if (height < 4 || width < 4 || height >20 || width >20) {
 			MessageBox::Show("Invalid dimensions", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else {
