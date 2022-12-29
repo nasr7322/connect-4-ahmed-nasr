@@ -144,3 +144,21 @@ int LoadGame(struct Board* B, struct Player* P1, struct Player* P2, int* turns, 
 
     return 0;
 }
+
+
+int GetNoSaved() {
+    FILE* fgames;///names file
+    fgames = fopen("games.txt", "r");
+
+
+    char buffer[255];
+    int cnt = 0;
+    while (!feof(fgames)) {
+        fgets(buffer, 255, fgames);
+        if (feof(fgames))break;
+        cnt++;
+    }
+    fclose(fgames);
+
+    return cnt;
+}
