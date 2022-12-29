@@ -97,6 +97,8 @@ int PopMove(struct Board* B, struct Player* P1, struct Player* P2, int col_numbe
     int cr = 0;
     while (cr + 1 < B->height && B->board[cr + 1][col_number] == 0)cr++;
     cr++;
+    if (cr == B->height)return -1;
+    if (B->board[0][col_number])cr = 0;
 
     if (B->board[cr][col_number] == P1->id) {
         P1->turns_played--;
@@ -114,3 +116,4 @@ int PopMove(struct Board* B, struct Player* P1, struct Player* P2, int col_numbe
 
     return 0;
 }
+

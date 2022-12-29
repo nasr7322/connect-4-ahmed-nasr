@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="actions.cpp" />
+    <ClCompile Include="AI_player.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="NATools.cpp" />
     <ClCompile Include="saveGame.cpp" />
@@ -130,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="actions.h" />
+    <ClInclude Include="AI_player.h" />
     <ClInclude Include="GameForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
