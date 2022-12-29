@@ -16,6 +16,7 @@ namespace Guimain {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Xml;
 
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
@@ -533,7 +534,7 @@ namespace Guimain {
 		OpenFileDialog^ openfiledialog = gcnew OpenFileDialog;
 		if(openfiledialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			try {
-				if (errors==3){ XmlTextReader^ reader = System::Resources::File::"default.xml"; } else{}
+				//if (errors==3){ XmlTextReader^ reader = System::Xml ("default.xml"); }else{}
 				XmlTextReader^ reader = gcnew XmlTextReader(openfiledialog->FileName);
 				while (reader->Read())
 				{
