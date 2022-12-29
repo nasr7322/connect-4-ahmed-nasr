@@ -27,6 +27,9 @@
     <ClCompile Include="MainForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="saveGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="structures.h">
@@ -47,10 +50,10 @@
     <ClInclude Include="GameForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BoardPrint.h">
+    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="saveGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
