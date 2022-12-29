@@ -119,6 +119,8 @@ int LoadBoard(struct Board* B, char* filename, char* gameprename) {
     fgames = fopen("games.txt", "r");
 
 
+    OutputDebugStringA("prename\n");
+    OutputDebugStringA(gameprename);
     FILE* fsgames;///structs file
     fsgames = fopen(filename, "rb");
 
