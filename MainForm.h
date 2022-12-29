@@ -1,6 +1,7 @@
 ﻿ #pragma once
 #using <System.Xml.dll>
 #include "GameForm.h"
+#include <windows.h>
 
 int errors = 0;
 int xmlv;
@@ -64,6 +65,12 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ xml_instructions;
 	private: System::Windows::Forms::CheckBox^ xml_check;
 	private: System::Windows::Forms::Panel^ xml_panel;
+	private: System::Windows::Forms::Panel^ load_panel;
+	private: System::Windows::Forms::Label^ load_label;
+	private: System::Windows::Forms::Label^ label4;
+
+
+
 	private:System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
@@ -101,9 +108,13 @@ namespace Guimain {
 			this->xml_instructions = (gcnew System::Windows::Forms::Label());
 			this->xml_check = (gcnew System::Windows::Forms::CheckBox());
 			this->xml_panel = (gcnew System::Windows::Forms::Panel());
+			this->load_panel = (gcnew System::Windows::Forms::Panel());
+			this->load_label = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->game_size_panel->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->xml_panel->SuspendLayout();
+			this->load_panel->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// owrname
@@ -248,6 +259,7 @@ namespace Guimain {
 			this->load_game->TabIndex = 18;
 			this->load_game->Text = L"Load Game";
 			this->load_game->UseVisualStyleBackColor = true;
+			this->load_game->Click += gcnew System::EventHandler(this, &MainForm::load_game_Click);
 			// 
 			// gamename
 			// 
@@ -385,7 +397,6 @@ namespace Guimain {
 			this->listBox->Location = System::Drawing::Point(394, 325);
 			this->listBox->Name = L"listBox";
 			this->listBox->Size = System::Drawing::Size(176, 132);
-
 			this->listBox->TabIndex = 22;
 			// 
 			// xml_instructions
@@ -401,9 +412,10 @@ namespace Guimain {
 			// 
 			this->xml_check->AutoSize = true;
 			this->xml_check->Checked = true;
+			this->xml_check->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->xml_check->Location = System::Drawing::Point(7, 133);
 			this->xml_check->Name = L"xml_check";
-			this->xml_check->Size = System::Drawing::Size(104, 17);
+			this->xml_check->Size = System::Drawing::Size(132, 21);
 			this->xml_check->TabIndex = 24;
 			this->xml_check->Text = L"Use XML values";
 			this->xml_check->UseVisualStyleBackColor = true;
@@ -419,10 +431,40 @@ namespace Guimain {
 			this->xml_panel->TabIndex = 25;
 			this->xml_panel->Visible = false;
 			// 
+			// load_panel
+			// 
+			this->load_panel->Controls->Add(this->label4);
+			this->load_panel->Controls->Add(this->load_label);
+			this->load_panel->Location = System::Drawing::Point(112, 230);
+			this->load_panel->Name = L"load_panel";
+			this->load_panel->Size = System::Drawing::Size(338, 252);
+			this->load_panel->TabIndex = 26;
+			// 
+			// load_label
+			// 
+			this->load_label->AutoSize = true;
+			this->load_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->load_label->Location = System::Drawing::Point(25, 13);
+			this->load_label->Name = L"load_label";
+			this->load_label->Size = System::Drawing::Size(287, 58);
+			this->load_label->TabIndex = 0;
+			this->load_label->Text = L"Load Game";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(110, 74);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(111, 17);
+			this->label4->TabIndex = 2;
+			this->label4->Text = L"Available games";
+			// 
 			// MainForm
 			// 
 			this->ClientSize = System::Drawing::Size(600, 600);
 			this->ControlBox = false;
+			this->Controls->Add(this->load_panel);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->game_size_panel);
 			this->Controls->Add(this->quit);
@@ -447,6 +489,8 @@ namespace Guimain {
 			this->panel1->PerformLayout();
 			this->xml_panel->ResumeLayout(false);
 			this->xml_panel->PerformLayout();
+			this->load_panel->ResumeLayout(false);
+			this->load_panel->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -477,8 +521,11 @@ namespace Guimain {
 			MessageBox::Show("Invalid dimensions", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else {
+			Board B;
+			Player P1, P2;
+			B.width = 0;
 			MainForm::Visible = false;
-			GameForm^ gameform = gcnew GameForm(height, width);
+			GameForm^ gameform = gcnew GameForm(height, width,B,P1,P2);
 			gameform->ShowDialog();
 			if (!(gameform->Visible)) { MainForm::Visible = true; }
 			game_size_panel->Hide();
@@ -551,6 +598,19 @@ namespace Guimain {
 	}
 }
 private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void load_game_Click(System::Object^ sender, System::EventArgs^ e) {
+	/**
+	Board B;
+	Player P1, P2;
+	LoadGame(&B, &P1, &P2, &turns,"games_struct.txt","G1\n");
+	
+	MainForm::Visible = false;
+	GameForm^ gameform = gcnew GameForm(height, width, B, P1, P2);
+	gameform->ShowDialog();
+	if (!(gameform->Visible)) { MainForm::Visible = true; }
+	game_size_panel->Hide();*/
+
 }
 };
 

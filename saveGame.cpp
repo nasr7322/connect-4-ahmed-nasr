@@ -2,6 +2,8 @@
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 char* parseGameName(char* data) {
     int ret = 0;
     int cr = 0;
@@ -95,10 +97,22 @@ int SaveBoard(struct Board* B, char* filename, char* gameprename) {
     
 }
 
-
+int comp(char* s1,char*s2) {
+    int cr = 0;
+    char debg[255];
+    debg[0] = s1[0];
+    debg[1] = '\0';
+    OutputDebugStringA("s1\n");
+    while (s1[cr] != '\0' && s2[cr] != '\0') {
+        OutputDebugStringA(s1);
+        if (s1[cr] != s2[cr])return -1;
+        cr++;
+    }
+    return s1[cr]==s2[cr];
+}
 int LoadBoard(struct Board* B, char* filename, char* gameprename) {
 
-    char* gamename = lower(gameprename);///Avoid Case sensitive
+    char* gamename = (gameprename);///Avoid Case sensitive
 
 
     FILE* fgames;///names file
@@ -114,7 +128,12 @@ int LoadBoard(struct Board* B, char* filename, char* gameprename) {
     while (!feof(fgames)) {
         fgets(buffer, 255, fgames);
         if (feof(fgames))break;
-        if (strcmp(parseGameName(buffer), gamename) == 0) {
+        OutputDebugStringA("*");
+        OutputDebugStringA(gamename);
+        OutputDebugStringA("*");
+        OutputDebugStringA(buffer);
+        OutputDebugStringA("*");
+        if (strcmp(buffer, gamename) ==0) {
             found = 1;
             fseek(fsgames, sizeof(struct Board) * cnt, SEEK_SET);
             int ret = fread(B, sizeof(struct Board), 1, fsgames);
