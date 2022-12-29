@@ -257,6 +257,7 @@ namespace Guimain {
 			this->top_players->TabIndex = 19;
 			this->top_players->Text = L"Top Players";
 			this->top_players->UseVisualStyleBackColor = true;
+			this->top_players->Click += gcnew System::EventHandler(this, &MainForm::top_players_Click);
 			// 
 			// load_game
 			// 
@@ -323,6 +324,7 @@ namespace Guimain {
 			this->scores_panel->Name = L"scores_panel";
 			this->scores_panel->Size = System::Drawing::Size(300, 190);
 			this->scores_panel->TabIndex = 16;
+			this->scores_panel->Visible = false;
 			// 
 			// scores_cancel
 			// 
@@ -333,6 +335,7 @@ namespace Guimain {
 			this->scores_cancel->TabIndex = 15;
 			this->scores_cancel->Text = L"Cancel";
 			this->scores_cancel->UseVisualStyleBackColor = true;
+			this->scores_cancel->Click += gcnew System::EventHandler(this, &MainForm::scores_cancel_Click);
 			// 
 			// scores_ok
 			// 
@@ -343,6 +346,7 @@ namespace Guimain {
 			this->scores_ok->TabIndex = 14;
 			this->scores_ok->Text = L"OK";
 			this->scores_ok->UseVisualStyleBackColor = true;
+			this->scores_ok->Click += gcnew System::EventHandler(this, &MainForm::scores_ok_Click);
 			// 
 			// scores_label2
 			// 
@@ -373,6 +377,7 @@ namespace Guimain {
 			this->scores_count_box->TabIndex = 10;
 			this->scores_count_box->Text = L"  ";
 			this->scores_count_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->scores_count_box->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::scores_count_box_KeyPress);
 			// 
 			// scores
 			// 
@@ -497,11 +502,11 @@ namespace Guimain {
 			MessageBox::Show("Invalid dimensions", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else {
+			game_size_panel->Hide();
 			MainForm::Visible = false;
 			GameForm^ gameform = gcnew GameForm(height, width);
 			gameform->ShowDialog();
 			if (!(gameform->Visible)) { MainForm::Visible = true; }
-			game_size_panel->Hide();
 		}
 	}
 
@@ -536,6 +541,11 @@ namespace Guimain {
 			e->Handled = true;
 		}
 	}
+	private: System::Void scores_count_box_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) {
+			e->Handled = true;
+		}
+	}
 //reading xml files
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 		xmllistBox->Items->Clear();
@@ -563,6 +573,41 @@ namespace Guimain {
 			}
 	}
 }
+
+private: System::Void top_players_Click(System::Object^ sender, System::EventArgs^ e) {
+	scores_panel->Show();
+	scores_panel->Location = System::Drawing::Point(150, 250);
+}
+private: System::Void scores_cancel_Click(System::Object^ sender, System::EventArgs^ e) {
+	scores_panel->Hide();
+}
+private: System::Void scores_ok_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (xml_check->Checked && !(xmllistBox->Items->Count == 0)) { loadhighscores(sender, e); }
+	else {
+		try {
+			Highscores = System::Convert::ToInt16(scores_count_box->Text);
+		}
+		catch (...) {
+			Highscores = 10;
+		}
+		loadhighscores(sender, e);
+	}
+}
+	public: System::Void loadhighscores(System::Object^ sender, System::EventArgs^ e) {
+
+		if (Highscores < 4 ) {
+			MessageBox::Show("Invalid input", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		else {
+			scores_panel->Hide();
+			MainForm::Visible = false;
+			GameForm^ gameform = gcnew GameForm(height, width);
+			gameform->ShowDialog();
+			if (!(gameform->Visible)) { MainForm::Visible = true; }
+		}
+	}
+
+
 };
 
 }
