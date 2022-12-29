@@ -36,6 +36,25 @@ namespace Guimain {
 			}
 		}
 
+	void readxml(XmlTextReader^ reader) {
+		while (reader->Read())
+		{
+			if ((reader->NodeType == XmlNodeType::Element)) {
+				xmllistBox->Items->Add(reader->Name);
+				if (reader->Name == "Height") { xmlv = 1; }
+				if (reader->Name == "Width") { xmlv = 2; }
+				if (reader->Name == "Highscores") { xmlv = 3; }
+			}
+
+			if ((reader->NodeType == XmlNodeType::Text)) {
+				xmllistBox->Items->Add(reader->Value);
+				if (xmlv == 1) { height = System::Convert::ToInt16(reader->Value); }
+				if (xmlv == 2) { width = System::Convert::ToInt16(reader->Value); }
+				if (xmlv == 3) { Highscores = System::Convert::ToInt16(reader->Value); }
+			}
+		}
+	}
+
 	protected:
 
 	private: System::Windows::Forms::Label^ owrname;
@@ -54,23 +73,13 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ maintext;
 	private: System::Windows::Forms::Button^ start_new;
 	private: System::Windows::Forms::Panel^ scores_panel;
-
 	private: System::Windows::Forms::Button^ scores_cancel;
-
 	private: System::Windows::Forms::Button^ scores_ok;
-
 	private: System::Windows::Forms::Label^ scores_label2;
-
 	private: System::Windows::Forms::Label^ scores_label1;
 	private: System::Windows::Forms::TextBox^ scores_count_box;
-
-
-
 	private: System::Windows::Forms::Label^ scores;
-
 	private: System::Windows::Forms::Button^ getxmldata_button;
-
-
 	private: System::Windows::Forms::ListBox^ listBox;
 	private: System::Windows::Forms::Label^ xml_instructions;
 	private: System::Windows::Forms::CheckBox^ xml_check;
@@ -532,31 +541,25 @@ namespace Guimain {
 		xmllistBox->Items->Clear();
 		xml_panel->Visible = true;
 		OpenFileDialog^ openfiledialog = gcnew OpenFileDialog;
+		XmlTextReader^ reader;
 		if(openfiledialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			try {
-				//if (errors==3){ XmlTextReader^ reader = System::Xml ("default.xml"); }else{}
-				XmlTextReader^ reader = gcnew XmlTextReader(openfiledialog->FileName);
-				while (reader->Read())
-				{
-					if ((reader->NodeType == XmlNodeType::Element)) {
-						xmllistBox->Items->Add(reader->Name);
-						if (reader->Name == "Height") { xmlv = 1; }
-						if (reader->Name == "Width") { xmlv = 2; }
-						if (reader->Name == "Highscores") { xmlv = 3; }
-					}
-
-					if ((reader->NodeType == XmlNodeType::Text)) {
-						xmllistBox->Items->Add(reader->Value);
-						if (xmlv == 1) { height = System::Convert::ToInt16(reader->Value); }
-						if (xmlv == 2) { width = System::Convert::ToInt16(reader->Value);}
-						if (xmlv == 3) { Highscores = System::Convert::ToInt16(reader->Value);}
-					}
-				}
+				reader = gcnew XmlTextReader(openfiledialog->FileName);
+				readxml(reader);
 			}
 			catch (...) {
-				MessageBox::Show("corrupted file", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				xmllistBox->Items->Clear();
-				errors++;
+				if (errors == 2) {
+					xmllistBox->Items->Clear();
+					reader = gcnew XmlTextReader("default.xml");
+					readxml(reader);
+					MessageBox::Show("3 corrupted files in a row. the default configurations are now loaded.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					errors = 0;
+				}
+				else {
+					MessageBox::Show("corrupted file", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					xmllistBox->Items->Clear();
+					errors++;
+				}
 			}
 	}
 }
