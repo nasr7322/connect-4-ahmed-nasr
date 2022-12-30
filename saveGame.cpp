@@ -188,3 +188,78 @@ int GetNoSaved() {
 
     return cnt;
 }
+
+
+int DeleteBoard(char* filename, char* gameprename){
+    FILE* fgames, * newfgames;///Files pointers of games names
+    if (!(fgames = fopen("games.txt", "r"))) {
+        return -1;
+    }
+    char* gamename = gameprename;
+
+
+
+    newfgames = fopen("newgames.txt", "w");
+    if (fgames == NULL || newfgames == NULL) {
+        return -1;
+    }
+
+
+    FILE* fsgames, * newfsgames;///Files pointers of games structures
+    if (!(fsgames = fopen(filename, "rb"))) {
+        fsgames = fopen(filename, "wb");
+        fclose(fsgames);
+        fsgames = fopen(filename, "rb");
+    }
+
+
+    newfsgames = fopen("newgames_structures.txt", "wb");
+    if (fsgames == NULL || newfsgames == NULL) {
+        return -1;
+    }
+
+
+
+
+    OutputDebugStringA("Delete");
+    OutputDebugStringA(gamename);
+    OutputDebugStringA("*\n");
+    char buffer[255];
+    ///Copying before score
+    struct Board temp_board;
+    int found = 0;
+
+    while (!feof(fgames)) {
+        fgets(buffer, 255, fgames);///name of game
+        fread(&temp_board, sizeof(struct Board), 1, fsgames);///struct of a game
+
+
+        if (feof(fgames))break;
+        if (strcmp(buffer, gamename) == 0) {///No duplicate struct
+            OutputDebugStringA(buffer);
+            OutputDebugStringA("*");
+            found = 1;
+
+
+            continue;
+        }
+
+        fprintf(newfgames, "%s", buffer);
+        fwrite(&temp_board, sizeof(struct Board), 1, newfsgames);
+    }
+
+
+
+    ///Replace names files
+    fclose(newfgames);
+    fclose(fgames);
+    remove("games.txt");
+    rename("newgames.txt", "games.txt");
+
+    ///Replace structs files
+    fclose(newfsgames);
+    fclose(fsgames);
+    remove(filename);
+    rename("newgames_structures.txt", filename);
+
+}

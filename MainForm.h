@@ -41,7 +41,7 @@ namespace Guimain {
 			Board B;
 			Player P1, P2;
 			String^ s = System::Convert::ToString(clicked->Tag);
-			auto a=s->ToCharArray();
+			auto a = s->ToCharArray();
 			char name[255];
 			int j = 0;
 			for (;j < a->Length;j++) {
@@ -51,13 +51,28 @@ namespace Guimain {
 			P1.score = P2.score = P1.turns_played = P2.turns_played = 0;
 			P1.id = 1;
 			P2.id = 2;
-			LoadGame(&B, &P1, &P2, &turns, "games_struct.txt",name );
+			LoadGame(&B, &P1, &P2, &turns, "games_struct.txt", name);
 			debg(P1.score);
 			debg(P1.turns_played);
 			MainForm::Visible = false;
 			GameForm^ gameform = gcnew GameForm(height, width, B, P1, P2);
 			gameform->ShowDialog();
 			if (!(gameform->Visible)) { MainForm::Visible = true; }
+		}
+		Void delete_game_button_Click(System::Object^ sender, System::EventArgs^ e) {
+			Button^ clicked = (Button^)sender;
+			String^ s = System::Convert::ToString(clicked->Tag);
+			auto a = s->ToCharArray();
+			char name[255];
+			int j = 0;
+			for (;j < a->Length;j++) {
+				name[j] = a[j];
+			}
+			name[j] = '\0';
+			
+			DeleteBoard("games_struct.txt", name);
+			load_panel->Controls->Clear();
+			renderGames();
 		}
 
 //comment here
@@ -70,15 +85,24 @@ namespace Guimain {
 			for (int i = 0;i < nosaved;i++) {
 				fgets(buffer, 255, fgames);
 				Button^ button = gcnew System::Windows::Forms::Button;
-				String^ s=gcnew String(buffer);
-				button->Height = 20 ;
-				button->Width = 80 ;
-				button->Left = 110 ;
-				button->Top = 100+(i*(button->Height)) ;
+				String^ s = gcnew String(buffer);
+				button->Height = 20;
+				button->Width = 80;
+				button->Left = 60;
+				button->Top = 100 + (i * (button->Height));
 				button->Text = s;
-				button->Tag =s;
+				button->Tag = s;
 				button->Click += gcnew EventHandler(this, &MainForm::loaded_game_button_Click);
 				load_panel->Controls->Add(button);
+				Button^ delete_button = gcnew System::Windows::Forms::Button;
+				delete_button->Height = 20;
+				delete_button->Width = 80;
+				delete_button->Left = 60+(button->Width);
+				delete_button->Top = 100 + (i * (delete_button->Height));
+				delete_button->Text = "Delete ";
+				delete_button->Tag = s;
+				delete_button->Click += gcnew EventHandler(this, &MainForm::delete_game_button_Click);
+				load_panel->Controls->Add(delete_button);
 			}
 			fclose(fgames);
 		}
@@ -228,12 +252,9 @@ private: System::Windows::Forms::Button^ button1;
 			this->game_mode_panel->SuspendLayout();
 			this->highscores_panel->SuspendLayout();
 			this->SuspendLayout();
-			// 
-			// owrname
-			// 
 			this->owrname->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->owrname->Cursor = System::Windows::Forms::Cursors::No;
-			this->owrname->Font = (gcnew System::Drawing::Font(L"Arial Narrow", 8.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+			this->owrname->Font = (gcnew System::Drawing::Font(L"Arial Narrow", 8.25, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->owrname->Location = System::Drawing::Point(225, 580);
 			this->owrname->Name = L"owrname";
@@ -241,9 +262,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->owrname->TabIndex = 3;
 			this->owrname->Text = L"By: Mohamed Nasr and Ahmed Hassan";
 			this->owrname->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// game_size_panel
-			// 
 			this->game_size_panel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->game_size_panel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->game_size_panel->Controls->Add(this->cancel_game_size);
@@ -258,9 +276,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->game_size_panel->Size = System::Drawing::Size(300, 190);
 			this->game_size_panel->TabIndex = 14;
 			this->game_size_panel->Visible = false;
-			// 
-			// cancel_game_size
-			// 
 			this->cancel_game_size->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->cancel_game_size->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->cancel_game_size->Location = System::Drawing::Point(174, 144);
@@ -270,9 +285,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->cancel_game_size->Text = L"Cancel";
 			this->cancel_game_size->UseVisualStyleBackColor = true;
 			this->cancel_game_size->Click += gcnew System::EventHandler(this, &MainForm::cancel_game_size_Click);
-			// 
-			// ok_game_size
-			// 
 			this->ok_game_size->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->ok_game_size->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->ok_game_size->Location = System::Drawing::Point(74, 144);
@@ -282,9 +294,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->ok_game_size->Text = L"OK";
 			this->ok_game_size->UseVisualStyleBackColor = true;
 			this->ok_game_size->Click += gcnew System::EventHandler(this, &MainForm::ok_game_size_Click);
-			// 
-			// size_instructions
-			// 
 			this->size_instructions->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->size_instructions->Location = System::Drawing::Point(73, 122);
 			this->size_instructions->Name = L"size_instructions";
@@ -292,9 +301,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->size_instructions->TabIndex = 13;
 			this->size_instructions->Text = L"*For default size leave empty*";
 			this->size_instructions->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// label_select_custom
-			// 
 			this->label_select_custom->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label_select_custom->AutoSize = true;
 			this->label_select_custom->Location = System::Drawing::Point(71, 76);
@@ -302,9 +308,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->label_select_custom->Size = System::Drawing::Size(107, 13);
 			this->label_select_custom->TabIndex = 12;
 			this->label_select_custom->Text = L"Select a custom size:";
-			// 
-			// w_box
-			// 
 			this->w_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->w_box->Location = System::Drawing::Point(154, 95);
 			this->w_box->Name = L"w_box";
@@ -337,9 +340,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->selecttext->TabIndex = 9;
 			this->selecttext->Text = L"Game Size";
 			this->selecttext->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// quit
-			// 
 			this->quit->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->quit->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->quit->Location = System::Drawing::Point(250, 448);
@@ -351,9 +351,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->quit->Text = L"Quit";
 			this->quit->UseVisualStyleBackColor = true;
 			this->quit->Click += gcnew System::EventHandler(this, &MainForm::quit_Click);
-			// 
-			// top_players
-			// 
 			this->top_players->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->top_players->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->top_players->Location = System::Drawing::Point(250, 418);
@@ -365,9 +362,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->top_players->Text = L"Top Players";
 			this->top_players->UseVisualStyleBackColor = true;
 			this->top_players->Click += gcnew System::EventHandler(this, &MainForm::top_players_Click);
-			// 
-			// load_game
-			// 
 			this->load_game->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->load_game->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->load_game->Location = System::Drawing::Point(250, 388);
@@ -379,11 +373,8 @@ private: System::Windows::Forms::Button^ button1;
 			this->load_game->Text = L"Load Game";
 			this->load_game->UseVisualStyleBackColor = true;
 			this->load_game->Click += gcnew System::EventHandler(this, &MainForm::load_game_Click);
-			// 
-			// gamename
-			// 
 			this->gamename->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->gamename->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->gamename->Font = (gcnew System::Drawing::Font(L"Arial", 9.75, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->gamename->Location = System::Drawing::Point(200, 223);
 			this->gamename->Name = L"gamename";
@@ -391,9 +382,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->gamename->TabIndex = 17;
 			this->gamename->Text = L"~~~~~~ Connect Four ~~~~~~";
 			this->gamename->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// maintext
-			// 
 			this->maintext->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->maintext->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 48, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -404,9 +392,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->maintext->TabIndex = 16;
 			this->maintext->Text = L"Main Menu";
 			this->maintext->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// start_new
-			// 
 			this->start_new->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->start_new->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->start_new->Location = System::Drawing::Point(250, 329);
@@ -418,9 +403,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->start_new->Text = L"Start New";
 			this->start_new->UseVisualStyleBackColor = true;
 			this->start_new->Click += gcnew System::EventHandler(this, &MainForm::start_new_Click);
-			// 
-			// scores_panel
-			// 
 			this->scores_panel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->scores_panel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->scores_panel->Controls->Add(this->scores_cancel);
@@ -434,9 +416,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->scores_panel->Size = System::Drawing::Size(300, 190);
 			this->scores_panel->TabIndex = 16;
 			this->scores_panel->Visible = false;
-			// 
-			// scores_cancel
-			// 
 			this->scores_cancel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->scores_cancel->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->scores_cancel->Location = System::Drawing::Point(174, 144);
@@ -446,9 +425,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->scores_cancel->Text = L"Cancel";
 			this->scores_cancel->UseVisualStyleBackColor = true;
 			this->scores_cancel->Click += gcnew System::EventHandler(this, &MainForm::scores_cancel_Click);
-			// 
-			// scores_ok
-			// 
 			this->scores_ok->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->scores_ok->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->scores_ok->Location = System::Drawing::Point(74, 144);
@@ -458,9 +434,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->scores_ok->Text = L"OK";
 			this->scores_ok->UseVisualStyleBackColor = true;
 			this->scores_ok->Click += gcnew System::EventHandler(this, &MainForm::scores_ok_Click);
-			// 
-			// scores_label2
-			// 
 			this->scores_label2->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->scores_label2->Location = System::Drawing::Point(73, 122);
 			this->scores_label2->Name = L"scores_label2";
@@ -468,9 +441,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->scores_label2->TabIndex = 13;
 			this->scores_label2->Text = L"*For default size leave empty*";
 			this->scores_label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// scores_label1
-			// 
 			this->scores_label1->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->scores_label1->AutoSize = true;
 			this->scores_label1->Location = System::Drawing::Point(71, 76);
@@ -478,9 +448,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->scores_label1->Size = System::Drawing::Size(128, 13);
 			this->scores_label1->TabIndex = 12;
 			this->scores_label1->Text = L"select a number of scores";
-			// 
-			// scores_count_box
-			// 
 			this->scores_count_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->scores_count_box->Location = System::Drawing::Point(74, 95);
 			this->scores_count_box->Name = L"scores_count_box";
@@ -502,9 +469,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->scores_label->TabIndex = 9;
 			this->scores_label->Text = L"Scores";
 			this->scores_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// getxmldata_button
-			// 
 			this->getxmldata_button->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->getxmldata_button->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->getxmldata_button->Location = System::Drawing::Point(250, 358);
@@ -516,18 +480,12 @@ private: System::Windows::Forms::Button^ button1;
 			this->getxmldata_button->Text = L"Get XML Data";
 			this->getxmldata_button->UseVisualStyleBackColor = true;
 			this->getxmldata_button->Click += gcnew System::EventHandler(this, &MainForm::read_xml_Click);
-			// 
-			// xml_instructions
-			// 
 			this->xml_instructions->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->xml_instructions->Location = System::Drawing::Point(6, 9);
 			this->xml_instructions->Name = L"xml_instructions";
 			this->xml_instructions->Size = System::Drawing::Size(179, 32);
 			this->xml_instructions->TabIndex = 23;
 			this->xml_instructions->Text = L"If a corrupted file is loaded 3 times the default XML will be used.";
-			// 
-			// xml_check
-			// 
 			this->xml_check->AutoSize = true;
 			this->xml_check->Checked = true;
 			this->xml_check->CheckState = System::Windows::Forms::CheckState::Checked;
@@ -537,9 +495,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->xml_check->TabIndex = 24;
 			this->xml_check->Text = L"Use XML values";
 			this->xml_check->UseVisualStyleBackColor = true;
-			// 
-			// xml_panel
-			// 
 			this->xml_panel->Controls->Add(this->xmllistBox);
 			this->xml_panel->Controls->Add(this->xml_check);
 			this->xml_panel->Controls->Add(this->xml_instructions);
@@ -548,17 +503,11 @@ private: System::Windows::Forms::Button^ button1;
 			this->xml_panel->Size = System::Drawing::Size(192, 151);
 			this->xml_panel->TabIndex = 25;
 			this->xml_panel->Visible = false;
-			// 
-			// xmllistBox
-			// 
 			this->xmllistBox->FormattingEnabled = true;
 			this->xmllistBox->Location = System::Drawing::Point(9, 45);
 			this->xmllistBox->Name = L"xmllistBox";
 			this->xmllistBox->Size = System::Drawing::Size(173, 82);
 			this->xmllistBox->TabIndex = 25;
-			// 
-			// load_panel
-			// 
 			this->load_panel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->load_panel->AutoScroll = true;
 			this->load_panel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
@@ -570,9 +519,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->load_panel->Size = System::Drawing::Size(300, 220);
 			this->load_panel->TabIndex = 26;
 			this->load_panel->Visible = false;
-			// 
-			// cancel_load
-			// 
 			this->cancel_load->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->cancel_load->Location = System::Drawing::Point(75, 186);
 			this->cancel_load->Name = L"cancel_load";
@@ -581,9 +527,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->cancel_load->Text = L"Cancel";
 			this->cancel_load->UseVisualStyleBackColor = true;
 			this->cancel_load->Click += gcnew System::EventHandler(this, &MainForm::cancel_load_Click);
-			// 
-			// available_games_label
-			// 
 			this->available_games_label->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->available_games_label->Location = System::Drawing::Point(100, 75);
 			this->available_games_label->Name = L"available_games_label";
@@ -592,9 +535,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->available_games_label->Text = L"Available Games:";
 			this->available_games_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->available_games_label->UseMnemonic = false;
-			// 
-			// load_label
-			// 
 			this->load_label->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->load_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -604,9 +544,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->load_label->TabIndex = 0;
 			this->load_label->Text = L"Load Game";
 			this->load_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// game_mode_panel
-			// 
 			this->game_mode_panel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->game_mode_panel->Controls->Add(this->button1);
 			this->game_mode_panel->Controls->Add(this->two_mode_button);
@@ -617,9 +554,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->game_mode_panel->Size = System::Drawing::Size(300, 190);
 			this->game_mode_panel->TabIndex = 27;
 			this->game_mode_panel->Visible = false;
-			// 
-			// button1
-			// 
 			this->button1->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->button1->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button1->Location = System::Drawing::Point(125, 154);
@@ -629,9 +563,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->button1->Text = L"Cancel";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MainForm::cancel_mode_button_Click);
-			// 
-			// two_mode_button
-			// 
 			this->two_mode_button->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->two_mode_button->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->two_mode_button->Location = System::Drawing::Point(75, 111);
@@ -641,9 +572,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->two_mode_button->Text = L"VS Player";
 			this->two_mode_button->UseVisualStyleBackColor = true;
 			this->two_mode_button->Click += gcnew System::EventHandler(this, &MainForm::two_mode_button_Click);
-			// 
-			// bot_mode_button
-			// 
 			this->bot_mode_button->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->bot_mode_button->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->bot_mode_button->Location = System::Drawing::Point(75, 69);
@@ -653,9 +581,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->bot_mode_button->Text = L"VS AI";
 			this->bot_mode_button->UseVisualStyleBackColor = true;
 			this->bot_mode_button->Click += gcnew System::EventHandler(this, &MainForm::bot_mode_button_Click);
-			// 
-			// mode_label
-			// 
 			this->mode_label->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->mode_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -665,9 +590,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->mode_label->TabIndex = 0;
 			this->mode_label->Text = L"Select Mode";
 			this->mode_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// highscores_panel
-			// 
 			this->highscores_panel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->highscores_panel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->highscores_panel->Controls->Add(this->highscores_label);
@@ -678,9 +600,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->highscores_panel->Size = System::Drawing::Size(250, 350);
 			this->highscores_panel->TabIndex = 28;
 			this->highscores_panel->Visible = false;
-			// 
-			// highscores_label
-			// 
 			this->highscores_label->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->highscores_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -690,9 +609,6 @@ private: System::Windows::Forms::Button^ button1;
 			this->highscores_label->TabIndex = 3;
 			this->highscores_label->Text = L"Highscores";
 			this->highscores_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// back_highscores_panel
-			// 
 			this->back_highscores_panel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->back_highscores_panel->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->back_highscores_panel->Location = System::Drawing::Point(75, 315);
@@ -702,18 +618,12 @@ private: System::Windows::Forms::Button^ button1;
 			this->back_highscores_panel->Text = L"Back";
 			this->back_highscores_panel->UseVisualStyleBackColor = true;
 			this->back_highscores_panel->Click += gcnew System::EventHandler(this, &MainForm::back_highscores_panel_Click);
-			// 
-			// scores_list_box
-			// 
 			this->scores_list_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->scores_list_box->FormattingEnabled = true;
 			this->scores_list_box->Location = System::Drawing::Point(10, 71);
 			this->scores_list_box->Name = L"scores_list_box";
 			this->scores_list_box->Size = System::Drawing::Size(230, 212);
 			this->scores_list_box->TabIndex = 1;
-			// 
-			// MainForm
-			// 
 			this->ClientSize = System::Drawing::Size(634, 611);
 			this->ControlBox = false;
 			this->Controls->Add(this->highscores_panel);
@@ -960,6 +870,8 @@ private: System::Void back_highscores_panel_Click(System::Object^ sender, System
 }
 private: System::Void cancel_mode_button_Click(System::Object^ sender, System::EventArgs^ e) {
 	game_mode_panel->Hide();
+}
+private: System::Void games_loaded_panel_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 }
 };
 
