@@ -53,6 +53,19 @@ namespace Guimain {
 
 
 	public:
+		void debg(Object^ O) {
+			String^ s = System::Convert::ToString(O);
+			auto a = s->ToCharArray();
+
+			char name[255];
+			int j = 0;
+			for (;j < a->Length;j++) {
+				name[j] = a[j];
+			}
+			name[j] = '\0';
+			OutputDebugStringA(name);
+			OutputDebugStringA("\n");
+		}
 		void updatePanel1() {
 
 			panel1->Controls->Clear();
@@ -74,6 +87,8 @@ namespace Guimain {
 			Button^ clicked = (Button^) sender;
 			int ret=PlayerMove(&board, (turns & 1) ? (&p2) : (&p1), System::Convert::ToInt32(clicked->Tag));
 			if (!ret) {
+				
+
 				play_stack[turns++] = System::Convert::ToInt32(clicked->Tag);
 				play_stack[turns] = -1;
 				this->redoToolStripMenuItem->Enabled = false;
@@ -90,8 +105,8 @@ namespace Guimain {
 					play_stack[turns++] = bst;
 					play_stack[turns] = -1;
 				}
-			}
 			updatePanel1();
+			}
 		}
 
 		void PrintBoard(int h, int w, Board fboard) {
@@ -178,6 +193,8 @@ namespace Guimain {
 				board = B;
 				p1 = P1;
 				p2 = P2;
+				debg(p1.score);
+				debg(p1.turns_played);
 			}
 			else {
 
@@ -191,9 +208,11 @@ namespace Guimain {
 			}
 			if (board.mode)
 				this->hintToolStripMenuItem->Enabled = false;
-			
+			turns = p1.turns_played+p2.turns_played;
+			for (int i = 0;i < 3000;i++)play_stack[i] = -1;
+			updatePanel1();
 			PrintBoard(board.height, board.width, board);
-			PrintButtons(w);
+			PrintButtons(board.width);
 			save_panel->Hide();
 
 		}
@@ -671,6 +690,10 @@ private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
 private: System::Void undoToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (board.mode == 0)
 		this->redoToolStripMenuItem->Enabled = true;
+	debg("Undo");
+	for(int i=0;i<turns;i++)
+		debg(play_stack[i]);
+	debg(play_stack[turns]);
 	UndoMove(&board,&p1,&p2,play_stack,&turns);
 	updatePanel1();
 	if(!canUndo(play_stack,turns))

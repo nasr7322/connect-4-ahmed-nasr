@@ -21,6 +21,20 @@ namespace Guimain {
 
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
+
+		void debg(Object^ O) {
+			String^ s = System::Convert::ToString(O);
+			auto a = s->ToCharArray();
+
+			char name[255];
+			int j = 0;
+			for (;j < a->Length;j++) {
+				name[j] = a[j];
+			}
+			name[j] = '\0';
+			OutputDebugStringA(name);
+			OutputDebugStringA("\n");
+		}
 		Void button_Click(System::Object^ sender, System::EventArgs^ e) {
 			Button^ clicked = (Button^)sender;
 			///int ret = PlayerMove(&board, (turns & 1) ? (&p2) : (&p1), System::Convert::ToInt32(clicked->Tag));
@@ -37,8 +51,13 @@ namespace Guimain {
 			name[j] = '\0';
 			///OutputDebugStringA("Gme name\n");
 			///OutputDebugStringA(name);
+			P1.score = P2.score = P1.turns_played = P2.turns_played = 0;
+			P1.id = 1;
+			P2.id = 2;
 			LoadGame(&B, &P1, &P2, &turns, "games_struct.txt",name );
 
+			debg(P1.score);
+			debg(P1.turns_played);
 			MainForm::Visible = false;
 			GameForm^ gameform = gcnew GameForm(height, width, B, P1, P2);
 			gameform->ShowDialog();
@@ -157,6 +176,7 @@ private: System::Windows::Forms::Panel^ gane_mode_panel;
 private: System::Windows::Forms::Button^ two_mode_button;
 private: System::Windows::Forms::Button^ bot_mode_button;
 private: System::Windows::Forms::Label^ mode_label;
+private: System::Windows::Forms::Button^ cancel_load;
 	private: System::Windows::Forms::Button^ button3;
 
 #pragma region Windows Form Designer generated code
@@ -209,6 +229,7 @@ private: System::Windows::Forms::Label^ mode_label;
 			this->two_mode_button = (gcnew System::Windows::Forms::Button());
 			this->bot_mode_button = (gcnew System::Windows::Forms::Button());
 			this->mode_label = (gcnew System::Windows::Forms::Label());
+			this->cancel_load = (gcnew System::Windows::Forms::Button());
 			this->game_size_panel->SuspendLayout();
 			this->scores_panel->SuspendLayout();
 			this->xml_panel->SuspendLayout();
@@ -539,6 +560,7 @@ private: System::Windows::Forms::Label^ mode_label;
 			// load_panel
 			// 
 			this->load_panel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->load_panel->Controls->Add(this->cancel_load);
 			this->load_panel->Controls->Add(this->label4);
 			this->load_panel->Controls->Add(this->load_label);
 			this->load_panel->Location = System::Drawing::Point(112, 230);
@@ -663,7 +685,7 @@ private: System::Windows::Forms::Label^ mode_label;
 			this->gane_mode_panel->Controls->Add(this->two_mode_button);
 			this->gane_mode_panel->Controls->Add(this->bot_mode_button);
 			this->gane_mode_panel->Controls->Add(this->mode_label);
-			this->gane_mode_panel->Location = System::Drawing::Point(26, 305);
+			this->gane_mode_panel->Location = System::Drawing::Point(38, 361);
 			this->gane_mode_panel->Name = L"gane_mode_panel";
 			this->gane_mode_panel->Size = System::Drawing::Size(374, 230);
 			this->gane_mode_panel->TabIndex = 27;
@@ -698,6 +720,16 @@ private: System::Windows::Forms::Label^ mode_label;
 			this->mode_label->Size = System::Drawing::Size(337, 58);
 			this->mode_label->TabIndex = 0;
 			this->mode_label->Text = L"Choose Mode";
+			// 
+			// cancel_load
+			// 
+			this->cancel_load->Location = System::Drawing::Point(90, 216);
+			this->cancel_load->Name = L"cancel_load";
+			this->cancel_load->Size = System::Drawing::Size(163, 22);
+			this->cancel_load->TabIndex = 3;
+			this->cancel_load->Text = L"Cancel";
+			this->cancel_load->UseVisualStyleBackColor = true;
+			this->cancel_load->Click += gcnew System::EventHandler(this, &MainForm::cancel_load_Click);
 			// 
 			// MainForm
 			// 
@@ -923,6 +955,9 @@ private: System::Void bot_mode_button_Click(System::Object^ sender, System::Even
 		if (!(gameform->Visible)) { MainForm::Visible = true; }
 
 	}
+}
+private: System::Void cancel_load_Click(System::Object^ sender, System::EventArgs^ e) {
+	load_panel->Hide();
 }
 };
 
