@@ -756,7 +756,7 @@ namespace Guimain {
 		}
 	}
 
-//go to leaderboards - in progress
+//go to leaderboards
 	private: System::Void to_leaderboards_button_Click(System::Object^ sender, System::EventArgs^ e) {
 
 			Reset(&board, &p1, &p2);
