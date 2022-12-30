@@ -170,6 +170,9 @@
   <ItemGroup>
     <Xml Include="default.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\Downloads\pop.mp3" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>

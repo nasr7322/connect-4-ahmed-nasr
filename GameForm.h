@@ -104,6 +104,8 @@ namespace Guimain {
 
 		//column button click
 		Void column_button_Click(System::Object^ sender, System::EventArgs^ e) {
+			Media::SoundPlayer^ plyr=gcnew Media::SoundPlayer("pop.wav");
+			plyr->Play();
 			Button^ clicked = (Button^)sender;
 			int ret = PlayerMove(&board, (turns & 1) ? (&p2) : (&p1), System::Convert::ToInt32(clicked->Tag));
 			if (!ret) {
@@ -199,6 +201,9 @@ namespace Guimain {
 				winnerlabel->Text = "It's a Draw!!";
 			}
 			final_scores_label->Text = "Player 1's " + (p1_label_score->Text) + "player 2's " + p2_label_score->Text;
+
+			Media::SoundPlayer^ plyr = gcnew Media::SoundPlayer("win.wav");
+			plyr->Play();
 		}
 
 		GameForm(int h, int w, Board B, Player P1, Player P2)
@@ -822,6 +827,7 @@ private: System::Void to_leaderboards_button_Click(System::Object^ sender, Syste
 		MessageBox::Show("Invalid Name(1<=length<=12)", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 	else {
+
 		///Casting
 		auto a = winner_name->Text->ToLower()->ToCharArray();
 		char name[255];
