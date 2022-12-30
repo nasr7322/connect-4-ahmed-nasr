@@ -1,5 +1,5 @@
 #include "actions.h"
-
+#include<Windows.h>
 int evaluatePlayer(struct Board* B, struct Player* P) {
     int new_score = 0;
 
@@ -119,12 +119,12 @@ int best_move(struct Board* B, struct Player* Ptowin, struct Player* Ptolose) {
     int bst = -1;
     for (int i = 0;i < B->width;i++) {
         int state = PlayerMove(B, Ptowin, i);
-
+        
         if (state == -1)continue;
-
+        OutputDebugStringA("Room to move");
         int ret = best_score(B, Ptowin, Ptolose, 0, 4);
 
-        if (ret > mx) {
+        if (ret >= mx) {
             mx = ret;
             bst = i;
         }

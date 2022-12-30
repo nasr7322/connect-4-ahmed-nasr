@@ -120,7 +120,9 @@ namespace Guimain {
 			//updatePanel1(); uncommint when you add the delay
 			if (board.mode) {
 				int bst = best_move(&board, &p2, &p1);
+
 				int ret = PlayerMove(&board, &p2, bst);
+
 				if (!ret) {
 					play_stack[turns++] = bst;
 					play_stack[turns] = -1;
