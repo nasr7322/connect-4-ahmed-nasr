@@ -708,10 +708,8 @@ namespace Guimain {
 
 //save
 	private: System::Void saveToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (!(this->Contains(save_panel)))
-			this->Controls->Add(save_panel);
 		save_panel->Show();
-		save_panel->BringToFront();
+		save_panel->Location = System::Drawing::Point(175,150);
 
 	}
 

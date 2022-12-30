@@ -2,13 +2,13 @@
 #include "actions.h"
 
 int canUndo(int play_stack[], int cr_move);
-int UndoMove(struct Board* B, struct Player* P1, struct Player* P2, int play_stack[], int* cr_move);
 
+int UndoMove(struct Board* B, struct Player* P1, struct Player* P2, int play_stack[], int* cr_move);
 
 int canRedo(int play_stack[], int cr_move);
 
-
 int RedoMove(struct Board* B, struct Player* P1, struct Player* P2, int play_stack[], int* cr_move);
+
 /*
 Example
 for move
