@@ -109,7 +109,12 @@ namespace Guimain {
 			//updatePanel1();
 			if (board.mode) {
 				int bst = best_move(&board, &p2, &p1);
+				debg("best");
+				debg(bst);
 				int ret = PlayerMove(&board, &p2,bst);
+				debg("ret");
+				debg(ret);
+
 				if (!ret) {
 					play_stack[turns++] = bst;
 					play_stack[turns] = -1;
