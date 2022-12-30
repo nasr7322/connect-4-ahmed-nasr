@@ -708,6 +708,7 @@ namespace Guimain {
 
 //save
 	private: System::Void saveToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		timer->Enabled = false;
 		save_panel->Show();
 		save_panel->Location = System::Drawing::Point(175,150);
 
@@ -732,11 +733,12 @@ namespace Guimain {
 			save_panel->Hide();
 			save_box->Text == "";
 		}
+		timer->Enabled = true;
 	}
 	
 //cancel save panel
 	private: System::Void cancel_button_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		timer->Enabled = true;
 		save_panel->Hide();
 	}
 	
