@@ -14,7 +14,7 @@ namespace Guimain {
 	Player p2;
 	int turns = 0;
 	int play_stack[3000];
-	
+	bool showleaderboard = false;
 	
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -56,7 +56,6 @@ namespace Guimain {
 		private: System::Windows::Forms::Label^ p2_label_score;
 		private: System::Windows::Forms::Label^ p2_label;
 		private: System::ComponentModel::IContainer^ components;
-		
 
 	public:
 
@@ -774,7 +773,12 @@ namespace Guimain {
 				debg(ret);
 			}
 			winnerpanel->Hide();
+			showleaderboard = true;
 			this->Close();
+	}
+
+	public: bool openleaderboard() {
+		return showleaderboard;
 	}
 
 //input limitations

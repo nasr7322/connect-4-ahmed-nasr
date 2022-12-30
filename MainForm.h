@@ -832,6 +832,9 @@ namespace Guimain {
 		GameForm^ gameform = gcnew GameForm(height, width, B, P1, P2);
 		gameform->ShowDialog();
 		if (!(gameform->Visible)) { MainForm::Visible = true; }
+		if (gameform->openleaderboard()) {
+			top_players_Click(sender,e);
+		}
 	}
 
 //VS AI click
@@ -850,7 +853,9 @@ namespace Guimain {
 			GameForm^ gameform = gcnew GameForm(height, width, B, P1, P2);
 			gameform->ShowDialog();
 			if (!(gameform->Visible)) { MainForm::Visible = true; }
-
+			if (gameform->openleaderboard()) {
+				top_players_Click(sender, e);
+			}
 		}
 	}
 
