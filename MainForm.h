@@ -36,7 +36,7 @@ namespace Guimain {
 		}
 
 //opening a saved game
-		Void loaded_game_button_Click(System::Object^ sender, System::EventArgs^ e) {
+		void loaded_game_button_Click(System::Object^ sender, System::EventArgs^ e) {
 			Button^ clicked = (Button^)sender;
 			Board B;
 			Player P1, P2;
@@ -62,7 +62,7 @@ namespace Guimain {
 		}
 
 //a button to delete loaded games
-		Void delete_game_button_Click(System::Object^ sender, System::EventArgs^ e) {
+		void delete_game_button_Click(System::Object^ sender, System::EventArgs^ e) {
 			Button^ clicked = (Button^)sender;
 			String^ s = System::Convert::ToString(clicked->Tag);
 			auto a = s->ToCharArray();
