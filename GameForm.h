@@ -5,6 +5,8 @@
 #include "saveGame.h"
 #include <Windows.h>
 #include "AI_player.h"
+#include "storeRank.h"
+
 
 namespace Guimain {
 
@@ -110,6 +112,10 @@ namespace Guimain {
 				this->redoToolStripMenuItem->Enabled = false;
 				if (board.mode == 0)
 					this->undoToolStripMenuItem->Enabled = true;
+				
+			}
+			else {
+				return;
 			}
 			//updatePanel1(); uncommint when you add the delay
 			if (board.mode) {
@@ -704,7 +710,7 @@ namespace Guimain {
 			   this->ResumeLayout(false);
 
 		   }
-
+       
 #pragma endregion
 
 	private: System::Void main_menu_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -796,5 +802,25 @@ namespace Guimain {
 
 		}
 	}
-	};
+}
+private: System::Void to_leaderboards_button_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (winner_name->Text == "" || save_box->Text->Length > 12) {
+		MessageBox::Show("Invalid Name(1<=length<=12)", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+	else {
+		///Casting
+		auto a = winner_name->Text->ToLower()->ToCharArray();
+		char name[255];
+		int j = 0;
+		for (;j < a->Length;j++) {
+			name[j] = a[j];
+		}
+		name[j] = '\0';
+		int ret=addScore(name, Max(p1.score, p2.score), "scores.txt");
+		debg(ret);
+		winnerpanel->Hide();
+	}
+
+}
+};
 }
