@@ -77,7 +77,19 @@ namespace Guimain {
 				play_stack[turns++] = System::Convert::ToInt32(clicked->Tag);
 				play_stack[turns] = -1;
 				this->redoToolStripMenuItem->Enabled = false;
-				this->undoToolStripMenuItem->Enabled = true;
+				if (board.mode == 0)
+					this->undoToolStripMenuItem->Enabled = true;
+			}
+			updatePanel1();
+			if (board.mode) {
+
+				int bst = best_move(&board, &p2, &p1);
+
+				int ret = PlayerMove(&board, &p2,bst);
+				if (!ret) {
+					play_stack[turns++] = bst;
+					play_stack[turns] = -1;
+				}
 			}
 			updatePanel1();
 		}
@@ -171,11 +183,14 @@ namespace Guimain {
 
 				board.height = h;
 				board.width = w;
+				board.mode = B.mode;
 				p1.score = p1.turns_played = 0;
 				p1.id = 1;
 				p2.score = p2.turns_played = 0;
 				p2.id = 2;
 			}
+			if (board.mode)
+				this->hintToolStripMenuItem->Enabled = false;
 			
 			PrintBoard(board.height, board.width, board);
 			PrintButtons(w);
@@ -586,6 +601,8 @@ namespace Guimain {
 			// 
 			// hintToolStripMenuItem
 			// 
+			
+			this->hintToolStripMenuItem->Enabled = true;
 			this->hintToolStripMenuItem->Name = L"hintToolStripMenuItem";
 			this->hintToolStripMenuItem->Size = System::Drawing::Size(224, 26);
 			this->hintToolStripMenuItem->Text = L"Hint";
@@ -652,7 +669,8 @@ private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
 }
 	   
 private: System::Void undoToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->redoToolStripMenuItem->Enabled = true;
+	if (board.mode == 0)
+		this->redoToolStripMenuItem->Enabled = true;
 	UndoMove(&board,&p1,&p2,play_stack,&turns);
 	updatePanel1();
 	if(!canUndo(play_stack,turns))
@@ -660,7 +678,8 @@ private: System::Void undoToolStripMenuItem_Click(System::Object^ sender, System
 }
 
 private: System::Void redoToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->undoToolStripMenuItem->Enabled = true;
+	if(board.mode==0)
+		this->undoToolStripMenuItem->Enabled = true;
 	RedoMove(&board, &p1, &p2, play_stack, &turns);
 	updatePanel1();
 	if (!canRedo(play_stack, turns))
