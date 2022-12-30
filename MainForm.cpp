@@ -1,10 +1,9 @@
 #include "MainForm.h"
-#include "GameForm.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
 
-[STAThread]
+[STAThreadAttribute]
 
 void main(array<String^>^ args) {
 	Application::EnableVisualStyles();

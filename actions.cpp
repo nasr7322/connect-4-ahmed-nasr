@@ -28,13 +28,9 @@ void UpdateScore(struct Board* B, struct Player* P) {///Time Complexity O(N^2),A
         }
     }
 
-    ///printf("%d\n",new_score);
-
-
     ///Check 45degree connect fours
     for (int i = 0;i < B->height + B->width;i++) {///We start from all elements of most left column then of most bottom row so total height+width-1 beginning-cells
         int basex = Min(i, B->height - 1), basey = Max(0, i - (B->height - 1));///Decode position
-
         int lst = 0;
         ///printf("base cell =(%d,%d)\n",basex,basey);
         for (int j = 0;j < Min(basex + 1, B->width - basey);j++) {
@@ -45,7 +41,6 @@ void UpdateScore(struct Board* B, struct Player* P) {///Time Complexity O(N^2),A
             ///printf("from %d to %d\n",lst,j);
         }
     }
-    ///printf("%d\n",new_score);
 
     ///Check 135degree connect fours
     for (int i = 0;i < B->height + B->width;i++) {///We start from all elements of most right column then of most bottom row so total height+width-1 beginning-cells
@@ -61,8 +56,6 @@ void UpdateScore(struct Board* B, struct Player* P) {///Time Complexity O(N^2),A
             ///printf("from %d to %d\n",lst,j);
         }
     }
-
-
     P->score = new_score;
 }
 
@@ -70,12 +63,8 @@ int PlayerMove(struct Board* B, struct Player* P, int col_number) {
     if (col_number >= B->width || col_number < 0 || B->board[0][col_number] != 0)return -1;
     int cr = 0;
     while (cr + 1 < B->height && B->board[cr + 1][col_number] == 0)cr++;
-
-
     B->board[cr][col_number] = P->id;
-
     UpdateScore(B, P);
-
     P->turns_played++;
     return 0;
 }
@@ -87,7 +76,6 @@ void Reset(Board* B, Player* P1, Player* P2)
             B->board[i][j] = 0;
         }
     }
-
     P1->score = P1->turns_played = 0;
     P2->score = P2->turns_played = 0;
 }
@@ -99,7 +87,6 @@ int PopMove(struct Board* B, struct Player* P1, struct Player* P2, int col_numbe
     cr++;
     if (cr == B->height)return -1;
     if (B->board[0][col_number])cr = 0;
-
     if (B->board[cr][col_number] == P1->id) {
         P1->turns_played--;
         B->board[cr][col_number] = 0;
@@ -112,8 +99,6 @@ int PopMove(struct Board* B, struct Player* P1, struct Player* P2, int col_numbe
         UpdateScore(B, P2);
 
     }
-
-
     return 0;
 }
 

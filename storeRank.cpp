@@ -49,10 +49,7 @@ char* parseName(char* data) {
     return tmpstring;
 }
 
-
-
 int addScore(char* prename, int score, char* filename) {
-    ///char* name = lower(prename);///To avoid case sensitive
 
     char* name = prename;
     FILE* newfp, * fp;
@@ -112,8 +109,6 @@ int addScore(char* prename, int score, char* filename) {
     return 0;
 }
 
-
-
 int getScore(char* prename, char* filename) {
     char* name = lower(prename);///Avoid Case sensitive
 
@@ -160,7 +155,6 @@ int getScoreByIndex(int idx, char* filename) {
 
     return score;
 }
-
 
 char* getNameByIndex(int idx, char* filename) {
 
