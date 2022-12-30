@@ -670,30 +670,29 @@ namespace Guimain {
 		}
 	}
 
-	private: System::Void to_leaderboards_button_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (winner_name->Text == "" || save_box->Text->Length > 12) {
-			MessageBox::Show("Invalid Name(1<=length<=12)", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-		else {
-
-			Reset(&board, &p1, &p2);
-			if (winner_name->Text != "") {
-				///Casting
-				auto a = winner_name->Text->ToLower()->ToCharArray();
-				char name[255];
-				int j = 0;
-				for (; j < a->Length; j++) {
-					name[j] = a[j];
-				}
-				name[j] = '\0';
-				int ret = addScore(name, Max(p1.score, p2.score), "scores.txt");
-				debg(ret);
-			}
-			winnerpanel->Hide();
-			this->Close();
-		}
+private: System::Void to_leaderboards_button_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (winner_name->Text == "" || save_box->Text->Length > 12) {
+		MessageBox::Show("Invalid Name(1<=length<=12)", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
+	else {
 
+	Reset(&board, &p1, &p2);
+	if (winner_name->Text != "") {
+		///Casting
+		auto a = winner_name->Text->ToLower()->ToCharArray();
+		char name[255];
+		int j = 0;
+		for (; j < a->Length; j++) {
+			name[j] = a[j];
+		}
+		name[j] = '\0';
+		int ret = addScore(name, Max(p1.score, p2.score), "scores.txt");
+		debg(ret);
+	}
+	winnerpanel->Hide();
+	this->Close();
+
+}
 	private: System::Void box_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (save_box->Text->Length > 12 && e->KeyChar != 0x08) {
 			e->Handled = true;
