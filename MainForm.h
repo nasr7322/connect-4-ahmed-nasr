@@ -73,7 +73,7 @@ namespace Guimain {
 				button->Height = 20 ;
 				button->Width = 80 ;
 				button->Left = 110 ;
-				button->Top = 75+(i*(button->Height)) ;
+				button->Top = 100+(i*(button->Height)) ;
 				button->Text = s;
 				button->Tag =s;
 				button->Click += gcnew EventHandler(this, &MainForm::loaded_game_button_Click);
@@ -140,7 +140,7 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ scores_label2;
 	private: System::Windows::Forms::Label^ scores_label1;
 	private: System::Windows::Forms::TextBox^ scores_count_box;
-	private: System::Windows::Forms::Label^ scores;
+	private: System::Windows::Forms::Label^ scores_label;
 	private: System::Windows::Forms::Button^ getxmldata_button;
 	private: System::Windows::Forms::ListBox^ listBox;
 	private: System::Windows::Forms::Label^ xml_instructions;
@@ -155,10 +155,10 @@ namespace Guimain {
 	private: System::Windows::Forms::Button^ two_mode_button;
 	private: System::Windows::Forms::Button^ bot_mode_button;
 	private: System::Windows::Forms::Label^ mode_label;
-private: System::Windows::Forms::Panel^ highscores_panel;
-private: System::Windows::Forms::Label^ highscores_label;
-private: System::Windows::Forms::Button^ back_highscores_panel;
-private: System::Windows::Forms::ListBox^ scores_list_box;
+	private: System::Windows::Forms::Panel^ highscores_panel;
+	private: System::Windows::Forms::Label^ highscores_label;
+	private: System::Windows::Forms::Button^ back_highscores_panel;
+	private: System::Windows::Forms::ListBox^ scores_list_box;
 	private: System::Windows::Forms::Button^ cancel_load;
 
 #pragma region Windows Form Designer generated code
@@ -190,7 +190,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->scores_label2 = (gcnew System::Windows::Forms::Label());
 			this->scores_label1 = (gcnew System::Windows::Forms::Label());
 			this->scores_count_box = (gcnew System::Windows::Forms::TextBox());
-			this->scores = (gcnew System::Windows::Forms::Label());
+			this->scores_label = (gcnew System::Windows::Forms::Label());
 			this->getxmldata_button = (gcnew System::Windows::Forms::Button());
 			this->xml_instructions = (gcnew System::Windows::Forms::Label());
 			this->xml_check = (gcnew System::Windows::Forms::CheckBox());
@@ -219,12 +219,13 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// owrname
 			// 
 			this->owrname->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
-			this->owrname->Font = (gcnew System::Drawing::Font(L"Open Sans", 7));
+			this->owrname->Font = (gcnew System::Drawing::Font(L"Arial Narrow", 8.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->owrname->Location = System::Drawing::Point(225, 580);
 			this->owrname->Name = L"owrname";
 			this->owrname->Size = System::Drawing::Size(200, 25);
 			this->owrname->TabIndex = 3;
-			this->owrname->Text = L"Mohamed Nasr and Ahmed Hassan";
+			this->owrname->Text = L"By: Mohamed Nasr and Ahmed Hassan";
 			this->owrname->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// game_size_panel
@@ -282,7 +283,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->label_select_custom->AutoSize = true;
 			this->label_select_custom->Location = System::Drawing::Point(71, 76);
 			this->label_select_custom->Name = L"label_select_custom";
-			this->label_select_custom->Size = System::Drawing::Size(141, 17);
+			this->label_select_custom->Size = System::Drawing::Size(107, 13);
 			this->label_select_custom->TabIndex = 12;
 			this->label_select_custom->Text = L"Select a custom size:";
 			// 
@@ -291,7 +292,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->w_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->w_box->Location = System::Drawing::Point(154, 95);
 			this->w_box->Name = L"w_box";
-			this->w_box->Size = System::Drawing::Size(70, 22);
+			this->w_box->Size = System::Drawing::Size(70, 20);
 			this->w_box->TabIndex = 11;
 			this->w_box->Text = L"  ";
 			this->w_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -302,7 +303,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->h_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->h_box->Location = System::Drawing::Point(74, 95);
 			this->h_box->Name = L"h_box";
-			this->h_box->Size = System::Drawing::Size(70, 22);
+			this->h_box->Size = System::Drawing::Size(70, 20);
 			this->h_box->TabIndex = 10;
 			this->h_box->Text = L"  ";
 			this->h_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -311,11 +312,12 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// selecttext
 			// 
 			this->selecttext->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->selecttext->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30));
-			this->selecttext->Location = System::Drawing::Point(37, 14);
+			this->selecttext->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->selecttext->Location = System::Drawing::Point(25, 14);
 			this->selecttext->MinimumSize = System::Drawing::Size(1, 1);
 			this->selecttext->Name = L"selecttext";
-			this->selecttext->Size = System::Drawing::Size(224, 40);
+			this->selecttext->Size = System::Drawing::Size(250, 40);
 			this->selecttext->TabIndex = 9;
 			this->selecttext->Text = L"Game Size";
 			this->selecttext->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -410,7 +412,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->scores_panel->Controls->Add(this->scores_label2);
 			this->scores_panel->Controls->Add(this->scores_label1);
 			this->scores_panel->Controls->Add(this->scores_count_box);
-			this->scores_panel->Controls->Add(this->scores);
+			this->scores_panel->Controls->Add(this->scores_label);
 			this->scores_panel->Location = System::Drawing::Point(622, 393);
 			this->scores_panel->Name = L"scores_panel";
 			this->scores_panel->Size = System::Drawing::Size(300, 190);
@@ -455,7 +457,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->scores_label1->AutoSize = true;
 			this->scores_label1->Location = System::Drawing::Point(71, 76);
 			this->scores_label1->Name = L"scores_label1";
-			this->scores_label1->Size = System::Drawing::Size(171, 17);
+			this->scores_label1->Size = System::Drawing::Size(128, 13);
 			this->scores_label1->TabIndex = 12;
 			this->scores_label1->Text = L"select a number of scores";
 			// 
@@ -464,23 +466,24 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->scores_count_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->scores_count_box->Location = System::Drawing::Point(74, 95);
 			this->scores_count_box->Name = L"scores_count_box";
-			this->scores_count_box->Size = System::Drawing::Size(150, 22);
+			this->scores_count_box->Size = System::Drawing::Size(150, 20);
 			this->scores_count_box->TabIndex = 10;
 			this->scores_count_box->Text = L"  ";
 			this->scores_count_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->scores_count_box->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::scores_count_box_KeyPress);
 			// 
-			// scores
+			// scores_label
 			// 
-			this->scores->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->scores->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30));
-			this->scores->Location = System::Drawing::Point(37, 14);
-			this->scores->MinimumSize = System::Drawing::Size(1, 1);
-			this->scores->Name = L"scores";
-			this->scores->Size = System::Drawing::Size(224, 40);
-			this->scores->TabIndex = 9;
-			this->scores->Text = L"Scores";
-			this->scores->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->scores_label->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->scores_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->scores_label->Location = System::Drawing::Point(37, 14);
+			this->scores_label->MinimumSize = System::Drawing::Size(1, 1);
+			this->scores_label->Name = L"scores_label";
+			this->scores_label->Size = System::Drawing::Size(224, 40);
+			this->scores_label->TabIndex = 9;
+			this->scores_label->Text = L"Scores";
+			this->scores_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// getxmldata_button
 			// 
@@ -499,7 +502,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// xml_instructions
 			// 
 			this->xml_instructions->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->xml_instructions->Location = System::Drawing::Point(5, 9);
+			this->xml_instructions->Location = System::Drawing::Point(6, 9);
 			this->xml_instructions->Name = L"xml_instructions";
 			this->xml_instructions->Size = System::Drawing::Size(179, 32);
 			this->xml_instructions->TabIndex = 23;
@@ -510,9 +513,9 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->xml_check->AutoSize = true;
 			this->xml_check->Checked = true;
 			this->xml_check->CheckState = System::Windows::Forms::CheckState::Checked;
-			this->xml_check->Location = System::Drawing::Point(7, 133);
+			this->xml_check->Location = System::Drawing::Point(10, 133);
 			this->xml_check->Name = L"xml_check";
-			this->xml_check->Size = System::Drawing::Size(132, 21);
+			this->xml_check->Size = System::Drawing::Size(104, 17);
 			this->xml_check->TabIndex = 24;
 			this->xml_check->Text = L"Use XML values";
 			this->xml_check->UseVisualStyleBackColor = true;
@@ -531,10 +534,9 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// xmllistBox
 			// 
 			this->xmllistBox->FormattingEnabled = true;
-			this->xmllistBox->ItemHeight = 16;
-			this->xmllistBox->Location = System::Drawing::Point(10, 45);
+			this->xmllistBox->Location = System::Drawing::Point(9, 45);
 			this->xmllistBox->Name = L"xmllistBox";
-			this->xmllistBox->Size = System::Drawing::Size(173, 52);
+			this->xmllistBox->Size = System::Drawing::Size(173, 82);
 			this->xmllistBox->TabIndex = 25;
 			// 
 			// load_panel
@@ -545,15 +547,15 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->load_panel->Controls->Add(this->cancel_load);
 			this->load_panel->Controls->Add(this->available_games_label);
 			this->load_panel->Controls->Add(this->load_label);
-			this->load_panel->Location = System::Drawing::Point(622, 197);
+			this->load_panel->Location = System::Drawing::Point(76, 222);
 			this->load_panel->Name = L"load_panel";
-			this->load_panel->Size = System::Drawing::Size(300, 190);
+			this->load_panel->Size = System::Drawing::Size(300, 220);
 			this->load_panel->TabIndex = 26;
 			this->load_panel->Visible = false;
 			// 
 			// cancel_load
 			// 
-			this->cancel_load->Location = System::Drawing::Point(75, 156);
+			this->cancel_load->Location = System::Drawing::Point(75, 186);
 			this->cancel_load->Name = L"cancel_load";
 			this->cancel_load->Size = System::Drawing::Size(150, 20);
 			this->cancel_load->TabIndex = 3;
@@ -564,7 +566,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// available_games_label
 			// 
 			this->available_games_label->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->available_games_label->Location = System::Drawing::Point(100, 58);
+			this->available_games_label->Location = System::Drawing::Point(100, 75);
 			this->available_games_label->Name = L"available_games_label";
 			this->available_games_label->Size = System::Drawing::Size(100, 17);
 			this->available_games_label->TabIndex = 2;
@@ -575,9 +577,9 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// load_label
 			// 
 			this->load_label->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->load_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->load_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->load_label->Location = System::Drawing::Point(25, 8);
+			this->load_label->Location = System::Drawing::Point(25, 23);
 			this->load_label->Name = L"load_label";
 			this->load_label->Size = System::Drawing::Size(250, 50);
 			this->load_label->TabIndex = 0;
@@ -590,7 +592,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->game_mode_panel->Controls->Add(this->two_mode_button);
 			this->game_mode_panel->Controls->Add(this->bot_mode_button);
 			this->game_mode_panel->Controls->Add(this->mode_label);
-			this->game_mode_panel->Location = System::Drawing::Point(305, 580);
+			this->game_mode_panel->Location = System::Drawing::Point(12, 12);
 			this->game_mode_panel->Name = L"game_mode_panel";
 			this->game_mode_panel->Size = System::Drawing::Size(300, 190);
 			this->game_mode_panel->TabIndex = 27;
@@ -621,7 +623,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// mode_label
 			// 
 			this->mode_label->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->mode_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->mode_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->mode_label->Location = System::Drawing::Point(0, 15);
 			this->mode_label->Name = L"mode_label";
@@ -637,7 +639,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->highscores_panel->Controls->Add(this->highscores_label);
 			this->highscores_panel->Controls->Add(this->back_highscores_panel);
 			this->highscores_panel->Controls->Add(this->scores_list_box);
-			this->highscores_panel->Location = System::Drawing::Point(12, 566);
+			this->highscores_panel->Location = System::Drawing::Point(12, 569);
 			this->highscores_panel->Name = L"highscores_panel";
 			this->highscores_panel->Size = System::Drawing::Size(250, 350);
 			this->highscores_panel->TabIndex = 28;
@@ -646,11 +648,11 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// highscores_label
 			// 
 			this->highscores_label->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->highscores_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 26.25F, System::Drawing::FontStyle::Regular,
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->highscores_label->Location = System::Drawing::Point(25, 13);
+			this->highscores_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->highscores_label->Location = System::Drawing::Point(3, 13);
 			this->highscores_label->Name = L"highscores_label";
-			this->highscores_label->Size = System::Drawing::Size(200, 45);
+			this->highscores_label->Size = System::Drawing::Size(242, 45);
 			this->highscores_label->TabIndex = 3;
 			this->highscores_label->Text = L"Highscores";
 			this->highscores_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -670,7 +672,6 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// 
 			this->scores_list_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->scores_list_box->FormattingEnabled = true;
-
 			this->scores_list_box->Location = System::Drawing::Point(10, 71);
 			this->scores_list_box->Name = L"scores_list_box";
 			this->scores_list_box->Size = System::Drawing::Size(230, 212);
@@ -700,7 +701,6 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Main Menu";
-			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->game_size_panel->ResumeLayout(false);
 			this->game_size_panel->PerformLayout();
 			this->scores_panel->ResumeLayout(false);
@@ -835,7 +835,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 	}
 
 
-//loading highscores - still in progress  
+//loading highscores
 	public: System::Void loadhighscores(System::Object^ sender, System::EventArgs^ e) {
 	if (Highscores < 1 ) {
 		MessageBox::Show("Invalid input", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -940,8 +940,6 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 private: System::Void back_highscores_panel_Click(System::Object^ sender, System::EventArgs^ e) {
 	scores_list_box->Items->Clear();
 	highscores_panel->Hide();
-}
-private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 
