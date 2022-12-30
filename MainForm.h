@@ -3,6 +3,7 @@
 #include "GameForm.h"
 #include <windows.h>
 #include "storeRank.h"
+
 int errors = 0;
 int xmlv;
 int height=0,width=0,Highscores=0;
@@ -100,6 +101,16 @@ namespace Guimain {
 				}
 			}
 		}
+
+//top players button
+	public: System::Void top_players_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (xml_check->Checked && !(xmllistBox->Items->Count == 0)) { loadhighscores(sender, e); }
+		else {
+			xmllistBox->Items->Clear();
+			scores_panel->Show();
+			scores_panel->Location = System::Drawing::Point(175, 250);
+		}
+	}
 
 	public:
 
@@ -242,7 +253,7 @@ private: System::Windows::Forms::Button^ button1;
 			this->game_size_panel->Controls->Add(this->w_box);
 			this->game_size_panel->Controls->Add(this->h_box);
 			this->game_size_panel->Controls->Add(this->selecttext);
-			this->game_size_panel->Location = System::Drawing::Point(614, 340);
+			this->game_size_panel->Location = System::Drawing::Point(557, 106);
 			this->game_size_panel->Name = L"game_size_panel";
 			this->game_size_panel->Size = System::Drawing::Size(300, 190);
 			this->game_size_panel->TabIndex = 14;
@@ -301,7 +312,7 @@ private: System::Windows::Forms::Button^ button1;
 			this->w_box->TabIndex = 11;
 			this->w_box->Text = L"  ";
 			this->w_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-			this->w_box->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::w_box_KeyPress);
+			this->w_box->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::box_KeyPress);
 			// 
 			// h_box
 			// 
@@ -312,7 +323,7 @@ private: System::Windows::Forms::Button^ button1;
 			this->h_box->TabIndex = 10;
 			this->h_box->Text = L"  ";
 			this->h_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-			this->h_box->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::h_box_KeyPress);
+			this->h_box->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::box_KeyPress);
 			// 
 			// selecttext
 			// 
@@ -418,7 +429,7 @@ private: System::Windows::Forms::Button^ button1;
 			this->scores_panel->Controls->Add(this->scores_label1);
 			this->scores_panel->Controls->Add(this->scores_count_box);
 			this->scores_panel->Controls->Add(this->scores_label);
-			this->scores_panel->Location = System::Drawing::Point(614, 144);
+			this->scores_panel->Location = System::Drawing::Point(100, 40);
 			this->scores_panel->Name = L"scores_panel";
 			this->scores_panel->Size = System::Drawing::Size(300, 190);
 			this->scores_panel->TabIndex = 16;
@@ -477,7 +488,7 @@ private: System::Windows::Forms::Button^ button1;
 			this->scores_count_box->TabIndex = 10;
 			this->scores_count_box->Text = L"  ";
 			this->scores_count_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-			this->scores_count_box->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::scores_count_box_KeyPress);
+			this->scores_count_box->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::box_KeyPress);
 			// 
 			// scores_label
 			// 
@@ -601,7 +612,7 @@ private: System::Windows::Forms::Button^ button1;
 			this->game_mode_panel->Controls->Add(this->two_mode_button);
 			this->game_mode_panel->Controls->Add(this->bot_mode_button);
 			this->game_mode_panel->Controls->Add(this->mode_label);
-			this->game_mode_panel->Location = System::Drawing::Point(285, 566);
+			this->game_mode_panel->Location = System::Drawing::Point(275, 489);
 			this->game_mode_panel->Name = L"game_mode_panel";
 			this->game_mode_panel->Size = System::Drawing::Size(300, 190);
 			this->game_mode_panel->TabIndex = 27;
@@ -788,17 +799,7 @@ private: System::Windows::Forms::Button^ button1;
 	}
 
 //textboxs only accepts digits
-	private: System::Void h_box_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) {
-			e->Handled = true;
-		}
-	}
-	private: System::Void w_box_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) {
-			e->Handled = true;
-		}
-	}
-	private: System::Void scores_count_box_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+	private: System::Void box_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) {
 			e->Handled = true;
 		}
@@ -832,15 +833,7 @@ private: System::Windows::Forms::Button^ button1;
 	}
 }
 
-//top players button
-	private: System::Void top_players_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (xml_check->Checked && !(xmllistBox->Items->Count == 0)) { loadhighscores(sender, e); }
-		else {
-			xmllistBox->Items->Clear();
-			scores_panel->Show();
-			scores_panel->Location = System::Drawing::Point(175, 250);
-		}
-}
+
 
 //cancel top players
 	private: System::Void scores_cancel_Click(System::Object^ sender, System::EventArgs^ e) {
