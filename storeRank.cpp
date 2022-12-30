@@ -52,11 +52,16 @@ char* parseName(char* data) {
 
 
 int addScore(char* prename, int score, char* filename) {
-    char* name = lower(prename);///To avoid case sensitive
+    ///char* name = lower(prename);///To avoid case sensitive
 
-
+    char* name = prename;
     FILE* newfp, * fp;
     fp = fopen(filename, "r");
+    if (!fp ) {
+        fp= fopen(filename, "w");
+        fclose(fp);
+        fp = fopen(filename, "r");
+    }
     newfp = fopen("newscore.txt", "w");
     if (fp == NULL || newfp == NULL) {
         return -1;
@@ -100,7 +105,7 @@ int addScore(char* prename, int score, char* filename) {
     fclose(newfp);
     fclose(fp);
     remove(filename);
-    //rename("newscore.txt", filename);
+    rename("newscore.txt", filename);
 
 
 
