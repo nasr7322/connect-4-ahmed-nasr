@@ -2,7 +2,7 @@
 #using <System.Xml.dll>
 #include "GameForm.h"
 #include <windows.h>
-
+#include "storeRank.h"
 int errors = 0;
 int xmlv;
 int height=0,width=0,Highscores=0;
@@ -282,7 +282,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->label_select_custom->AutoSize = true;
 			this->label_select_custom->Location = System::Drawing::Point(71, 76);
 			this->label_select_custom->Name = L"label_select_custom";
-			this->label_select_custom->Size = System::Drawing::Size(107, 13);
+			this->label_select_custom->Size = System::Drawing::Size(141, 17);
 			this->label_select_custom->TabIndex = 12;
 			this->label_select_custom->Text = L"Select a custom size:";
 			// 
@@ -291,7 +291,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->w_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->w_box->Location = System::Drawing::Point(154, 95);
 			this->w_box->Name = L"w_box";
-			this->w_box->Size = System::Drawing::Size(70, 20);
+			this->w_box->Size = System::Drawing::Size(70, 22);
 			this->w_box->TabIndex = 11;
 			this->w_box->Text = L"  ";
 			this->w_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -302,7 +302,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->h_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->h_box->Location = System::Drawing::Point(74, 95);
 			this->h_box->Name = L"h_box";
-			this->h_box->Size = System::Drawing::Size(70, 20);
+			this->h_box->Size = System::Drawing::Size(70, 22);
 			this->h_box->TabIndex = 10;
 			this->h_box->Text = L"  ";
 			this->h_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -454,7 +454,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->scores_label1->AutoSize = true;
 			this->scores_label1->Location = System::Drawing::Point(71, 76);
 			this->scores_label1->Name = L"scores_label1";
-			this->scores_label1->Size = System::Drawing::Size(128, 13);
+			this->scores_label1->Size = System::Drawing::Size(171, 17);
 			this->scores_label1->TabIndex = 12;
 			this->scores_label1->Text = L"select a number of scores";
 			// 
@@ -463,7 +463,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->scores_count_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->scores_count_box->Location = System::Drawing::Point(74, 95);
 			this->scores_count_box->Name = L"scores_count_box";
-			this->scores_count_box->Size = System::Drawing::Size(150, 20);
+			this->scores_count_box->Size = System::Drawing::Size(150, 22);
 			this->scores_count_box->TabIndex = 10;
 			this->scores_count_box->Text = L"  ";
 			this->scores_count_box->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -511,7 +511,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->xml_check->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->xml_check->Location = System::Drawing::Point(7, 133);
 			this->xml_check->Name = L"xml_check";
-			this->xml_check->Size = System::Drawing::Size(104, 17);
+			this->xml_check->Size = System::Drawing::Size(132, 21);
 			this->xml_check->TabIndex = 24;
 			this->xml_check->Text = L"Use XML values";
 			this->xml_check->UseVisualStyleBackColor = true;
@@ -530,9 +530,10 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// xmllistBox
 			// 
 			this->xmllistBox->FormattingEnabled = true;
+			this->xmllistBox->ItemHeight = 16;
 			this->xmllistBox->Location = System::Drawing::Point(10, 45);
 			this->xmllistBox->Name = L"xmllistBox";
-			this->xmllistBox->Size = System::Drawing::Size(173, 56);
+			this->xmllistBox->Size = System::Drawing::Size(173, 52);
 			this->xmllistBox->TabIndex = 25;
 			// 
 			// load_panel
@@ -667,9 +668,10 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// 
 			this->scores_list_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->scores_list_box->FormattingEnabled = true;
+			this->scores_list_box->ItemHeight = 16;
 			this->scores_list_box->Location = System::Drawing::Point(11, 72);
 			this->scores_list_box->Name = L"scores_list_box";
-			this->scores_list_box->Size = System::Drawing::Size(230, 225);
+			this->scores_list_box->Size = System::Drawing::Size(230, 212);
 			this->scores_list_box->TabIndex = 1;
 			// 
 			// MainForm
@@ -696,6 +698,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Main Menu";
+			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->game_size_panel->ResumeLayout(false);
 			this->game_size_panel->PerformLayout();
 			this->scores_panel->ResumeLayout(false);
@@ -839,9 +842,51 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 		scores_panel->Hide();
 		highscores_panel->Show();
 		highscores_panel->Location=System::Drawing::Point(200,150);
-		for (int i = 0; i < Highscores; i++) {
-			scores_list_box->Items->Add("score here " + i);
+
+		///Read score one by one and add to list
+		FILE* fp;
+		fp = fopen("scores.txt", "r");
+		if (!fp)return;
+		char buffer[255];
+		int found = 0;
+		int idx = 0;
+		while (!feof(fp)&&idx<Highscores) {
+			fgets(buffer, 255, fp);
+			if (feof(fp))break;
+			found = 1;
+			int score = parseScore(buffer);
+			char name[255];
+			{///Parse name
+
+				int ret = 0;
+				int cr = 0;
+				while (buffer[cr] != '=') {
+					cr++;
+
+				}
+				cr++;
+				int ncr = 0;
+				while (buffer[cr] != '\0' && buffer[cr] != '\n') {
+					name[ncr++] = buffer[cr++];
+				}
+				name[ncr] = '\0';
+
+			}
+			String^ nameObject = gcnew String(name);
+			scores_list_box->Items->Add(nameObject+":"+score);
+			idx++;
 		}
+
+		fclose(fp);
+		/**for (int i = 0; i < Highscores; i++) {
+			int temp = getScoreByIndex(i, "scores.txt");
+			if (temp == -1)break;
+			char* name = getNameByIndex(i, "scores.txt");
+
+			OutputDebugStringA(name);
+			OutputDebugStringA("*\n");
+			
+		}*/
 	}
 }
 
@@ -893,6 +938,8 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 private: System::Void back_highscores_panel_Click(System::Object^ sender, System::EventArgs^ e) {
 	scores_list_box->Items->Clear();
 	highscores_panel->Hide();
+}
+private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 

@@ -101,6 +101,10 @@ namespace Guimain {
 				this->redoToolStripMenuItem->Enabled = false;
 				if (board.mode == 0)
 					this->undoToolStripMenuItem->Enabled = true;
+				
+			}
+			else {
+				return;
 			}
 			//updatePanel1();
 			if (board.mode) {
