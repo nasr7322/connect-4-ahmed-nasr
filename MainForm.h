@@ -229,7 +229,7 @@ namespace Guimain {
 			this->game_size_panel->Controls->Add(this->w_box);
 			this->game_size_panel->Controls->Add(this->h_box);
 			this->game_size_panel->Controls->Add(this->selecttext);
-			this->game_size_panel->Location = System::Drawing::Point(586, 12);
+			this->game_size_panel->Location = System::Drawing::Point(563, 12);
 			this->game_size_panel->Name = L"game_size_panel";
 			this->game_size_panel->Size = System::Drawing::Size(300, 190);
 			this->game_size_panel->TabIndex = 14;
@@ -534,7 +534,7 @@ namespace Guimain {
 			this->load_panel->Controls->Add(this->cancel_load);
 			this->load_panel->Controls->Add(this->available_games_label);
 			this->load_panel->Controls->Add(this->load_label);
-			this->load_panel->Location = System::Drawing::Point(112, 247);
+			this->load_panel->Location = System::Drawing::Point(563, 236);
 			this->load_panel->Name = L"load_panel";
 			this->load_panel->Size = System::Drawing::Size(300, 190);
 			this->load_panel->TabIndex = 26;
@@ -579,7 +579,7 @@ namespace Guimain {
 			this->game_mode_panel->Controls->Add(this->two_mode_button);
 			this->game_mode_panel->Controls->Add(this->bot_mode_button);
 			this->game_mode_panel->Controls->Add(this->mode_label);
-			this->game_mode_panel->Location = System::Drawing::Point(32, 529);
+			this->game_mode_panel->Location = System::Drawing::Point(13, 225);
 			this->game_mode_panel->Name = L"game_mode_panel";
 			this->game_mode_panel->Size = System::Drawing::Size(300, 190);
 			this->game_mode_panel->TabIndex = 27;
