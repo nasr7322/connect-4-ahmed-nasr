@@ -177,6 +177,7 @@ namespace Guimain {
 				select->Left = 150 + (i * (select->Width));
 				select->Top = 100;
 				select->Tag = i;
+				select->Text = System::Convert::ToString(i);
 				select->Click += gcnew EventHandler(this, &GameForm::column_button_Click);
 				panel1->Controls->Add(select);
 			}
@@ -277,6 +278,7 @@ namespace Guimain {
 			   this->save_panel->SuspendLayout();
 			   this->menuStrip1->SuspendLayout();
 			   this->winnerpanel->SuspendLayout();
+			   this->panel1->SuspendLayout();
 			   this->SuspendLayout();
 			   // 
 			   // main_menu
@@ -284,6 +286,7 @@ namespace Guimain {
 			   this->main_menu->Anchor = System::Windows::Forms::AnchorStyles::None;
 			   this->main_menu->BackColor = System::Drawing::SystemColors::Control;
 			   this->main_menu->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			   this->main_menu->Cursor = System::Windows::Forms::Cursors::Hand;
 			   this->main_menu->Location = System::Drawing::Point(350, 565);
 			   this->main_menu->Name = L"main_menu";
 			   this->main_menu->Size = System::Drawing::Size(100, 25);
@@ -295,12 +298,12 @@ namespace Guimain {
 			   // p1_label
 			   // 
 			   this->p1_label->Anchor = System::Windows::Forms::AnchorStyles::None;
-			   this->p1_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			   this->p1_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 26.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
 			   this->p1_label->Location = System::Drawing::Point(16, 26);
 			   this->p1_label->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			   this->p1_label->Name = L"p1_label";
-			   this->p1_label->Size = System::Drawing::Size(122, 37);
+			   this->p1_label->Size = System::Drawing::Size(146, 37);
 			   this->p1_label->TabIndex = 1;
 			   this->p1_label->Text = L"Player1";
 			   // 
@@ -330,7 +333,7 @@ namespace Guimain {
 			   // turns_label
 			   // 
 			   this->turns_label->Anchor = System::Windows::Forms::AnchorStyles::None;
-			   this->turns_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			   this->turns_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
 			   this->turns_label->Location = System::Drawing::Point(338, 32);
 			   this->turns_label->Name = L"turns_label";
@@ -379,12 +382,12 @@ namespace Guimain {
 			   // p2_label
 			   // 
 			   this->p2_label->Anchor = System::Windows::Forms::AnchorStyles::None;
-			   this->p2_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			   this->p2_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 26.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->p2_label->Location = System::Drawing::Point(647, 26);
+			   this->p2_label->Location = System::Drawing::Point(635, 26);
 			   this->p2_label->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			   this->p2_label->Name = L"p2_label";
-			   this->p2_label->Size = System::Drawing::Size(124, 37);
+			   this->p2_label->Size = System::Drawing::Size(136, 37);
 			   this->p2_label->TabIndex = 6;
 			   this->p2_label->Text = L"Player2";
 			   // 
@@ -406,6 +409,7 @@ namespace Guimain {
 			   // cancel_save_button
 			   // 
 			   this->cancel_save_button->Anchor = System::Windows::Forms::AnchorStyles::None;
+			   this->cancel_save_button->Cursor = System::Windows::Forms::Cursors::Hand;
 			   this->cancel_save_button->Location = System::Drawing::Point(160, 131);
 			   this->cancel_save_button->Name = L"cancel_save_button";
 			   this->cancel_save_button->Size = System::Drawing::Size(75, 25);
@@ -417,6 +421,7 @@ namespace Guimain {
 			   // save_button
 			   // 
 			   this->save_button->Anchor = System::Windows::Forms::AnchorStyles::None;
+			   this->save_button->Cursor = System::Windows::Forms::Cursors::Hand;
 			   this->save_button->Location = System::Drawing::Point(60, 131);
 			   this->save_button->Name = L"save_button";
 			   this->save_button->Size = System::Drawing::Size(75, 25);
@@ -539,6 +544,7 @@ namespace Guimain {
 			   // to_leaderboards_button
 			   // 
 			   this->to_leaderboards_button->Anchor = System::Windows::Forms::AnchorStyles::None;
+			   this->to_leaderboards_button->Cursor = System::Windows::Forms::Cursors::Hand;
 			   this->to_leaderboards_button->Location = System::Drawing::Point(100, 156);
 			   this->to_leaderboards_button->Name = L"to_leaderboards_button";
 			   this->to_leaderboards_button->Size = System::Drawing::Size(100, 23);
@@ -610,7 +616,7 @@ namespace Guimain {
 			   this->p2_icon->Enabled = false;
 			   this->p2_icon->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->p2_icon->ForeColor = System::Drawing::Color::Transparent;
-			   this->p2_icon->Location = System::Drawing::Point(591, 20);
+			   this->p2_icon->Location = System::Drawing::Point(587, 20);
 			   this->p2_icon->Name = L"p2_icon";
 			   this->p2_icon->Size = System::Drawing::Size(50, 50);
 			   this->p2_icon->TabIndex = 12;
@@ -621,6 +627,7 @@ namespace Guimain {
 			   this->button1->Anchor = System::Windows::Forms::AnchorStyles::None;
 			   this->button1->BackColor = System::Drawing::SystemColors::Control;
 			   this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			   this->button1->Cursor = System::Windows::Forms::Cursors::Hand;
 			   this->button1->Location = System::Drawing::Point(218, 565);
 			   this->button1->Name = L"button1";
 			   this->button1->Size = System::Drawing::Size(100, 25);
@@ -633,6 +640,7 @@ namespace Guimain {
 			   this->button2->Anchor = System::Windows::Forms::AnchorStyles::None;
 			   this->button2->BackColor = System::Drawing::SystemColors::Control;
 			   this->button2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			   this->button2->Cursor = System::Windows::Forms::Cursors::Hand;
 			   this->button2->Location = System::Drawing::Point(90, 565);
 			   this->button2->Name = L"button2";
 			   this->button2->Size = System::Drawing::Size(100, 25);
@@ -645,6 +653,7 @@ namespace Guimain {
 			   this->button3->Anchor = System::Windows::Forms::AnchorStyles::None;
 			   this->button3->BackColor = System::Drawing::SystemColors::Control;
 			   this->button3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			   this->button3->Cursor = System::Windows::Forms::Cursors::Hand;
 			   this->button3->Location = System::Drawing::Point(480, 565);
 			   this->button3->Name = L"button3";
 			   this->button3->Size = System::Drawing::Size(100, 25);
@@ -657,6 +666,7 @@ namespace Guimain {
 			   this->button4->Anchor = System::Windows::Forms::AnchorStyles::None;
 			   this->button4->BackColor = System::Drawing::SystemColors::Control;
 			   this->button4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			   this->button4->Cursor = System::Windows::Forms::Cursors::Hand;
 			   this->button4->Location = System::Drawing::Point(613, 565);
 			   this->button4->Name = L"button4";
 			   this->button4->Size = System::Drawing::Size(100, 25);
@@ -666,6 +676,7 @@ namespace Guimain {
 			   // 
 			   // panel1
 			   // 
+			   this->panel1->Controls->Add(this->p2_label);
 			   this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			   this->panel1->Location = System::Drawing::Point(0, 0);
 			   this->panel1->Name = L"panel1";
@@ -678,6 +689,7 @@ namespace Guimain {
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->ClientSize = System::Drawing::Size(784, 611);
 			   this->ControlBox = false;
+			   this->Controls->Add(this->p1_icon);
 			   this->Controls->Add(this->button4);
 			   this->Controls->Add(this->button3);
 			   this->Controls->Add(this->button2);
@@ -689,11 +701,9 @@ namespace Guimain {
 			   this->Controls->Add(this->p1_label_score);
 			   this->Controls->Add(this->p1_label);
 			   this->Controls->Add(this->p2_label_moves);
-			   this->Controls->Add(this->p2_label);
 			   this->Controls->Add(this->p2_label_score);
 			   this->Controls->Add(this->main_menu);
 			   this->Controls->Add(this->p2_icon);
-			   this->Controls->Add(this->p1_icon);
 			   this->Controls->Add(this->save_panel);
 			   this->Controls->Add(this->winnerpanel);
 			   this->Controls->Add(this->panel1);
@@ -710,6 +720,7 @@ namespace Guimain {
 			   this->menuStrip1->PerformLayout();
 			   this->winnerpanel->ResumeLayout(false);
 			   this->winnerpanel->PerformLayout();
+			   this->panel1->ResumeLayout(false);
 			   this->ResumeLayout(false);
 
 		   }
