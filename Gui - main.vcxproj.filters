@@ -68,6 +68,12 @@
     <ClInclude Include="AI_player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="default.xml" />
@@ -76,7 +82,7 @@
     <Image Include="..\..\..\Downloads\RED.PNG">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\..\..\Downloads\ORANGE.PNG">
+    <Image Include="ORANGE.PNG">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
