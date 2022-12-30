@@ -401,7 +401,7 @@ namespace Guimain {
 			this->scores_panel->Controls->Add(this->scores_label1);
 			this->scores_panel->Controls->Add(this->scores_count_box);
 			this->scores_panel->Controls->Add(this->scores);
-			this->scores_panel->Location = System::Drawing::Point(13, 12);
+			this->scores_panel->Location = System::Drawing::Point(586, 432);
 			this->scores_panel->Name = L"scores_panel";
 			this->scores_panel->Size = System::Drawing::Size(300, 190);
 			this->scores_panel->TabIndex = 16;
@@ -579,7 +579,7 @@ namespace Guimain {
 			this->game_mode_panel->Controls->Add(this->two_mode_button);
 			this->game_mode_panel->Controls->Add(this->bot_mode_button);
 			this->game_mode_panel->Controls->Add(this->mode_label);
-			this->game_mode_panel->Location = System::Drawing::Point(13, 225);
+			this->game_mode_panel->Location = System::Drawing::Point(271, 566);
 			this->game_mode_panel->Name = L"game_mode_panel";
 			this->game_mode_panel->Size = System::Drawing::Size(300, 190);
 			this->game_mode_panel->TabIndex = 27;
