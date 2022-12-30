@@ -2,7 +2,7 @@
 struct Board {
     int height, width;
     int board[100][100];
-
+    int mode;
 };
 
 struct Player {
