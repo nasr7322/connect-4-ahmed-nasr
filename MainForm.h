@@ -220,7 +220,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// 
 			this->owrname->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->owrname->Font = (gcnew System::Drawing::Font(L"Open Sans", 7));
-			this->owrname->Location = System::Drawing::Point(217, 586);
+			this->owrname->Location = System::Drawing::Point(225, 580);
 			this->owrname->Name = L"owrname";
 			this->owrname->Size = System::Drawing::Size(200, 25);
 			this->owrname->TabIndex = 3;
@@ -324,7 +324,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// 
 			this->quit->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->quit->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->quit->Location = System::Drawing::Point(242, 448);
+			this->quit->Location = System::Drawing::Point(250, 448);
 			this->quit->MaximumSize = System::Drawing::Size(225, 36);
 			this->quit->MinimumSize = System::Drawing::Size(150, 24);
 			this->quit->Name = L"quit";
@@ -338,7 +338,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// 
 			this->top_players->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->top_players->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->top_players->Location = System::Drawing::Point(242, 418);
+			this->top_players->Location = System::Drawing::Point(250, 418);
 			this->top_players->MaximumSize = System::Drawing::Size(225, 36);
 			this->top_players->MinimumSize = System::Drawing::Size(150, 24);
 			this->top_players->Name = L"top_players";
@@ -352,7 +352,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// 
 			this->load_game->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->load_game->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->load_game->Location = System::Drawing::Point(242, 388);
+			this->load_game->Location = System::Drawing::Point(250, 388);
 			this->load_game->MaximumSize = System::Drawing::Size(225, 36);
 			this->load_game->MinimumSize = System::Drawing::Size(150, 24);
 			this->load_game->Name = L"load_game";
@@ -365,10 +365,11 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// gamename
 			// 
 			this->gamename->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->gamename->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10));
-			this->gamename->Location = System::Drawing::Point(205, 230);
+			this->gamename->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->gamename->Location = System::Drawing::Point(200, 223);
 			this->gamename->Name = L"gamename";
-			this->gamename->Size = System::Drawing::Size(224, 25);
+			this->gamename->Size = System::Drawing::Size(250, 25);
 			this->gamename->TabIndex = 17;
 			this->gamename->Text = L"~~~~~~ Connect Four ~~~~~~";
 			this->gamename->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -376,12 +377,12 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// maintext
 			// 
 			this->maintext->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->maintext->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 38.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->maintext->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 48, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->maintext->Location = System::Drawing::Point(167, 170);
+			this->maintext->Location = System::Drawing::Point(135, 150);
 			this->maintext->MinimumSize = System::Drawing::Size(1, 1);
 			this->maintext->Name = L"maintext";
-			this->maintext->Size = System::Drawing::Size(300, 62);
+			this->maintext->Size = System::Drawing::Size(380, 70);
 			this->maintext->TabIndex = 16;
 			this->maintext->Text = L"Main Menu";
 			this->maintext->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -390,7 +391,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// 
 			this->start_new->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->start_new->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->start_new->Location = System::Drawing::Point(242, 329);
+			this->start_new->Location = System::Drawing::Point(250, 329);
 			this->start_new->MaximumSize = System::Drawing::Size(225, 36);
 			this->start_new->MinimumSize = System::Drawing::Size(150, 24);
 			this->start_new->Name = L"start_new";
@@ -485,7 +486,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// 
 			this->getxmldata_button->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->getxmldata_button->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->getxmldata_button->Location = System::Drawing::Point(242, 358);
+			this->getxmldata_button->Location = System::Drawing::Point(250, 358);
 			this->getxmldata_button->MaximumSize = System::Drawing::Size(225, 36);
 			this->getxmldata_button->MinimumSize = System::Drawing::Size(150, 24);
 			this->getxmldata_button->Name = L"getxmldata_button";
@@ -521,7 +522,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->xml_panel->Controls->Add(this->xmllistBox);
 			this->xml_panel->Controls->Add(this->xml_check);
 			this->xml_panel->Controls->Add(this->xml_instructions);
-			this->xml_panel->Location = System::Drawing::Point(388, 316);
+			this->xml_panel->Location = System::Drawing::Point(413, 321);
 			this->xml_panel->Name = L"xml_panel";
 			this->xml_panel->Size = System::Drawing::Size(192, 151);
 			this->xml_panel->TabIndex = 25;
@@ -723,7 +724,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 		else {
 			xmllistBox->Items->Clear();
 			game_size_panel->Show();
-			game_size_panel->Location = System::Drawing::Point(150, 250);
+			game_size_panel->Location = System::Drawing::Point(175, 250);
 		}
 	}
 
@@ -736,7 +737,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 		else {
 			game_size_panel->Hide();
 			game_mode_panel->Show();
-			game_mode_panel->Location= System::Drawing::Point(150, 250);
+			game_mode_panel->Location= System::Drawing::Point(175, 250);
 		}
 	}
 
@@ -809,7 +810,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 		else {
 			xmllistBox->Items->Clear();
 			scores_panel->Show();
-			scores_panel->Location = System::Drawing::Point(150, 250);
+			scores_panel->Location = System::Drawing::Point(175, 250);
 		}
 }
 
@@ -838,7 +839,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 	else {
 		scores_panel->Hide();
 		highscores_panel->Show();
-		highscores_panel->Location=System::Drawing::Point(200,150);
+		highscores_panel->Location=System::Drawing::Point(175,150);
 		for (int i = 0; i < Highscores; i++) {
 			scores_list_box->Items->Add("score here " + i);
 		}
@@ -848,7 +849,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 //load game button
 	private: System::Void load_game_Click(System::Object^ sender, System::EventArgs^ e) {
 	load_panel->Show();
-	load_panel->Location = System::Drawing::Point(150, 250);
+	load_panel->Location = System::Drawing::Point(175, 250);
 
 }
 
