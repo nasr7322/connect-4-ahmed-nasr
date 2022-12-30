@@ -12,3 +12,8 @@ struct Player {
 
 };
 
+struct time {
+    int Secounds;
+    int Minutes;
+};
+

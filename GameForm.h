@@ -14,7 +14,8 @@ namespace Guimain {
 	Player p2;
 	int turns = 0;
 	int play_stack[3000];
-
+	Time time;
+	
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -24,9 +25,6 @@ namespace Guimain {
 
 	public ref class GameForm : public System::Windows::Forms::Form
 	{
-
-		int secounds = 0, minutes = 0;
-		String^ sec, ^ min;
 		
 		private: System::Windows::Forms::Panel^ winnerpanel;
 		private: System::Windows::Forms::Label^ winnerlabel;
@@ -660,14 +658,16 @@ namespace Guimain {
 	
 
 //timer
+
+	String^ sec, ^ min;
 	private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
-		secounds++;
-		if (secounds == 60) {
-			secounds = 0;
-			minutes++;
+		time.Secounds++;
+		if (time.Secounds == 60) {
+			time.Secounds = 0;
+			time.Minutes++;
 		}
-		sec = Convert::ToString(secounds);
-		min = Convert::ToString(minutes);
+		sec = Convert::ToString(time.Secounds);
+		min = Convert::ToString(time.Minutes);
 		time_label->Text = min + ":" + sec;
 
 	}

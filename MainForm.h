@@ -579,7 +579,7 @@ namespace Guimain {
 		this->load_panel->Controls->Add(this->available_games_label);
 		this->load_panel->Controls->Add(this->load_label);
 		this->load_panel->Controls->Add(this->load_panel2);
-		this->load_panel->Location = System::Drawing::Point(72, 251);
+		this->load_panel->Location = System::Drawing::Point(12, 12);
 		this->load_panel->Name = L"load_panel";
 		this->load_panel->Size = System::Drawing::Size(300, 220);
 		this->load_panel->TabIndex = 26;
