@@ -589,7 +589,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->game_mode_panel->Controls->Add(this->two_mode_button);
 			this->game_mode_panel->Controls->Add(this->bot_mode_button);
 			this->game_mode_panel->Controls->Add(this->mode_label);
-			this->game_mode_panel->Location = System::Drawing::Point(340, 596);
+			this->game_mode_panel->Location = System::Drawing::Point(305, 580);
 			this->game_mode_panel->Name = L"game_mode_panel";
 			this->game_mode_panel->Size = System::Drawing::Size(300, 190);
 			this->game_mode_panel->TabIndex = 27;
@@ -632,10 +632,11 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// highscores_panel
 			// 
 			this->highscores_panel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->highscores_panel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->highscores_panel->Controls->Add(this->highscores_label);
 			this->highscores_panel->Controls->Add(this->back_highscores_panel);
 			this->highscores_panel->Controls->Add(this->scores_list_box);
-			this->highscores_panel->Location = System::Drawing::Point(12, 596);
+			this->highscores_panel->Location = System::Drawing::Point(12, 566);
 			this->highscores_panel->Name = L"highscores_panel";
 			this->highscores_panel->Size = System::Drawing::Size(250, 350);
 			this->highscores_panel->TabIndex = 28;
@@ -646,7 +647,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			this->highscores_label->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->highscores_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 26.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->highscores_label->Location = System::Drawing::Point(26, 14);
+			this->highscores_label->Location = System::Drawing::Point(25, 13);
 			this->highscores_label->Name = L"highscores_label";
 			this->highscores_label->Size = System::Drawing::Size(200, 45);
 			this->highscores_label->TabIndex = 3;
@@ -656,7 +657,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// back_highscores_panel
 			// 
 			this->back_highscores_panel->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->back_highscores_panel->Location = System::Drawing::Point(76, 316);
+			this->back_highscores_panel->Location = System::Drawing::Point(75, 315);
 			this->back_highscores_panel->Name = L"back_highscores_panel";
 			this->back_highscores_panel->Size = System::Drawing::Size(100, 23);
 			this->back_highscores_panel->TabIndex = 2;
@@ -668,7 +669,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 			// 
 			this->scores_list_box->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->scores_list_box->FormattingEnabled = true;
-			this->scores_list_box->Location = System::Drawing::Point(11, 72);
+			this->scores_list_box->Location = System::Drawing::Point(10, 71);
 			this->scores_list_box->Name = L"scores_list_box";
 			this->scores_list_box->Size = System::Drawing::Size(230, 225);
 			this->scores_list_box->TabIndex = 1;
@@ -839,7 +840,7 @@ private: System::Windows::Forms::ListBox^ scores_list_box;
 	else {
 		scores_panel->Hide();
 		highscores_panel->Show();
-		highscores_panel->Location=System::Drawing::Point(175,150);
+		highscores_panel->Location=System::Drawing::Point(200,150);
 		for (int i = 0; i < Highscores; i++) {
 			scores_list_box->Items->Add("score here " + i);
 		}
