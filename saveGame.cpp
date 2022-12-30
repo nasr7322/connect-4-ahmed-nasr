@@ -153,6 +153,7 @@ int LoadBoard(struct Board* B, char* filename, char* gameprename) {
 }
 
 int LoadGame(struct Board* B, struct Player* P1, struct Player* P2, int* turns, char* filename, char* gameprename) {
+    
     int state = LoadBoard(B, filename, gameprename);
     if (state <= 0)return -1;
     for (int i = 0;i < B->height;i++) {
