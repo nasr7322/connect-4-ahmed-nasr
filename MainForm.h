@@ -155,6 +155,10 @@ namespace Guimain {
 	private: System::Windows::Forms::Button^ two_mode_button;
 	private: System::Windows::Forms::Button^ bot_mode_button;
 	private: System::Windows::Forms::Label^ mode_label;
+private: System::Windows::Forms::Panel^ highscores_panel;
+private: System::Windows::Forms::Label^ highscores_label;
+private: System::Windows::Forms::Button^ back_highscores_panel;
+private: System::Windows::Forms::ListBox^ scores_list_box;
 	private: System::Windows::Forms::Button^ cancel_load;
 
 #pragma region Windows Form Designer generated code
@@ -200,18 +204,23 @@ namespace Guimain {
 			this->two_mode_button = (gcnew System::Windows::Forms::Button());
 			this->bot_mode_button = (gcnew System::Windows::Forms::Button());
 			this->mode_label = (gcnew System::Windows::Forms::Label());
+			this->highscores_panel = (gcnew System::Windows::Forms::Panel());
+			this->highscores_label = (gcnew System::Windows::Forms::Label());
+			this->back_highscores_panel = (gcnew System::Windows::Forms::Button());
+			this->scores_list_box = (gcnew System::Windows::Forms::ListBox());
 			this->game_size_panel->SuspendLayout();
 			this->scores_panel->SuspendLayout();
 			this->xml_panel->SuspendLayout();
 			this->load_panel->SuspendLayout();
 			this->game_mode_panel->SuspendLayout();
+			this->highscores_panel->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// owrname
 			// 
 			this->owrname->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->owrname->Font = (gcnew System::Drawing::Font(L"Open Sans", 7));
-			this->owrname->Location = System::Drawing::Point(200, 575);
+			this->owrname->Location = System::Drawing::Point(217, 586);
 			this->owrname->Name = L"owrname";
 			this->owrname->Size = System::Drawing::Size(200, 25);
 			this->owrname->TabIndex = 3;
@@ -229,7 +238,7 @@ namespace Guimain {
 			this->game_size_panel->Controls->Add(this->w_box);
 			this->game_size_panel->Controls->Add(this->h_box);
 			this->game_size_panel->Controls->Add(this->selecttext);
-			this->game_size_panel->Location = System::Drawing::Point(563, 12);
+			this->game_size_panel->Location = System::Drawing::Point(622, 1);
 			this->game_size_panel->Name = L"game_size_panel";
 			this->game_size_panel->Size = System::Drawing::Size(300, 190);
 			this->game_size_panel->TabIndex = 14;
@@ -315,7 +324,7 @@ namespace Guimain {
 			// 
 			this->quit->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->quit->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->quit->Location = System::Drawing::Point(225, 443);
+			this->quit->Location = System::Drawing::Point(242, 448);
 			this->quit->MaximumSize = System::Drawing::Size(225, 36);
 			this->quit->MinimumSize = System::Drawing::Size(150, 24);
 			this->quit->Name = L"quit";
@@ -329,7 +338,7 @@ namespace Guimain {
 			// 
 			this->top_players->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->top_players->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->top_players->Location = System::Drawing::Point(225, 413);
+			this->top_players->Location = System::Drawing::Point(242, 418);
 			this->top_players->MaximumSize = System::Drawing::Size(225, 36);
 			this->top_players->MinimumSize = System::Drawing::Size(150, 24);
 			this->top_players->Name = L"top_players";
@@ -343,7 +352,7 @@ namespace Guimain {
 			// 
 			this->load_game->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->load_game->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->load_game->Location = System::Drawing::Point(225, 383);
+			this->load_game->Location = System::Drawing::Point(242, 388);
 			this->load_game->MaximumSize = System::Drawing::Size(225, 36);
 			this->load_game->MinimumSize = System::Drawing::Size(150, 24);
 			this->load_game->Name = L"load_game";
@@ -357,7 +366,7 @@ namespace Guimain {
 			// 
 			this->gamename->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->gamename->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10));
-			this->gamename->Location = System::Drawing::Point(188, 225);
+			this->gamename->Location = System::Drawing::Point(205, 230);
 			this->gamename->Name = L"gamename";
 			this->gamename->Size = System::Drawing::Size(224, 25);
 			this->gamename->TabIndex = 17;
@@ -369,7 +378,7 @@ namespace Guimain {
 			this->maintext->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->maintext->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 38.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->maintext->Location = System::Drawing::Point(150, 165);
+			this->maintext->Location = System::Drawing::Point(167, 170);
 			this->maintext->MinimumSize = System::Drawing::Size(1, 1);
 			this->maintext->Name = L"maintext";
 			this->maintext->Size = System::Drawing::Size(300, 62);
@@ -381,7 +390,7 @@ namespace Guimain {
 			// 
 			this->start_new->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->start_new->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->start_new->Location = System::Drawing::Point(225, 324);
+			this->start_new->Location = System::Drawing::Point(242, 329);
 			this->start_new->MaximumSize = System::Drawing::Size(225, 36);
 			this->start_new->MinimumSize = System::Drawing::Size(150, 24);
 			this->start_new->Name = L"start_new";
@@ -401,7 +410,7 @@ namespace Guimain {
 			this->scores_panel->Controls->Add(this->scores_label1);
 			this->scores_panel->Controls->Add(this->scores_count_box);
 			this->scores_panel->Controls->Add(this->scores);
-			this->scores_panel->Location = System::Drawing::Point(586, 432);
+			this->scores_panel->Location = System::Drawing::Point(622, 393);
 			this->scores_panel->Name = L"scores_panel";
 			this->scores_panel->Size = System::Drawing::Size(300, 190);
 			this->scores_panel->TabIndex = 16;
@@ -476,7 +485,7 @@ namespace Guimain {
 			// 
 			this->getxmldata_button->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->getxmldata_button->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->getxmldata_button->Location = System::Drawing::Point(225, 353);
+			this->getxmldata_button->Location = System::Drawing::Point(242, 358);
 			this->getxmldata_button->MaximumSize = System::Drawing::Size(225, 36);
 			this->getxmldata_button->MinimumSize = System::Drawing::Size(150, 24);
 			this->getxmldata_button->Name = L"getxmldata_button";
@@ -534,7 +543,7 @@ namespace Guimain {
 			this->load_panel->Controls->Add(this->cancel_load);
 			this->load_panel->Controls->Add(this->available_games_label);
 			this->load_panel->Controls->Add(this->load_label);
-			this->load_panel->Location = System::Drawing::Point(563, 236);
+			this->load_panel->Location = System::Drawing::Point(622, 197);
 			this->load_panel->Name = L"load_panel";
 			this->load_panel->Size = System::Drawing::Size(300, 190);
 			this->load_panel->TabIndex = 26;
@@ -579,7 +588,7 @@ namespace Guimain {
 			this->game_mode_panel->Controls->Add(this->two_mode_button);
 			this->game_mode_panel->Controls->Add(this->bot_mode_button);
 			this->game_mode_panel->Controls->Add(this->mode_label);
-			this->game_mode_panel->Location = System::Drawing::Point(271, 566);
+			this->game_mode_panel->Location = System::Drawing::Point(340, 596);
 			this->game_mode_panel->Name = L"game_mode_panel";
 			this->game_mode_panel->Size = System::Drawing::Size(300, 190);
 			this->game_mode_panel->TabIndex = 27;
@@ -619,10 +628,55 @@ namespace Guimain {
 			this->mode_label->Text = L"Select Mode";
 			this->mode_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
+			// highscores_panel
+			// 
+			this->highscores_panel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->highscores_panel->Controls->Add(this->highscores_label);
+			this->highscores_panel->Controls->Add(this->back_highscores_panel);
+			this->highscores_panel->Controls->Add(this->scores_list_box);
+			this->highscores_panel->Location = System::Drawing::Point(12, 596);
+			this->highscores_panel->Name = L"highscores_panel";
+			this->highscores_panel->Size = System::Drawing::Size(250, 350);
+			this->highscores_panel->TabIndex = 28;
+			this->highscores_panel->Visible = false;
+			// 
+			// highscores_label
+			// 
+			this->highscores_label->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->highscores_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 26.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->highscores_label->Location = System::Drawing::Point(26, 14);
+			this->highscores_label->Name = L"highscores_label";
+			this->highscores_label->Size = System::Drawing::Size(200, 45);
+			this->highscores_label->TabIndex = 3;
+			this->highscores_label->Text = L"Highscores";
+			this->highscores_label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// back_highscores_panel
+			// 
+			this->back_highscores_panel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->back_highscores_panel->Location = System::Drawing::Point(76, 316);
+			this->back_highscores_panel->Name = L"back_highscores_panel";
+			this->back_highscores_panel->Size = System::Drawing::Size(100, 23);
+			this->back_highscores_panel->TabIndex = 2;
+			this->back_highscores_panel->Text = L"Back";
+			this->back_highscores_panel->UseVisualStyleBackColor = true;
+			this->back_highscores_panel->Click += gcnew System::EventHandler(this, &MainForm::back_highscores_panel_Click);
+			// 
+			// scores_list_box
+			// 
+			this->scores_list_box->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->scores_list_box->FormattingEnabled = true;
+			this->scores_list_box->Location = System::Drawing::Point(11, 72);
+			this->scores_list_box->Name = L"scores_list_box";
+			this->scores_list_box->Size = System::Drawing::Size(230, 225);
+			this->scores_list_box->TabIndex = 1;
+			// 
 			// MainForm
 			// 
-			this->ClientSize = System::Drawing::Size(600, 600);
+			this->ClientSize = System::Drawing::Size(634, 611);
 			this->ControlBox = false;
+			this->Controls->Add(this->highscores_panel);
 			this->Controls->Add(this->game_mode_panel);
 			this->Controls->Add(this->load_panel);
 			this->Controls->Add(this->scores_panel);
@@ -650,6 +704,7 @@ namespace Guimain {
 			this->xml_panel->PerformLayout();
 			this->load_panel->ResumeLayout(false);
 			this->game_mode_panel->ResumeLayout(false);
+			this->highscores_panel->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
@@ -687,7 +742,6 @@ namespace Guimain {
 
 //start game from size panel
 	private: System::Void ok_game_size_Click(System::Object^ sender, System::EventArgs^ e) {
-		
 		try {
 			height = System::Convert::ToInt16(h_box->Text);
 			width = System::Convert::ToInt16(w_box->Text);
@@ -751,8 +805,12 @@ namespace Guimain {
 
 //top players button
 	private: System::Void top_players_Click(System::Object^ sender, System::EventArgs^ e) {
-	scores_panel->Show();
-	scores_panel->Location = System::Drawing::Point(150, 250);
+		if (xml_check->Checked && !(xmllistBox->Items->Count == 0)) { loadhighscores(sender, e); }
+		else {
+			xmllistBox->Items->Clear();
+			scores_panel->Show();
+			scores_panel->Location = System::Drawing::Point(150, 250);
+		}
 }
 
 //cancel top players
@@ -760,10 +818,8 @@ namespace Guimain {
 	scores_panel->Hide();
 }
 
-//ok top players
+//ok score panel
 	private: System::Void scores_ok_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (xml_check->Checked && !(xmllistBox->Items->Count == 0)) { loadhighscores(sender, e); }
-	else {
 		try {
 			Highscores = System::Convert::ToInt16(scores_count_box->Text);
 		}
@@ -772,16 +828,20 @@ namespace Guimain {
 		}
 		loadhighscores(sender, e);
 	}
-}
+
 
 //loading highscores - still in progress  
 	public: System::Void loadhighscores(System::Object^ sender, System::EventArgs^ e) {
-
 	if (Highscores < 1 ) {
 		MessageBox::Show("Invalid input", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 	else {
 		scores_panel->Hide();
+		highscores_panel->Show();
+		highscores_panel->Location=System::Drawing::Point(200,150);
+		for (int i = 0; i < Highscores; i++) {
+			scores_list_box->Items->Add("score here " + i);
+		}
 	}
 }
 
@@ -828,6 +888,11 @@ namespace Guimain {
 		if (!(gameform->Visible)) { MainForm::Visible = true; }
 
 	}
+}
+
+private: System::Void back_highscores_panel_Click(System::Object^ sender, System::EventArgs^ e) {
+	scores_list_box->Items->Clear();
+	highscores_panel->Hide();
 }
 };
 
