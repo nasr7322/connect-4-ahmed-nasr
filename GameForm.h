@@ -543,6 +543,7 @@ namespace Guimain {
 			   this->to_leaderboards_button->TabIndex = 6;
 			   this->to_leaderboards_button->Text = L"Leaderboard";
 			   this->to_leaderboards_button->UseVisualStyleBackColor = true;
+			   this->to_leaderboards_button->Click += gcnew System::EventHandler(this, &GameForm::to_leaderboards_button_Click);
 			   // 
 			   // enter_name_winner
 			   // 
@@ -802,7 +803,7 @@ namespace Guimain {
 
 		}
 	}
-}
+
 private: System::Void to_leaderboards_button_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (winner_name->Text == "" || save_box->Text->Length > 12) {
 		MessageBox::Show("Invalid Name(1<=length<=12)", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
