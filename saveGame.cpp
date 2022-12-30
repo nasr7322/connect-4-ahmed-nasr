@@ -9,13 +9,11 @@ char* parseGameName(char* data) {
     int cr = 0;
 
     char newstring[255];
-    ///printf("infunc=%s\n","initial");
     int ncr = 0;
     while (data[cr] != '\0' && data[cr] != '\n') {
         newstring[ncr++] = data[cr++];
     }
     newstring[ncr] = '\0';
-    ///printf("infunc=%s\n",newstring);
     char* tmpstring = newstring;
     return tmpstring;
 }
@@ -110,6 +108,7 @@ int comp(char* s1,char*s2) {
     }
     return s1[cr]==s2[cr];
 }
+
 int LoadBoard(struct Board* B, char* filename, char* gameprename) {
 
     char* gamename = (gameprename);///Avoid Case sensitive
@@ -170,7 +169,6 @@ int LoadGame(struct Board* B, struct Player* P1, struct Player* P2, int* turns, 
     return 0;
 }
 
-
 int GetNoSaved() {
     FILE* fgames;///names file
     fgames = fopen("games.txt", "r");
@@ -188,7 +186,6 @@ int GetNoSaved() {
 
     return cnt;
 }
-
 
 int DeleteBoard(char* filename, char* gameprename){
     FILE* fgames, * newfgames;///Files pointers of games names

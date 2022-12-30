@@ -54,6 +54,7 @@ namespace Guimain {
 			LoadGame(&B, &P1, &P2, &turns, "games_struct.txt", name);
 			debg(P1.score);
 			debg(P1.turns_played);
+			load_panel->Hide();
 			MainForm::Visible = false;
 			GameForm^ gameform = gcnew GameForm(height, width, B, P1, P2);
 			gameform->ShowDialog();
