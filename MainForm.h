@@ -20,7 +20,7 @@ namespace Guimain {
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 
-//comment here
+		//Debuging function print data needed to console
 		void debg(Object^ O) {
 			String^ s = System::Convert::ToString(O);
 			auto a = s->ToCharArray();
@@ -34,8 +34,8 @@ namespace Guimain {
 			OutputDebugStringA("\n");
 		}
 
-//comment here - why Void and not void ?
-		Void loaded_game_button_Click(System::Object^ sender, System::EventArgs^ e) {
+		//Load chosen game
+		void loaded_game_button_Click(System::Object^ sender, System::EventArgs^ e) {
 			Button^ clicked = (Button^)sender;
 			Board B;
 			Player P1, P2;
@@ -59,7 +59,7 @@ namespace Guimain {
 			if (!(gameform->Visible)) { MainForm::Visible = true; }
 		}
 
-//comment here
+		//Get saved games names and render selection buttons on panel
 		void renderGames() {
 			FILE* fgames;///names file
 			fgames = fopen("games.txt", "r");
@@ -82,7 +82,7 @@ namespace Guimain {
 			fclose(fgames);
 		}
 
-// takes a xml file and reades the values in it
+// takes a xml file and reads the values in it
 		void readxml(XmlTextReader^ reader) {
 			while (reader->Read())
 			{
