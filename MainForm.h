@@ -939,7 +939,7 @@ private: System::Void two_mode_button_Click(System::Object^ sender, System::Even
 	if (!(gameform->Visible)) { MainForm::Visible = true; }
 }
 private: System::Void bot_mode_button_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (board.width > 10 || board.height > 10) {
+	if (width > 10 || height > 10) {
 		MessageBox::Show("Sorry bot can't play in big boards ", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 	}
 	else {
