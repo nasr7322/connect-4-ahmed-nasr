@@ -175,6 +175,7 @@ namespace Guimain {
 				select->Left = 150 + (i * (select->Width));
 				select->Top = 100;
 				select->Tag = i;
+				select->Text = System::Convert::ToString(i);
 				select->Click += gcnew EventHandler(this, &GameForm::column_button_Click);
 				panel1->Controls->Add(select);
 			}

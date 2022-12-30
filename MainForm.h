@@ -159,6 +159,7 @@ namespace Guimain {
 	private: System::Windows::Forms::Label^ highscores_label;
 	private: System::Windows::Forms::Button^ back_highscores_panel;
 	private: System::Windows::Forms::ListBox^ scores_list_box;
+private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Button^ cancel_load;
 
 #pragma region Windows Form Designer generated code
@@ -201,6 +202,7 @@ namespace Guimain {
 			this->available_games_label = (gcnew System::Windows::Forms::Label());
 			this->load_label = (gcnew System::Windows::Forms::Label());
 			this->game_mode_panel = (gcnew System::Windows::Forms::Panel());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->two_mode_button = (gcnew System::Windows::Forms::Button());
 			this->bot_mode_button = (gcnew System::Windows::Forms::Button());
 			this->mode_label = (gcnew System::Windows::Forms::Label());
@@ -239,7 +241,7 @@ namespace Guimain {
 			this->game_size_panel->Controls->Add(this->w_box);
 			this->game_size_panel->Controls->Add(this->h_box);
 			this->game_size_panel->Controls->Add(this->selecttext);
-			this->game_size_panel->Location = System::Drawing::Point(622, 1);
+			this->game_size_panel->Location = System::Drawing::Point(622, 12);
 			this->game_size_panel->Name = L"game_size_panel";
 			this->game_size_panel->Size = System::Drawing::Size(300, 190);
 			this->game_size_panel->TabIndex = 14;
@@ -413,7 +415,7 @@ namespace Guimain {
 			this->scores_panel->Controls->Add(this->scores_label1);
 			this->scores_panel->Controls->Add(this->scores_count_box);
 			this->scores_panel->Controls->Add(this->scores_label);
-			this->scores_panel->Location = System::Drawing::Point(622, 393);
+			this->scores_panel->Location = System::Drawing::Point(622, 475);
 			this->scores_panel->Name = L"scores_panel";
 			this->scores_panel->Size = System::Drawing::Size(300, 190);
 			this->scores_panel->TabIndex = 16;
@@ -547,7 +549,7 @@ namespace Guimain {
 			this->load_panel->Controls->Add(this->cancel_load);
 			this->load_panel->Controls->Add(this->available_games_label);
 			this->load_panel->Controls->Add(this->load_label);
-			this->load_panel->Location = System::Drawing::Point(76, 222);
+			this->load_panel->Location = System::Drawing::Point(622, 223);
 			this->load_panel->Name = L"load_panel";
 			this->load_panel->Size = System::Drawing::Size(300, 220);
 			this->load_panel->TabIndex = 26;
@@ -589,19 +591,31 @@ namespace Guimain {
 			// game_mode_panel
 			// 
 			this->game_mode_panel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->game_mode_panel->Controls->Add(this->button1);
 			this->game_mode_panel->Controls->Add(this->two_mode_button);
 			this->game_mode_panel->Controls->Add(this->bot_mode_button);
 			this->game_mode_panel->Controls->Add(this->mode_label);
-			this->game_mode_panel->Location = System::Drawing::Point(12, 12);
+			this->game_mode_panel->Location = System::Drawing::Point(50, 157);
 			this->game_mode_panel->Name = L"game_mode_panel";
 			this->game_mode_panel->Size = System::Drawing::Size(300, 190);
 			this->game_mode_panel->TabIndex = 27;
 			this->game_mode_panel->Visible = false;
 			// 
+			// button1
+			// 
+			this->button1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->button1->Location = System::Drawing::Point(125, 154);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(50, 20);
+			this->button1->TabIndex = 16;
+			this->button1->Text = L"Cancel";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MainForm::cancel_mode_button_Click);
+			// 
 			// two_mode_button
 			// 
 			this->two_mode_button->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->two_mode_button->Location = System::Drawing::Point(72, 123);
+			this->two_mode_button->Location = System::Drawing::Point(75, 111);
 			this->two_mode_button->Name = L"two_mode_button";
 			this->two_mode_button->Size = System::Drawing::Size(150, 30);
 			this->two_mode_button->TabIndex = 2;
@@ -612,7 +626,7 @@ namespace Guimain {
 			// bot_mode_button
 			// 
 			this->bot_mode_button->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->bot_mode_button->Location = System::Drawing::Point(72, 81);
+			this->bot_mode_button->Location = System::Drawing::Point(75, 69);
 			this->bot_mode_button->Name = L"bot_mode_button";
 			this->bot_mode_button->Size = System::Drawing::Size(150, 30);
 			this->bot_mode_button->TabIndex = 1;
@@ -625,7 +639,7 @@ namespace Guimain {
 			this->mode_label->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->mode_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->mode_label->Location = System::Drawing::Point(0, 15);
+			this->mode_label->Location = System::Drawing::Point(0, 9);
 			this->mode_label->Name = L"mode_label";
 			this->mode_label->Size = System::Drawing::Size(300, 45);
 			this->mode_label->TabIndex = 0;
@@ -940,6 +954,9 @@ namespace Guimain {
 private: System::Void back_highscores_panel_Click(System::Object^ sender, System::EventArgs^ e) {
 	scores_list_box->Items->Clear();
 	highscores_panel->Hide();
+}
+private: System::Void cancel_mode_button_Click(System::Object^ sender, System::EventArgs^ e) {
+	game_mode_panel->Hide();
 }
 };
 
