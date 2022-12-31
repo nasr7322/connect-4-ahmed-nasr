@@ -902,8 +902,15 @@ namespace Guimain {
 			catch (...) {
 				if (errors == 2) {
 					xmllistBox->Items->Clear();
-					reader = gcnew XmlTextReader("default.xml");
-					readxml(reader);
+					try {
+						reader = gcnew XmlTextReader("default.xml");
+						readxml(reader);
+					}
+					catch (...) {
+						Highscores = 10;
+						width = 7;
+						height = 9;;
+					}
 					MessageBox::Show("3 corrupted files in a row. the default configurations are now loaded.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					errors = 0;
 				}
@@ -988,15 +995,6 @@ namespace Guimain {
 		}
 
 		fclose(fp);
-		/**for (int i = 0; i < Highscores; i++) {
-			int temp = getScoreByIndex(i, "scores.txt");
-			if (temp == -1)break;
-			char* name = getNameByIndex(i, "scores.txt");
-
-			OutputDebugStringA(name);
-			OutputDebugStringA("*\n");
-			
-		}*/
 	}
 }
 

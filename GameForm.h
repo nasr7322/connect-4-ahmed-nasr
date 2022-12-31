@@ -175,7 +175,7 @@ namespace Guimain {
 			timer->Enabled = false;
 			panel1->Enabled = false;
 			winnerpanel->Visible = true;
-			winnerpanel->Location = System::Drawing::Point(150, 250);
+			winnerpanel->Location = System::Drawing::Point(225, 250);
 			if (p1.score < p2.score) {
 				winnerlabel->Text = "Player 2 Wins!!";
 				if (board.mode) {
@@ -718,7 +718,7 @@ namespace Guimain {
 	private: System::Void saveToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		timer->Enabled = false;
 		save_panel->Show();
-		save_panel->Location = System::Drawing::Point(175,150);
+		save_panel->Location = System::Drawing::Point(250,150);
 
 	}
 
