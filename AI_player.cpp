@@ -97,6 +97,9 @@ int best_move(struct Board* B, struct Player* Ptowin, struct Player* Ptolose) {
     for (int i = 0;i < B->width;i++) {
         int state = PlayerMove(B, Ptowin, i);
         if (state == -1)continue;
+        if (bst == -1) {
+            bst = i;
+        }
         OutputDebugStringA("Room to move");
         int ret = best_score(B, Ptowin, Ptolose, 0, 4);
         if (ret >= mx) {
