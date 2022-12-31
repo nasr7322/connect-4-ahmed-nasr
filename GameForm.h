@@ -91,9 +91,12 @@ namespace Guimain {
 		}
 
 		//column button click
-		Void column_button_Click(System::Object^ sender, System::EventArgs^ e) {
-			Media::SoundPlayer^ plyr=gcnew Media::SoundPlayer("pop.wav");
-			plyr->Play();
+		void column_button_Click(System::Object^ sender, System::EventArgs^ e) {
+			try {
+				Media::SoundPlayer^ plyr = gcnew Media::SoundPlayer("pop.wav");
+				plyr->Play();
+			}
+			catch(...){}
 			Button^ clicked = (Button^)sender;
 			int ret = PlayerMove(&board, (turns & 1) ? (&p2) : (&p1), System::Convert::ToInt32(clicked->Tag));
 			if (!ret) {
@@ -180,14 +183,20 @@ namespace Guimain {
 					winner_name->Enabled = false;
 				}
 				else {
-					Media::SoundPlayer^ plyr = gcnew Media::SoundPlayer("win.wav");
-					plyr->Play();
+					try{
+						Media::SoundPlayer^ plyr = gcnew Media::SoundPlayer("win.wav");
+						plyr->Play();
+					}
+					catch (...){}
 				}
 			}
 			else if (p1.score > p2.score) {
 				winnerlabel->Text = "Player 1 Wins!!";
-				Media::SoundPlayer^ plyr = gcnew Media::SoundPlayer("win.wav");
-				plyr->Play();
+				try {
+					Media::SoundPlayer^ plyr = gcnew Media::SoundPlayer("win.wav");
+					plyr->Play();
+				}
+				catch (...) {}
 			}
 			else if (p1.score==p2.score)
 			{
