@@ -109,23 +109,45 @@ namespace Guimain {
 			fclose(fgames);
 		}
 
-// takes a xml file and reades the values in it - will work even if elements are rearranged
+//reading and avoiding whitespaces
+		void readerread(XmlTextReader^ reader) {
+			reader->Read();
+			if (reader->NodeType == XmlNodeType::Whitespace) {
+				reader->Read();
+			}
+		}
+
+//takes a xml file and reades the values in it - will work even if elements are rearranged
 		void readxml(XmlTextReader^ reader) {
-			while (reader->Read())
-			{
-				if ((reader->NodeType == XmlNodeType::Element)) {
-					xmllistBox->Items->Add(reader->Name);
-					if (reader->Name == "Height") { xmlv = 1; }
-					if (reader->Name == "Width") { xmlv = 2; }
-					if (reader->Name == "Highscores") { xmlv = 3; }
-				}
-				if ((reader->NodeType == XmlNodeType::Text)) {
-					xmllistBox->Items->Add(reader->Value);
-					if (xmlv == 1) { height = System::Convert::ToInt16(reader->Value); }
-					if (xmlv == 2) { width = System::Convert::ToInt16(reader->Value); }
-					if (xmlv == 3) { Highscores = System::Convert::ToInt16(reader->Value); }
+			readerread(reader); // keeps reading until finds something
+			if (reader->Name == "Configurations") {
+				for (int i = 0; i < 3; i++) {
+					readerread(reader);
+					if ((reader->NodeType == XmlNodeType::Element)) {
+						xmllistBox->Items->Add(reader->Name);
+						if (reader->Name == "Height") { xmlv = 1; }
+						if (reader->Name == "Width") { xmlv = 2; }
+						if (reader->Name == "Highscores") { xmlv = 3; }
+					}
+					else { throw(reader); }
+					String^ check = reader->Name;
+					readerread(reader);
+					if ((reader->NodeType == XmlNodeType::Text)) {
+						xmllistBox->Items->Add(reader->Value);
+						if (xmlv == 1) { height = System::Convert::ToInt16(reader->Value); }
+						if (xmlv == 2) { width = System::Convert::ToInt16(reader->Value); }
+						if (xmlv == 3) { Highscores = System::Convert::ToInt16(reader->Value); }
+					}
+					else { throw(reader); }
+					readerread(reader);
+					if (reader->NodeType != XmlNodeType::EndElement || reader->Name != check) {
+						throw(reader);
+					}
 				}
 			}
+			else {throw(reader);}
+			readerread(reader);
+			if ( reader->NodeType != XmlNodeType::EndElement || reader->Name != "Configurations" ){ throw(reader); }
 		}
 
 	public:
@@ -870,7 +892,7 @@ namespace Guimain {
 		xml_panel->Visible = true;
 		OpenFileDialog^ openfiledialog = gcnew OpenFileDialog;
 		XmlTextReader^ reader;
-		if(openfiledialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+		if (openfiledialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			try {
 				reader = gcnew XmlTextReader(openfiledialog->FileName);
 				readxml(reader);
@@ -889,8 +911,8 @@ namespace Guimain {
 					errors++;
 				}
 			}
+		}
 	}
-}
 
 //top players button
 	public: System::Void top_players_Click(System::Object^ sender, System::EventArgs^ e) {
