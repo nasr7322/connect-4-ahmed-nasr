@@ -148,6 +148,8 @@ namespace Guimain {
 			else {throw(reader);}
 			readerread(reader);
 			if ( reader->NodeType != XmlNodeType::EndElement || reader->Name != "Configurations" ){ throw(reader); }
+			readerread(reader);
+			if(reader->NodeType != XmlNodeType::None){ throw(reader); }
 		}
 
 	public:
