@@ -109,6 +109,32 @@ int comp(char* s1,char*s2) {
     return s1[cr]==s2[cr];
 }
 
+int isBoardExist( char* filename, char* gameprename) {
+
+    char* gamename = (gameprename);///Avoid Case sensitive
+
+
+    FILE* fgames;///names file
+    fgames = fopen("games.txt", "r");
+
+
+
+    char buffer[255];
+    int found = 0;
+    int cnt = 0;
+    while (!feof(fgames)) {
+        fgets(buffer, 255, fgames);
+        if (feof(fgames))break;
+        if (strcmp(buffer, gamename) == 0) {
+            found = 1;
+            break;
+        }
+        cnt++;
+    }
+    fclose(fgames);
+
+    return found;
+}
 int LoadBoard(struct Board* B, char* filename, char* gameprename) {
 
     char* gamename = (gameprename);///Avoid Case sensitive
@@ -134,7 +160,7 @@ int LoadBoard(struct Board* B, char* filename, char* gameprename) {
         OutputDebugStringA("*");
         OutputDebugStringA(buffer);
         OutputDebugStringA("*");
-        if (strcmp(buffer, gamename) ==0) {
+        if (strcmp(buffer, gamename) == 0) {
             found = 1;
             fseek(fsgames, sizeof(struct Board) * cnt, SEEK_SET);
             int ret = fread(B, sizeof(struct Board), 1, fsgames);

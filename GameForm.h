@@ -715,12 +715,22 @@ namespace Guimain {
 
 //save panel ok click
 	private: System::Void save_panel_ok_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (GetNoSaved() == 3) {
+		auto a = save_box->Text->ToLower()->ToCharArray();
+
+		char name[255];
+		int j = 0;
+		for (; j < a->Length; j++) {
+			name[j] = a[j];
+		}
+		name[j++] = '\n';
+		name[j] = '\0';
+		if (GetNoSaved() == 3&&!isBoardExist("games_struct.txt", name)) {
 			MessageBox::Show("Maximum number of saved games reached", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 
 		}
 		else {
 			///Casting
+
 			auto a = save_box->Text->ToLower()->ToCharArray();
 			char name[255];
 			int j = 0;
@@ -759,7 +769,6 @@ namespace Guimain {
 //go to leaderboards
 	private: System::Void to_leaderboards_button_Click(System::Object^ sender, System::EventArgs^ e) {
 
-			Reset(&board, &p1, &p2);
 			if (winner_name->Text != "") {
 				///Casting
 				auto a = winner_name->Text->ToLower()->ToCharArray();
@@ -770,8 +779,11 @@ namespace Guimain {
 				}
 				name[j] = '\0';
 				int ret = addScore(name, Max(p1.score, p2.score), "scores.txt");
+
+				debg("Save");
 				debg(ret);
 			}
+			Reset(&board, &p1, &p2);
 			winnerpanel->Hide();
 			showleaderboard = true;
 			this->Close();

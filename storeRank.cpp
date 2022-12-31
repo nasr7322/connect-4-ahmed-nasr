@@ -67,12 +67,32 @@ int addScore(char* prename, int score, char* filename) {
     char buffer[255];
     ///Copying before score
     int found = 0;
+    OutputDebugStringA("name\n");
+    OutputDebugStringA(name);
+    OutputDebugStringA("*\n");
     while (!feof(fp) && crscore >= score) {
         fgets(buffer, 255, fp);
         if (feof(fp))break;
         crscore = parseScore(buffer);
         if (crscore < score)break;
-        char* crname = parseName(buffer);
+        char crname[255];
+        ///Parse Name
+        int ret = 0;
+        int cr = 0;
+        while ('0' <= buffer[cr] && buffer[cr] <= '9') {
+            cr++;
+
+        }
+        if (buffer[cr] == '=')
+            cr++;
+        int ncr = 0;
+        while (buffer[cr] != '\0' && buffer[cr] != '\n') {
+            crname[ncr++] = buffer[cr++];
+        }
+        crname[ncr] = '\0';
+        OutputDebugStringA("crscore\n");
+        OutputDebugStringA(crname);
+        OutputDebugStringA("*\n");
         if (strcmp(crname, name) == 0)found = 1;
 
         fprintf(newfp, "%s", buffer);
@@ -82,18 +102,62 @@ int addScore(char* prename, int score, char* filename) {
     if (!found)
         fprintf(newfp, "%d=%s\n", score, name);
     found = 1;
-    char* crname = parseName(buffer);
-    if (!feof(fp) && strcmp(crname, name) != 0)
+    char crname [255];
+    ///Parse Name
+    int ret = 0;
+    int cr = 0;
+    while ('0'<=buffer[cr] &&buffer[cr]<='9') {
+        cr++;
+
+    }
+    if(buffer[cr]=='=')
+        cr++;
+    int ncr = 0;
+    while (buffer[cr] != '\0' && buffer[cr] != '\n') {
+        crname[ncr++] = buffer[cr++];
+    }
+    crname[ncr] = '\0';
+
+
+    OutputDebugStringA("name\n");
+    OutputDebugStringA(name);
+    OutputDebugStringA("*\n");
+    OutputDebugStringA("middle\n");
+    OutputDebugStringA(crname);
+    OutputDebugStringA("*\n");
+
+    if (!feof(fp) && strcmp(crname, name) != 0) {
         fprintf(newfp, "%s", buffer);
+        OutputDebugStringA("ADDEDD\n");
+
+    }
 
     ///Copying after score
+    
     while (!feof(fp)) {
         fgets(buffer, 255, fp);
         if (feof(fp))break;
-        char* crname = parseName(buffer);
-        printf("%s -> %s*\n", crname, name);
+        char crname[255];
+        ///Parse Name
+        int ret = 0;
+        int cr = 0;
+        while ('0' <= buffer[cr] && buffer[cr] <= '9') {
+            cr++;
+
+        }
+        if (buffer[cr] == '=')
+            cr++;
+        int ncr = 0;
+        while (buffer[cr] != '\0' && buffer[cr] != '\n') {
+            crname[ncr++] = buffer[cr++];
+        }
+        crname[ncr] = '\0';
+        OutputDebugStringA("mncrscore\n");
+        OutputDebugStringA(crname);
+        OutputDebugStringA("*\n");
         if (strcmp(crname, name) == 0)continue;
 
+        OutputDebugStringA("not continued\n");
         fprintf(newfp, "%s", buffer);
     }
 
